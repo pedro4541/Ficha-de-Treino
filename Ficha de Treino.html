@@ -1,0 +1,1105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NutroTrack · Fichas de Treino</title>
+<link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@500;600;700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+:root{
+  --bg:#0a0e14;--s:#111722;--s2:#161d2a;--s3:#1c2535;--bd:#1e2a3a;
+  --car:#f472b6;--ped:#38bdf8;--grn:#34d399;--org:#fb923c;--red:#f87171;--pur:#a78bfa;
+  --txt:#e2e8f0;--dim:#64748b;--dim2:#94a3b8;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--txt);font-family:'DM Sans',sans-serif;font-size:14px;min-height:100vh;}
+.wrap{max-width:1100px;margin:0 auto;padding:28px 18px;}
+
+/* HEADER */
+header{display:flex;align-items:center;justify-content:space-between;margin-bottom:32px;padding-bottom:18px;border-bottom:1px solid var(--bd);}
+.logo{font-family:'Clash Display',sans-serif;font-size:20px;font-weight:700;color:var(--txt);}
+.logo em{color:var(--grn);font-style:normal;}
+.hbadge{background:var(--s);border:1px solid var(--bd);border-radius:999px;padding:5px 13px;font-size:11px;color:var(--dim);}
+
+/* TABS */
+.tabs{display:flex;gap:6px;margin-bottom:24px;background:var(--s);border:1px solid var(--bd);border-radius:12px;padding:5px;width:fit-content;}
+.tab{padding:9px 20px;border-radius:8px;cursor:pointer;font-weight:500;border:none;background:transparent;color:var(--dim);font-size:13px;font-family:'DM Sans',sans-serif;transition:all .2s;color:var(--dim2);}
+.tab[data-p="c"].on{background:rgba(244,114,182,.15);color:var(--car);}
+.tab[data-p="p"].on{background:rgba(56,189,248,.15);color:var(--ped);}
+.tab[data-p="h"].on{background:rgba(52,211,153,.15);color:var(--grn);}
+.pg{display:none;}.pg.on{display:block;}
+
+/* PERSON HEADER */
+.person-header{
+  background:var(--s);border:1px solid var(--bd);border-radius:16px;
+  padding:20px 24px;margin-bottom:20px;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;
+}
+.person-info{display:flex;align-items:center;gap:16px;}
+.person-avatar{width:52px;height:52px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;}
+.av-c{background:rgba(244,114,182,.15);border:2px solid var(--car);}
+.av-p{background:rgba(56,189,248,.15);border:2px solid var(--ped);}
+.person-name{font-family:'Clash Display',sans-serif;font-size:18px;font-weight:700;color:var(--txt);}
+.person-sub{font-size:12px;color:var(--dim2);margin-top:2px;}
+.person-stats{display:flex;gap:16px;flex-wrap:wrap;}
+.pstat{text-align:center;}
+.pstat-val{font-family:'Clash Display',sans-serif;font-size:16px;font-weight:700;}
+.pstat-lb{font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:.6px;}
+
+/* SPLIT OVERVIEW */
+.split-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin-bottom:20px;}
+.split-day{background:var(--s);border:1px solid var(--bd);border-radius:10px;padding:10px 8px;text-align:center;cursor:pointer;transition:all .2s;}
+.split-day:hover{border-color:var(--dim);}
+.split-day.active-day{border-color:var(--grn);background:rgba(52,211,153,.08);}
+.split-day.rest{opacity:.45;}
+.split-day.hiit-day{border-color:var(--org);background:rgba(251,146,60,.06);}
+.sd-name{font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px;}
+.sd-label{font-size:11px;font-weight:600;color:var(--txt);}
+.sd-tag{font-size:9px;margin-top:3px;}
+
+/* WORKOUT TABS */
+.wtabs{display:flex;gap:5px;margin-bottom:18px;flex-wrap:wrap;}
+.wtab{padding:7px 16px;border-radius:8px;cursor:pointer;font-size:12px;font-weight:600;border:1px solid var(--bd);background:var(--s2);color:var(--dim2);transition:all .2s;}
+.wtab.on{border-color:var(--grn);background:rgba(52,211,153,.1);color:var(--grn);}
+.wtab.hiit-tab.on{border-color:var(--org);background:rgba(251,146,60,.1);color:var(--org);}
+.wpage{display:none;}.wpage.on{display:block;}
+
+/* EXERCISE CARD */
+.ex-card{
+  background:var(--s);border:1px solid var(--bd);border-radius:14px;
+  margin-bottom:10px;overflow:hidden;
+}
+.ex-header{
+  display:flex;align-items:center;gap:14px;padding:16px 18px;
+  cursor:pointer;transition:background .15s;
+}
+.ex-header:hover{background:var(--s2);}
+.ex-num{
+  width:32px;height:32px;border-radius:8px;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Clash Display',sans-serif;font-size:14px;font-weight:700;
+  flex-shrink:0;
+}
+.ex-main{flex:1;min-width:0;}
+.ex-name{font-family:'Clash Display',sans-serif;font-size:15px;font-weight:600;color:var(--txt);}
+.ex-meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:4px;}
+.badge{font-size:10px;font-weight:700;padding:2px 8px;border-radius:999px;}
+.b-sets{background:rgba(167,139,250,.15);color:var(--pur);}
+.b-reps{background:rgba(52,211,153,.15);color:var(--grn);}
+.b-rest{background:rgba(56,189,248,.15);color:var(--ped);}
+.b-muscle{background:rgba(255,255,255,.07);color:var(--dim2);}
+.b-super{background:rgba(251,146,60,.15);color:var(--org);}
+.ex-toggle{font-size:18px;color:var(--dim);transition:transform .25s;flex-shrink:0;}
+.ex-header.open .ex-toggle{transform:rotate(180deg);}
+.ex-body{display:none;padding:0 18px 18px;}
+.ex-body.open{display:block;}
+
+.ex-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px;}
+@media(max-width:600px){.ex-grid{grid-template-columns:1fr;}}
+
+.info-box{background:var(--s2);border:1px solid var(--bd);border-radius:10px;padding:12px 14px;}
+.ib-label{font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:.6px;margin-bottom:6px;}
+.ib-text{font-size:12px;color:var(--dim2);line-height:1.6;}
+.ib-text strong{color:var(--txt);}
+
+/* LOG SECTION */
+.log-section{background:var(--s2);border:1px solid var(--bd);border-radius:10px;padding:14px;}
+.log-title{font-size:12px;font-weight:600;color:var(--txt);margin-bottom:10px;display:flex;align-items:center;justify-content:space-between;}
+.sets-row{display:grid;grid-template-columns:30px 1fr 1fr 1fr auto;gap:6px;align-items:center;margin-bottom:6px;}
+.sets-label{font-size:11px;color:var(--dim);font-weight:600;}
+.log-input{
+  background:var(--s3);border:1px solid var(--bd);border-radius:7px;
+  padding:6px 10px;font-size:13px;color:var(--txt);font-family:'DM Sans',sans-serif;
+  width:100%;outline:none;transition:border-color .2s;text-align:center;
+}
+.log-input:focus{border-color:var(--grn);}
+.log-input::placeholder{color:var(--dim);}
+.col-hdr{font-size:9px;color:var(--dim);text-transform:uppercase;letter-spacing:.5px;text-align:center;}
+.btn-done{
+  background:rgba(52,211,153,.15);border:1px solid rgba(52,211,153,.3);
+  color:var(--grn);border-radius:7px;padding:6px 10px;cursor:pointer;
+  font-size:12px;font-weight:600;transition:all .2s;white-space:nowrap;
+}
+.btn-done:hover{background:rgba(52,211,153,.25);}
+.btn-done.completed{background:rgba(52,211,153,.3);border-color:var(--grn);}
+
+/* PROGRESS HINT */
+.progress-hint{
+  background:rgba(167,139,250,.08);border:1px solid rgba(167,139,250,.2);
+  border-radius:8px;padding:10px 12px;margin-top:10px;
+  font-size:12px;color:var(--dim2);line-height:1.5;
+}
+.progress-hint strong{color:var(--pur);}
+
+/* LAST LOG */
+.last-log{font-size:11px;color:var(--grn);margin-top:4px;padding:4px 8px;background:rgba(52,211,153,.08);border-radius:6px;display:none;}
+
+/* CHART */
+.chart-mini{position:relative;height:100px;margin-top:10px;}
+
+/* REST TIMER */
+.timer-bar{
+  position:fixed;bottom:20px;right:20px;
+  background:var(--s);border:1px solid var(--bd);border-radius:14px;
+  padding:14px 18px;box-shadow:0 8px 32px rgba(0,0,0,.4);
+  display:none;z-index:100;min-width:200px;
+}
+.timer-bar.active{display:block;}
+.timer-title{font-size:11px;color:var(--dim);margin-bottom:4px;}
+.timer-count{font-family:'Clash Display',sans-serif;font-size:32px;font-weight:700;color:var(--grn);text-align:center;}
+.timer-count.urgent{color:var(--red);}
+.timer-prog{height:4px;background:var(--bd);border-radius:2px;margin-top:8px;overflow:hidden;}
+.timer-fill{height:100%;background:var(--grn);border-radius:2px;transition:width .9s linear;}
+.timer-fill.urgent{background:var(--red);}
+.timer-btns{display:flex;gap:6px;margin-top:10px;}
+.tbtn{flex:1;padding:6px;border-radius:7px;border:1px solid var(--bd);background:var(--s2);color:var(--dim2);cursor:pointer;font-size:11px;font-weight:600;transition:all .2s;}
+.tbtn:hover{border-color:var(--dim);color:var(--txt);}
+.tbtn.skip{border-color:var(--org);color:var(--org);}
+
+/* HIIT CARD */
+.hiit-card{background:var(--s);border:1px solid rgba(251,146,60,.3);border-radius:14px;margin-bottom:10px;overflow:hidden;}
+.hiit-header{background:rgba(251,146,60,.06);padding:16px 18px;border-bottom:1px solid var(--bd);}
+.hiit-title{font-family:'Clash Display',sans-serif;font-size:15px;font-weight:700;color:var(--txt);}
+.hiit-sub{font-size:12px;color:var(--dim2);margin-top:3px;}
+.hiit-body{padding:16px 18px;}
+.hiit-row{display:flex;align-items:center;justify-content:space-between;padding:8px 0;border-bottom:1px solid var(--bd);}
+.hiit-row:last-child{border-bottom:none;}
+.hiit-ex{font-size:13px;color:var(--txt);font-weight:500;}
+.hiit-detail{font-size:12px;color:var(--org);font-weight:600;}
+
+/* SESSION SUMMARY */
+.session-bar{
+  background:var(--s);border:1px solid var(--bd);border-radius:14px;
+  padding:16px 20px;margin-bottom:16px;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;
+}
+.sess-stat{text-align:center;}
+.sess-val{font-family:'Clash Display',sans-serif;font-size:20px;font-weight:700;color:var(--grn);}
+.sess-lb{font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:.5px;}
+
+/* HISTORY TAB */
+.hist-card{background:var(--s);border:1px solid var(--bd);border-radius:12px;padding:16px;margin-bottom:10px;}
+.hist-date{font-size:11px;color:var(--dim);margin-bottom:8px;}
+.hist-name{font-family:'Clash Display',sans-serif;font-size:14px;font-weight:600;color:var(--txt);margin-bottom:10px;}
+.hist-sets{display:flex;gap:6px;flex-wrap:wrap;}
+.hist-set{background:var(--s2);border:1px solid var(--bd);border-radius:6px;padding:4px 10px;font-size:12px;color:var(--dim2);}
+.hist-set strong{color:var(--grn);}
+
+.btn-primary{
+  background:rgba(52,211,153,.15);border:1px solid rgba(52,211,153,.3);
+  color:var(--grn);border-radius:9px;padding:9px 18px;cursor:pointer;
+  font-size:13px;font-weight:600;font-family:'DM Sans',sans-serif;transition:all .2s;
+}
+.btn-primary:hover{background:rgba(52,211,153,.25);}
+.btn-danger{background:rgba(248,113,113,.1);border:1px solid rgba(248,113,113,.2);color:var(--red);border-radius:9px;padding:9px 18px;cursor:pointer;font-size:13px;font-weight:600;font-family:'DM Sans',sans-serif;}
+
+.tip-box{background:rgba(167,139,250,.07);border:1px solid rgba(167,139,250,.2);border-radius:10px;padding:12px 14px;margin-bottom:16px;}
+.tip-box strong{color:var(--pur);}
+.tip-box span{font-size:12px;color:var(--dim2);line-height:1.6;}
+
+.section-title{font-family:'Clash Display',sans-serif;font-size:13px;font-weight:700;color:var(--dim);letter-spacing:1px;text-transform:uppercase;margin:18px 0 10px;display:flex;align-items:center;gap:8px;}
+
+footer{text-align:center;padding:28px 0 12px;color:var(--dim);font-size:11px;border-top:1px solid var(--bd);margin-top:32px;}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="logo">Nutro<em>Track</em> · <span style="font-size:14px;font-weight:500;color:var(--dim2)">Fichas de Treino</span></div>
+  <div style="display:flex;align-items:center;gap:10px;">
+    <div id="sync-status" style="font-size:12px;color:var(--dim);">☁️ Pronto</div>
+    <button onclick="reloadFromCloud()" style="padding:5px 12px;border-radius:8px;border:1px solid var(--bd);background:var(--s2);color:var(--dim2);cursor:pointer;font-size:11px;font-family:'DM Sans',sans-serif;">🔄 Sincronizar</button>
+    <div class="hbadge">Google Sheets ✅</div>
+  </div>
+</header>
+
+<div class="tabs">
+  <button class="tab on" data-p="c" onclick="showTab('c')">👩 Caroline</button>
+  <button class="tab" data-p="p" onclick="showTab('p')">👨 Pedro</button>
+  <button class="tab" data-p="h" onclick="showTab('h')">📊 Histórico & Evolução</button>
+</div>
+
+<!-- ════════════════════ CAROLINE ════════════════════ -->
+<div class="pg on" id="pg-c">
+
+  <div class="person-header">
+    <div class="person-info">
+      <div class="person-avatar av-c">👩</div>
+      <div>
+        <div class="person-name" style="color:var(--car)">Caroline Silva</div>
+        <div class="person-sub">31 anos · 161 cm · 79,75 kg · Ozempic · Full Body 3×/semana</div>
+      </div>
+    </div>
+    <div class="person-stats">
+      <div class="pstat"><div class="pstat-val" style="color:var(--car)">79,75</div><div class="pstat-lb">Peso (kg)</div></div>
+      <div class="pstat"><div class="pstat-val" style="color:var(--red)">42,9%</div><div class="pstat-lb">Gordura</div></div>
+      <div class="pstat"><div class="pstat-val" style="color:var(--grn)">41,4</div><div class="pstat-lb">Músculo (kg)</div></div>
+      <div class="pstat"><div class="pstat-val" style="color:var(--org)">30,8</div><div class="pstat-lb">IMC</div></div>
+    </div>
+  </div>
+
+  <div class="tip-box">
+    <strong>💡 Estratégia Personal:</strong>
+    <span> Full Body 3×/semana maximiza gasto calórico e frequência muscular — ideal para recomposição com Ozempic. Supersets reduzem tempo de treino e aumentam o gasto calórico sem comprometer a carga. <strong>Proteína mínima: 100g/dia. Não treinar em jejum.</strong></span>
+  </div>
+
+  <!-- SPLIT SEMANA -->
+  <div class="section-title">📅 Organização da Semana</div>
+  <div class="split-grid" id="c-split">
+    <div class="split-day active-day" onclick="setCDay('A')"><div class="sd-name">Seg</div><div class="sd-label">Full A</div><div class="sd-tag" style="color:var(--car)">💪 Treino</div></div>
+    <div class="split-day rest"><div class="sd-name">Ter</div><div class="sd-label">LISS</div><div class="sd-tag" style="color:var(--ped)">🚶 Cardio</div></div>
+    <div class="split-day active-day" onclick="setCDay('B')"><div class="sd-name">Qua</div><div class="sd-label">Full B</div><div class="sd-tag" style="color:var(--car)">💪 Treino</div></div>
+    <div class="split-day rest"><div class="sd-name">Qui</div><div class="sd-label">LISS</div><div class="sd-tag" style="color:var(--ped)">🚶 Cardio</div></div>
+    <div class="split-day active-day" onclick="setCDay('C')"><div class="sd-name">Sex</div><div class="sd-label">Full C</div><div class="sd-tag" style="color:var(--car)">💪 Treino</div></div>
+    <div class="split-day rest"><div class="sd-name">Sáb</div><div class="sd-label">Ativo</div><div class="sd-tag" style="color:var(--dim)">🧘 Flex</div></div>
+    <div class="split-day rest"><div class="sd-name">Dom</div><div class="sd-label">Descanso</div><div class="sd-tag" style="color:var(--dim)">😴 Rest</div></div>
+  </div>
+
+  <!-- WORKOUT SELECTOR -->
+  <div class="wtabs">
+    <button class="wtab on" id="cwt-A" onclick="cShowW('A')">Full Body A · Seg</button>
+    <button class="wtab" id="cwt-B" onclick="cShowW('B')">Full Body B · Qua</button>
+    <button class="wtab" id="cwt-C" onclick="cShowW('C')">Full Body C · Sex</button>
+    <button class="wtab hiit-tab" id="cwt-L" onclick="cShowW('L')">LISS Cardio · Ter/Qui</button>
+  </div>
+
+  <!-- SESSION BAR -->
+  <div class="session-bar" id="c-sess-bar">
+    <div class="sess-stat"><div class="sess-val" id="c-vol">0</div><div class="sess-lb">Volume Total (kg)</div></div>
+    <div class="sess-stat"><div class="sess-val" id="c-exdone" style="color:var(--pur)">0/0</div><div class="sess-lb">Exercícios Feitos</div></div>
+    <div class="sess-stat"><div class="sess-val" id="c-time" style="color:var(--org)">0</div><div class="sess-lb">Min Estimados</div></div>
+    <button class="btn-primary" onclick="finishSession('c')">✅ Finalizar Treino</button>
+  </div>
+
+  <!-- FULL BODY A -->
+  <div class="wpage on" id="cw-A">
+    <div class="section-title">⚡ Full Body A · Segunda-feira</div>
+    <div id="cA-exercises"></div>
+  </div>
+  <!-- FULL BODY B -->
+  <div class="wpage" id="cw-B">
+    <div class="section-title">⚡ Full Body B · Quarta-feira</div>
+    <div id="cB-exercises"></div>
+  </div>
+  <!-- FULL BODY C -->
+  <div class="wpage" id="cw-C">
+    <div class="section-title">⚡ Full Body C · Sexta-feira</div>
+    <div id="cC-exercises"></div>
+  </div>
+  <!-- LISS -->
+  <div class="wpage" id="cw-L">
+    <div class="hiit-card">
+      <div class="hiit-header">
+        <div class="hiit-title">🚶 LISS Cardio · Terça e Quinta</div>
+        <div class="hiit-sub">Low Intensity Steady State · 35–45 minutos · Zona 2 (60–70% FCmax)</div>
+      </div>
+      <div class="hiit-body">
+        <div class="tip-box" style="margin-bottom:14px;">
+          <strong>💡 Por que LISS?</strong>
+          <span> Com o Ozempic reduzindo apetite e calórico já em déficit, o LISS queima gordura sem o cortisol elevado do HIIT — preservando seu músculo. FC alvo: <strong>~125–140 bpm</strong>.</span>
+        </div>
+        <div class="hiit-row"><div class="hiit-ex">🏃 Opção 1 · Esteira inclinada 6–8%</div><div class="hiit-detail">5,5–6,5 km/h · 40 min</div></div>
+        <div class="hiit-row"><div class="hiit-ex">🚴 Opção 2 · Bicicleta ergométrica</div><div class="hiit-detail">Resistência leve-média · 40 min</div></div>
+        <div class="hiit-row"><div class="hiit-ex">🏊 Opção 3 · Natação</div><div class="hiit-detail">Ritmo moderado · 35 min</div></div>
+        <div class="hiit-row"><div class="hiit-ex">🚶 Opção 4 · Caminhada ao ar livre</div><div class="hiit-detail">Terreno irregular · 45 min</div></div>
+        <div class="hiit-row"><div class="hiit-ex">📊 Progressão</div><div class="hiit-detail">Aumente 5 min/semana até 60 min</div></div>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /caroline -->
+
+<!-- ════════════════════ PEDRO ════════════════════ -->
+<div class="pg" id="pg-p">
+
+  <div class="person-header">
+    <div class="person-info">
+      <div class="person-avatar av-p">👨</div>
+      <div>
+        <div class="person-name" style="color:var(--ped)">Pedro Henrique</div>
+        <div class="person-sub">31 anos · 176 cm · 123,6 kg · Mounjaro 5mg · Upper/Lower 4×/semana + HIIT 2×</div>
+      </div>
+    </div>
+    <div class="person-stats">
+      <div class="pstat"><div class="pstat-val" style="color:var(--ped)">123,6</div><div class="pstat-lb">Peso (kg)</div></div>
+      <div class="pstat"><div class="pstat-val" style="color:var(--red)">37,8%</div><div class="pstat-lb">Gordura</div></div>
+      <div class="pstat"><div class="pstat-val" style="color:var(--grn)">70,0</div><div class="pstat-lb">Músculo (kg)</div></div>
+      <div class="pstat"><div class="pstat-val" style="color:var(--red)">39,9</div><div class="pstat-lb">IMC</div></div>
+    </div>
+  </div>
+
+  <div class="tip-box">
+    <strong>💡 Estratégia Personal:</strong>
+    <span> Upper/Lower 4×/semana preserva os 70kg de músculo com volume adequado. HIIT 2×/semana é <strong>medicação para o HOMA-IR 6,5</strong> — cada sessão melhora sensibilidade à insulina por 24–48h. <strong>Proteína mínima: 150g/dia. Treino de força SEMPRE antes do cardio.</strong></span>
+  </div>
+
+  <!-- SPLIT SEMANA PEDRO -->
+  <div class="section-title">📅 Organização da Semana</div>
+  <div class="split-grid">
+    <div class="split-day active-day" onclick="setPDay('UA')"><div class="sd-name">Seg</div><div class="sd-label">Upper A</div><div class="sd-tag" style="color:var(--ped)">💪 Empurra</div></div>
+    <div class="split-day active-day" onclick="setPDay('LA')"><div class="sd-name">Ter</div><div class="sd-label">Lower A</div><div class="sd-tag" style="color:var(--ped)">🦵 Quad</div></div>
+    <div class="split-day hiit-day" onclick="setPDay('HI')"><div class="sd-name">Qua</div><div class="sd-label">HIIT</div><div class="sd-tag" style="color:var(--org)">🔥 Insulina</div></div>
+    <div class="split-day active-day" onclick="setPDay('UB')"><div class="sd-name">Qui</div><div class="sd-label">Upper B</div><div class="sd-tag" style="color:var(--ped)">💪 Puxa</div></div>
+    <div class="split-day active-day" onclick="setPDay('LB')"><div class="sd-name">Sex</div><div class="sd-label">Lower B</div><div class="sd-tag" style="color:var(--ped)">🦵 Post.</div></div>
+    <div class="split-day hiit-day"><div class="sd-name">Sáb</div><div class="sd-label">HIIT</div><div class="sd-tag" style="color:var(--org)">🔥 Insulina</div></div>
+    <div class="split-day rest"><div class="sd-name">Dom</div><div class="sd-label">Descanso</div><div class="sd-tag" style="color:var(--dim)">😴 Rest</div></div>
+  </div>
+
+  <div class="wtabs">
+    <button class="wtab on" id="pwt-UA" onclick="pShowW('UA')">Upper A · Seg</button>
+    <button class="wtab" id="pwt-LA" onclick="pShowW('LA')">Lower A · Ter</button>
+    <button class="wtab hiit-tab" id="pwt-HI" onclick="pShowW('HI')">HIIT · Qua/Sáb</button>
+    <button class="wtab" id="pwt-UB" onclick="pShowW('UB')">Upper B · Qui</button>
+    <button class="wtab" id="pwt-LB" onclick="pShowW('LB')">Lower B · Sex</button>
+  </div>
+
+  <div class="session-bar" id="p-sess-bar">
+    <div class="sess-stat"><div class="sess-val" id="p-vol">0</div><div class="sess-lb">Volume Total (kg)</div></div>
+    <div class="sess-stat"><div class="sess-val" id="p-exdone" style="color:var(--pur)">0/0</div><div class="sess-lb">Exercícios Feitos</div></div>
+    <div class="sess-stat"><div class="sess-val" id="p-time" style="color:var(--org)">0</div><div class="sess-lb">Min Estimados</div></div>
+    <button class="btn-primary" onclick="finishSession('p')">✅ Finalizar Treino</button>
+  </div>
+
+  <div class="wpage on" id="pw-UA"><div class="section-title">⚡ Upper Body A · Segunda · Empurra</div><div id="pUA-exercises"></div></div>
+  <div class="wpage" id="pw-LA"><div class="section-title">🦵 Lower Body A · Terça · Quadríceps</div><div id="pLA-exercises"></div></div>
+  <div class="wpage" id="pw-HI">
+    <div class="hiit-card">
+      <div class="hiit-header">
+        <div class="hiit-title">🔥 HIIT · Quarta e Sábado</div>
+        <div class="hiit-sub">High Intensity Interval Training · 30 minutos · Tratamento para HOMA-IR 6,5</div>
+      </div>
+      <div class="hiit-body">
+        <div class="tip-box" style="margin-bottom:14px;">
+          <strong>🩸 Por que HIIT para Pedro?</strong>
+          <span> Com HOMA-IR 6,5 e resistência à insulina confirmada, o HIIT é a intervenção não-farmacológica mais poderosa disponível. Cada sessão melhora a captação de glicose muscular por <strong>24–48h</strong>. Junto com o Mounjaro, é a combinação ideal para quebrar o ciclo.</span>
+        </div>
+        <div class="section-title" style="margin-top:0">Protocolo A · Esteira/Rua (Semanas 1-4)</div>
+        <div class="hiit-row"><div class="hiit-ex">Aquecimento</div><div class="hiit-detail">5 min caminhada rápida</div></div>
+        <div class="hiit-row"><div class="hiit-ex">⚡ Tiro 1–8</div><div class="hiit-detail">30s sprint 80% · 90s caminhada</div></div>
+        <div class="hiit-row"><div class="hiit-ex">Desaquecimento</div><div class="hiit-detail">5 min caminhada leve</div></div>
+        <div class="hiit-row"><div class="hiit-ex">📊 Progressão</div><div class="hiit-detail">Sem 5+: 10 tiros · Sem 9+: 45s sprint</div></div>
+        <div class="section-title">Protocolo B · Bicicleta (Semanas 5-8)</div>
+        <div class="hiit-row"><div class="hiit-ex">Aquecimento</div><div class="hiit-detail">5 min resistência leve</div></div>
+        <div class="hiit-row"><div class="hiit-ex">⚡ Tiro 1–10</div><div class="hiit-detail">20s máximo · 40s recuperação</div></div>
+        <div class="hiit-row"><div class="hiit-ex">Desaquecimento</div><div class="hiit-detail">5 min pedalada leve</div></div>
+        <div class="hiit-row"><div class="hiit-ex">📊 Progressão</div><div class="hiit-detail">Sem 9+: aumentar resistência 1 nível</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="wpage" id="pw-UB"><div class="section-title">⚡ Upper Body B · Quinta · Puxa</div><div id="pUB-exercises"></div></div>
+  <div class="wpage" id="pw-LB"><div class="section-title">🦵 Lower Body B · Sexta · Posterior</div><div id="pLB-exercises"></div></div>
+
+</div><!-- /pedro -->
+
+<!-- ════════════════════ HISTÓRICO ════════════════════ -->
+<div class="pg" id="pg-h">
+  <div class="section-title">📊 Evolução de Carga por Exercício</div>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;" id="hist-selectors"></div>
+  <div class="hist-card" id="chart-card" style="display:none;">
+    <div class="ct" id="chart-ex-name" style="font-family:'Clash Display',sans-serif;font-size:16px;font-weight:700;color:var(--txt);margin-bottom:4px;"></div>
+    <div style="font-size:12px;color:var(--dim);margin-bottom:14px;" id="chart-ex-sub"></div>
+    <div style="position:relative;height:200px;"><canvas id="progress-chart"></canvas></div>
+  </div>
+  <div class="section-title" style="margin-top:20px;">🗒 Registros Salvos</div>
+  <div id="hist-list"><div style="color:var(--dim);font-size:13px;padding:20px;text-align:center;">Nenhum treino registrado ainda. Complete sua primeira sessão!</div></div>
+  <div style="display:flex;gap:8px;margin-top:16px;">
+    <button class="btn-danger" onclick="if(confirm('Apagar todos os registros?')){localStorage.removeItem('nt_logs');renderHistory();}">🗑 Limpar Histórico</button>
+  </div>
+</div>
+
+<!-- REST TIMER -->
+<div class="timer-bar" id="rest-timer">
+  <div class="timer-title">⏱ Descanso</div>
+  <div class="timer-count" id="timer-display">60</div>
+  <div class="timer-prog"><div class="timer-fill" id="timer-fill" style="width:100%"></div></div>
+  <div class="timer-btns">
+    <button class="tbtn" onclick="addTimer(15)">+15s</button>
+    <button class="tbtn skip" onclick="stopTimer()">Pular ⏭</button>
+  </div>
+</div>
+
+<footer>NutroTrack · Fichas de Treino · Caroline & Pedro · Planejamento gerado com base em composição corporal e exames laboratoriais</footer>
+</div>
+
+<script>
+// ═══════════════════ GOOGLE SHEETS INTEGRATION ═══════════════════
+
+const GS_URL = 'https://script.google.com/macros/s/AKfycbzwdWKwMpcdPI2bSzvhxsIa1hHXPfWg9LV6ZiSBm3b8hu5AiPJv5yg-uR5qRGMhEJcLEA/exec';
+
+// Cache local para funcionar offline e acelerar a UI
+let localCache = {};
+try { localCache = JSON.parse(localStorage.getItem('nt_cache') || '{}'); } catch(e) { localCache = {}; }
+
+function saveCache() { try { localStorage.setItem('nt_cache', JSON.stringify(localCache)); } catch(e) {} }
+
+// Status de sincronização
+let syncStatus = 'idle'; // idle | syncing | ok | error
+
+function setSyncStatus(s, msg) {
+  syncStatus = s;
+  const el = document.getElementById('sync-status');
+  if (!el) return;
+  const map = {
+    idle:    { icon:'☁️',  color:'var(--dim)',  text:'Pronto' },
+    syncing: { icon:'🔄',  color:'var(--org)',  text: msg || 'Sincronizando...' },
+    ok:      { icon:'✅',  color:'var(--grn)',  text: msg || 'Salvo no Google Sheets!' },
+    error:   { icon:'⚠️',  color:'var(--red)',  text: msg || 'Sem internet — salvo localmente' },
+    loading: { icon:'⏳',  color:'var(--ped)',  text: msg || 'Carregando dados...' },
+  };
+  const st = map[s] || map.idle;
+  el.innerHTML = `<span style="color:${st.color}">${st.icon} ${st.text}</span>`;
+}
+
+// Salvar no Google Sheets (com fallback local)
+async function gsPost(payload) {
+  setSyncStatus('syncing');
+  // Salva no cache local imediatamente
+  const exId = payload.exId;
+  if (!localCache[exId]) localCache[exId] = [];
+  localCache[exId].push(payload);
+  saveCache();
+
+  try {
+    const resp = await fetch(GS_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain' },
+      body: JSON.stringify(payload)
+    });
+    const json = await resp.json();
+    if (json.status === 'ok') {
+      setSyncStatus('ok', `✅ "${payload.exName}" salvo no Google Sheets!`);
+      setTimeout(() => setSyncStatus('idle'), 3000);
+    } else {
+      throw new Error('Resposta inesperada');
+    }
+  } catch(err) {
+    setSyncStatus('error', '⚠️ Sem internet — salvo localmente, sincroniza depois');
+    setTimeout(() => setSyncStatus('idle'), 4000);
+  }
+}
+
+// Carregar dados do Google Sheets
+async function gsLoad() {
+  setSyncStatus('loading', '⏳ Carregando seus dados...');
+  try {
+    const resp = await fetch(GS_URL + '?t=' + Date.now());
+    const rows = await resp.json();
+    // Reagrupa por exId
+    const fresh = {};
+    rows.forEach(r => {
+      if (!r.exId) return;
+      if (!fresh[r.exId]) fresh[r.exId] = [];
+      // Agrupa sets do mesmo registro (mesma data + exercício)
+      const key = `${r.date}_${r.exId}`;
+      let entry = fresh[r.exId].find(e => e._key === key);
+      if (!entry) {
+        entry = { _key: key, date: String(r.date), person: r.person, exId: r.exId, name: r.exName, sets: [], workout: r.workout };
+        fresh[r.exId].push(entry);
+      }
+      entry.sets.push({ weight: parseFloat(r.weight) || 0, reps: parseInt(r.reps) || 0, rpe: parseInt(r.rpe) || 7 });
+    });
+    // Remove _key helper
+    Object.keys(fresh).forEach(id => fresh[id].forEach(e => delete e._key));
+    localCache = fresh;
+    saveCache();
+    setSyncStatus('ok', `✅ Dados carregados — ${rows.length} registros`);
+    setTimeout(() => setSyncStatus('idle'), 3000);
+    return fresh;
+  } catch(err) {
+    setSyncStatus('error', '⚠️ Offline — mostrando dados locais');
+    setTimeout(() => setSyncStatus('idle'), 3000);
+    return localCache;
+  }
+}
+
+// Funções de acesso ao cache (substitui getLogs/saveLogs)
+function getLogs() { return localCache; }
+function saveLogs(logs) { localCache = logs; saveCache(); }
+
+// ═══════════════════ DADOS DOS TREINOS ═══════════════════
+
+const cWorkouts = {
+  A: {
+    name:"Full Body A · Segunda", color:"#f472b6",
+    tip:"Foco em EMPURRA + PUXADA + PERNAS (extensores). Supersets marcados com ⚡ — sem descanso entre os pares.",
+    exercises:[
+      {id:"c_squat",name:"Agachamento Livre",muscle:"Quadríceps · Glúteos · Core",sets:4,reps:"10–12",rest:90,
+       exec:"Pés na largura dos ombros, dedos levemente abertos. Desça até a coxa ficar paralela ao chão, joelhos na linha dos pés. Mantenha o peito erguido e o core contraído durante todo o movimento.",
+       progress:"Quando conseguir fazer 12 reps com boa forma em TODAS as 4 séries, aumente 2,5kg na próxima sessão.",
+       alt:"Agachamento no Smith · Leg Press 45° · Agachamento Goblet com kettlebell"},
+      {id:"c_rdl",name:"⚡ Romanian Deadlift",muscle:"Posterior · Glúteos · Lombar",sets:4,reps:"10–12",rest:60,
+       exec:"Barra próxima ao corpo. Empurre o quadril para trás e desça a barra pela frente das pernas até sentir esticar os posteriores (aprox. abaixo do joelho). Não arredonde a lombar.",
+       progress:"Aumente 2,5kg quando completar 12 reps em todas as séries. Se a lombar cansar antes das pernas, reduza o peso.",
+       alt:"Stiff com halteres · Cadeira flexora · Hip Hinge com elástico"},
+      {id:"c_bench",name:"Supino com Halteres",muscle:"Peitoral · Ombro · Tríceps",sets:3,reps:"10–12",rest:90,
+       exec:"Halteres no lado do peito, cotovelos a 45° do corpo. Empurre verticalmente e controle a descida em 2–3 segundos. Não deixe os cotovelos abrirem demais.",
+       progress:"Quando fazer 12 reps com boa forma, suba 2kg por halter (4kg total).",
+       alt:"Supino na máquina · Crossover no cabo · Flexão de braço"},
+      {id:"c_row",name:"⚡ Remada Curvada com Halteres",muscle:"Dorsal · Romboides · Bíceps",sets:3,reps:"10–12",rest:60,
+       exec:"Pés afastados, tronco inclinado 45°, core firme. Puxe os halteres em direção ao umbigo, cotovelos junto ao corpo. Espreme o dorsal no topo por 1 segundo.",
+       progress:"Aumente 2kg por halter quando conseguir 12 reps perfeitas.",
+       alt:"Remada cavalinho · Remada no cabo · Pull-down no cabo"},
+      {id:"c_ohp",name:"Desenvolvimento com Halteres",muscle:"Ombros · Tríceps",sets:3,reps:"10–12",rest:75,
+       exec:"Sentada, costas apoiadas, halteres na altura dos ombros. Empurre para cima sem arquear a lombar. Controle a descida.",
+       progress:"Suba 2kg no total quando completar 12 reps em todas as séries.",
+       alt:"Desenvolvimento na máquina · Arnold Press · Elevação lateral"},
+      {id:"c_plank",name:"Prancha Abdominal",muscle:"Core · Transverso",sets:3,reps:"30–45s",rest:45,
+       exec:"Antebraços no chão, corpo reto como uma tábua. Não deixe o quadril subir ou descer. Respire normalmente. Ative o core como se fosse apanhar um soco.",
+       progress:"Quando segurar 45s com facilidade, progrida para 60s ou prancha com elevação de perna alternada.",
+       alt:"Dead Bug · Hollow Hold · Prancha lateral"}
+    ]
+  },
+  B: {
+    name:"Full Body B · Quarta", color:"#f472b6",
+    tip:"Foco em PUXADA + EMPURRA INCLINADO + PERNAS (glúteos). Descanse mais entre as séries compostas.",
+    exercises:[
+      {id:"c_lgpress",name:"Leg Press 45°",muscle:"Quadríceps · Glúteos",sets:4,reps:"12–15",rest:75,
+       exec:"Pés no meio da plataforma, largura do quadril. Desça até 90° de joelho, não deixe o quadril levantar da cadeira. Empurre pela plataforma toda, não pela ponta dos pés.",
+       progress:"Aumente 5–10kg quando completar 15 reps em todas as séries.",
+       alt:"Agachamento Goblet · Afundo com halteres · Agachamento no Smith"},
+      {id:"c_hipthrust",name:"⚡ Hip Thrust com Barra/Halteres",muscle:"Glúteos · Posteriores",sets:4,reps:"12–15",rest:60,
+       exec:"Ombros apoiados no banco, barra no dobramento do quadril. Empurre o quadril para cima até o corpo ficar paralelo ao chão. Contraia o glúteo no topo por 1–2 segundos.",
+       progress:"Suba 5kg quando completar 15 reps com contração plena.",
+       alt:"Elevação de quadril no chão · Glúteo 4 apoios · Mesa extensora de glúteo"},
+      {id:"c_pulldown",name:"Puxada no Pulley (Lat Pulldown)",muscle:"Dorsal · Bíceps",sets:4,reps:"10–12",rest:75,
+       exec:"Pegada pronada, um pouco mais larga que os ombros. Puxe a barra até o queixo, cotovelos apontando para o chão. Não balance o tronco. Controle a subida.",
+       progress:"Aumente 2,5–5kg quando completar 12 reps sem balanço.",
+       alt:"Remada no cabo · Pullover · Assisted Pull-up"},
+      {id:"c_inc_press",name:"⚡ Supino Inclinado com Halteres",muscle:"Peitoral Superior · Ombros",sets:3,reps:"10–12",rest:60,
+       exec:"Banco a 30–45°. Halteres ao lado do peito, cotovelos a 45°. Empurre sem deixar os braços ficarem perpendiculares ao corpo. Controle a descida em 2s.",
+       progress:"Suba 2kg por halter quando completar 12 reps.",
+       alt:"Supino inclinado na máquina · Crossover inclinado · Flexão de braço inclinada"},
+      {id:"c_curl",name:"Rosca Direta com Halteres",muscle:"Bíceps",sets:3,reps:"12–15",rest:60,
+       exec:"Cotovelos fixos ao lado do corpo. Suba os halteres girando o punho (supinação). Controle a descida em 2 segundos. Não balance o tronco.",
+       progress:"Suba 1–2kg quando completar 15 reps.",
+       alt:"Rosca no cabo · Rosca concentrada · Rosca martelo"},
+      {id:"c_tricep",name:"⚡ Tríceps Pulley",muscle:"Tríceps",sets:3,reps:"12–15",rest:45,
+       exec:"Cotovelos fixos ao lado do corpo. Estenda o braço completamente, gire o punho para fora no final. Controle a subida em 2 segundos.",
+       progress:"Suba 2–5kg quando completar 15 reps perfeitas.",
+       alt:"Tríceps no cabo · Tríceps francês com halter · Mergulho no banco"}
+    ]
+  },
+  C: {
+    name:"Full Body C · Sexta", color:"#f472b6",
+    tip:"Treino mais denso — circuito de alta intensidade. Menores cargas, mais reps, menos descanso. Gasto calórico máximo. Ideal para finalizar a semana.",
+    exercises:[
+      {id:"c_goblet",name:"Agachamento Goblet",muscle:"Quadríceps · Glúteos · Core",sets:4,reps:"15",rest:60,
+       exec:"Segure um halter verticalmente na frente do peito com as duas mãos. Pés um pouco mais que largura dos ombros. Agache profundo, cotovelos empurram os joelhos para fora. Postura ereta.",
+       progress:"Quando 15 reps ficarem fáceis, adicione 2kg ao halter ou faça com pausa de 2s no fundo.",
+       alt:"Agachamento livre com barra · Leg press · Agachamento sumô"},
+      {id:"c_chest_cable",name:"⚡ Crossover no Cabo",muscle:"Peitoral · Ombro Anterior",sets:3,reps:"12–15",rest:45,
+       exec:"Cabos na altura dos ombros ou acima. Pés afastados, um levemente à frente. Cruze os braços à frente do peito com leve curvatura no cotovelo. Controle a abertura em 3s.",
+       progress:"Aumente 2–5kg quando completar 15 reps controladas.",
+       alt:"Supino com halteres · Flexão de braço com pés elevados"},
+      {id:"c_seated_row",name:"Remada Sentada no Cabo",muscle:"Dorsal Médio · Bíceps",sets:3,reps:"12–15",rest:60,
+       exec:"Puxe o cabo até o umbigo, cotovelos junto ao corpo. Espreme o dorsal no final por 1s. Controle a extensão dos braços sem deixar as costas arredondarem.",
+       progress:"Aumente 5kg quando completar 15 reps com contração plena.",
+       alt:"Remada curvada · Remada cavalinho · Puxada"},
+      {id:"c_lunge",name:"⚡ Afundo com Halteres",muscle:"Quadríceps · Glúteos · Equilíbrio",sets:3,reps:"10 cada lado",rest:60,
+       exec:"Passo largo à frente, joelho traseiro desce até próximo ao chão. Joelho da frente não ultrapassa muito a ponta do pé. Empurre pelo calcanhar para voltar.",
+       progress:"Suba 2kg por halter quando completar 10 reps por lado sem desequilíbrio.",
+       alt:"Afundo estático (estacionário) · Step-up no banco · Afundo reverso"},
+      {id:"c_lateral",name:"Elevação Lateral",muscle:"Ombro Médio",sets:3,reps:"15",rest:45,
+       exec:"Halteres leves. Eleve lateralmente até ombro, cotovelo levemente dobrado. Não balance. Desça em 3 segundos. Se precisar balançar, está pesado demais.",
+       progress:"Aumente 1kg por halter quando completar 15 reps sem impulso.",
+       alt:"Elevação lateral no cabo · Elevação com elástico · Face pull"},
+      {id:"c_ab_crunch",name:"⚡ Crunch no Cabo",muscle:"Reto Abdominal",sets:3,reps:"15–20",rest:45,
+       exec:"Ajoelhada de frente para o pulley com corda na nuca. Contraia o abdômen puxando o tronco em direção às coxas. Pause 1s embaixo. Não use os braços para puxar.",
+       progress:"Aumente 5kg quando completar 20 reps com contração plena.",
+       alt:"Crunch no chão · Bicicleta abdominal · Ab roller"}
+    ]
+  }
+};
+
+const pWorkouts = {
+  UA: {
+    name:"Upper A · Segunda · Empurra", color:"#38bdf8",
+    tip:"Foco em movimentos de EMPURRA: peito, ombros, tríceps. Começa com o movimento mais pesado (supino). Supersets marcados com ⚡.",
+    exercises:[
+      {id:"p_bench",name:"Supino Reto com Barra",muscle:"Peitoral · Ombros · Tríceps",sets:4,reps:"6–10",rest:120,
+       exec:"Pegada um pouco mais larga que os ombros. Barra desce até levemente tocar o peito. Cotovelos a 45–75° do tronco. Pés firmes no chão. Arco lombar natural.",
+       progress:"Quando completar 10 reps em TODAS as 4 séries, adicione 2,5kg na barra na próxima sessão.",
+       alt:"Supino com halteres · Supino no Smith · Flexão de braço com colete"},
+      {id:"p_ohp",name:"Desenvolvimento com Barra (OHP)",muscle:"Ombros · Tríceps · Core",sets:4,reps:"8–10",rest:120,
+       exec:"Em pé, pegada na largura dos ombros. Core contraído para proteger a lombar. Empurre a barra verticalmente, passando pela frente do rosto. Não arquear excessivamente.",
+       progress:"Adicione 2,5kg quando completar 10 reps com boa postura.",
+       alt:"Desenvolvimento com halteres · Arnold Press · Desenvolvimento na máquina"},
+      {id:"p_inc_db",name:"⚡ Supino Inclinado com Halteres",muscle:"Peitoral Superior",sets:3,reps:"8–12",rest:75,
+       exec:"Banco a 30°. Halteres ao lado do peito na altura do esterno, não dos ombros. Empurre verticalmente. Controle a descida em 3 segundos.",
+       progress:"Suba 2kg por halter quando completar 12 reps.",
+       alt:"Supino inclinado com barra · Crossover inclinado"},
+      {id:"p_cable_fly",name:"⚡ Crossover no Cabo",muscle:"Peitoral · Definição",sets:3,reps:"12–15",rest:60,
+       exec:"Cabos na posição alta. Puxe cruzando na frente do peito. Controle a abertura em 3s. Leve curvatura no cotovelo durante todo o movimento.",
+       progress:"Aumente 5kg quando completar 15 reps controladas.",
+       alt:"Crucifixo com halteres · Pec Deck"},
+      {id:"p_tricep_skull",name:"Tríceps Testa (Skull Crusher)",muscle:"Tríceps · Cabeça Longa",sets:3,reps:"10–12",rest:75,
+       exec:"Deitado, barra EZ. Desça a barra em direção à testa, cotovelos fixos. Extensão total no topo. Não deixe os cotovelos abrirem.",
+       progress:"Adicione 2,5kg quando completar 12 reps.",
+       alt:"Tríceps francês com halter · Tríceps no cabo com corda"},
+      {id:"p_lat_raise",name:"⚡ Elevação Lateral",muscle:"Ombro Médio",sets:3,reps:"15",rest:45,
+       exec:"Incline levemente o tronco à frente. Suba até a linha dos ombros. Controle a descida em 3s. Se precisar de impulso, peso excessivo.",
+       progress:"Suba 1–2kg por halter quando completar 15 reps sem balanço.",
+       alt:"Elevação no cabo · Face pull"}
+    ]
+  },
+  LA: {
+    name:"Lower A · Terça · Quadríceps", color:"#38bdf8",
+    tip:"Foco em QUADRÍCEPS + CORE. Agachamento primeiro quando mais descansado. Trabalho metabólico intenso — queima máxima de gordura visceral.",
+    exercises:[
+      {id:"p_squat",name:"Agachamento com Barra (Livre)",muscle:"Quadríceps · Glúteos · Core",sets:5,reps:"6–8",rest:150,
+       exec:"Barra no trapézio, pés na largura dos ombros (ou levemente mais). Desça até coxa paralela ou abaixo. Joelhos seguem os dedos dos pés. Core RÍGIDO durante todo movimento.",
+       progress:"Adicione 5kg quando completar 8 reps em todas as 5 séries. Este é o movimento mais importante.",
+       alt:"Agachamento no Smith · Leg Press 45° · Agachamento Hack"},
+      {id:"p_legpress",name:"Leg Press 45°",muscle:"Quadríceps · Glúteos",sets:4,reps:"10–12",rest:90,
+       exec:"Pés no centro da plataforma, largura do quadril. Desça até 90° de joelho, sem o quadril sair da cadeira. Não deixe os joelhos fecharem.",
+       progress:"Aumente 10–20kg quando completar 12 reps em todas as séries.",
+       alt:"Agachamento Goblet pesado · Agachamento búlgaro"},
+      {id:"p_leg_ext",name:"⚡ Cadeira Extensora",muscle:"Quadríceps · Isolamento",sets:3,reps:"12–15",rest:60,
+       exec:"Ajuste o rolo sobre os tornozelos. Extensão completa no topo, pause 1s. Desça controlado em 3 segundos. Não use impulso.",
+       progress:"Aumente 5kg quando completar 15 reps com pausa.",
+       alt:"Agachamento isométrico na parede · Terminal Knee Extension"},
+      {id:"p_lunge_walk",name:"⚡ Afundo Caminhando",muscle:"Quadríceps · Glúteos · Equilíbrio",sets:3,reps:"12 cada lado",rest:75,
+       exec:"Passadas largas. Joelho traseiro baixa quase ao chão. Passo à frente com a outra perna. Mantenha o tronco ereto.",
+       progress:"Suba 2kg por halter quando completar 12 por lado sem perda de postura.",
+       alt:"Afundo estático · Step-up no banco · Afundo reverso"},
+      {id:"p_calf",name:"Elevação de Panturrilha em Pé",muscle:"Gastrocnêmio · Sóleo",sets:4,reps:"15–20",rest:45,
+       exec:"Pé na borda do step, calcanhar abaixo do nível. Suba na ponta do pé o máximo possível. Segure 2s no topo. Desça lentamente.",
+       progress:"Aumente 5–10kg quando completar 20 reps com pausa no topo.",
+       alt:"Elevação sentado na máquina · Leg press com panturrilha"},
+      {id:"p_plank",name:"Prancha + Variações",muscle:"Core · Transverso · Oblíquos",sets:3,reps:"45s",rest:45,
+       exec:"Série 1: Prancha frontal. Série 2: Prancha lateral direita. Série 3: Prancha lateral esquerda. Core contraído, respiração controlada.",
+       progress:"Evolua para 60s · Depois prancha com toque no ombro alternado.",
+       alt:"Dead Bug · Hollow Hold · Ab Wheel Rollout"}
+    ]
+  },
+  UB: {
+    name:"Upper B · Quinta · Puxa", color:"#38bdf8",
+    tip:"Foco em movimentos de PUXADA: dorsal, bíceps, posteriores de ombro. Complementa o Upper A. Supersets marcados com ⚡.",
+    exercises:[
+      {id:"p_pullup",name:"Barra Fixa (Pull-up / Chin-up)",muscle:"Dorsal · Bíceps · Core",sets:4,reps:"Máx (mín 4)",rest:120,
+       exec:"Pegada pronada (pull-up) ou supinada (chin-up). Parta da posição morta (braços esticados). Puxe até o queixo passar da barra. Controle a descida em 3s.",
+       progress:"Se faz menos de 4: use assistência ou elástico. Objetivo: 8+ reps → adicione peso com colete.",
+       alt:"Puxada assistida · Lat Pulldown · Remada no cabo alta"},
+      {id:"p_row_bb",name:"Remada Curvada com Barra",muscle:"Dorsal · Romboides · Bíceps",sets:4,reps:"8–10",rest:120,
+       exec:"Pegada pronada, tronco a 45°, core rígido. Puxe a barra em direção ao umbigo. Cotovelos próximos ao corpo. Espreme o dorsal no topo.",
+       progress:"Adicione 5kg quando completar 10 reps sem balanço.",
+       alt:"Remada com halteres · Remada cavalinho · Remada Pendlay"},
+      {id:"p_seated_row",name:"⚡ Remada Sentada no Cabo",muscle:"Dorsal Médio · Trapézio",sets:3,reps:"10–12",rest:75,
+       exec:"Puxe a pega até o umbigo. Cotovelos junto ao corpo. Sem arredondar as costas na extensão.",
+       progress:"Aumente 5–10kg quando completar 12 reps.",
+       alt:"Remada cavalinho · Remada unilateral com halter"},
+      {id:"p_facepull",name:"⚡ Face Pull no Cabo",muscle:"Posteriores do Ombro · Manguito",sets:3,reps:"15",rest:45,
+       exec:"Cabo na altura dos olhos, corda. Puxe em direção ao rosto, cotovelos acima dos ombros. Rotação externa no final. Essencial para saúde dos ombros.",
+       progress:"Aumente 5kg quando completar 15 reps com rotação externa completa.",
+       alt:"Elevação posterior com halteres · Crucifixo inverso"},
+      {id:"p_curl_bb",name:"Rosca Direta com Barra",muscle:"Bíceps",sets:3,reps:"8–12",rest:75,
+       exec:"Cotovelos fixos ao lado do corpo. Suba a barra supinando. Pausa 1s no topo. Controle a descida em 3s. Nada de balanço.",
+       progress:"Adicione 2,5kg quando completar 12 reps.",
+       alt:"Rosca com halteres · Rosca no cabo · Rosca concentrada"},
+      {id:"p_hammer",name:"⚡ Rosca Martelo",muscle:"Bíceps · Braquial · Antebraço",sets:3,reps:"10–12",rest:60,
+       exec:"Pegada neutra (halteres paralelos). Suba alternando os braços. Sem rotação do punho. Cotovelos fixos.",
+       progress:"Suba 2kg por halter quando completar 12 reps.",
+       alt:"Rosca no cabo com corda · Rosca de concentração"}
+    ]
+  },
+  LB: {
+    name:"Lower B · Sexta · Posterior", color:"#38bdf8",
+    tip:"Foco em POSTERIORES + GLÚTEOS. Trabalho metabólico intenso. Crucial para equilibrar com o Lower A. Sexta = terminar a semana forte.",
+    exercises:[
+      {id:"p_rdl",name:"Romanian Deadlift com Barra",muscle:"Posteriores · Glúteos · Lombar",sets:4,reps:"8–10",rest:120,
+       exec:"Barra perto das pernas. Empurre o quadril para trás, mantendo as costas retas. Desça até sentir o estiramento dos posteriores. Não curve a lombar. Respire fundo antes de cada rep.",
+       progress:"Adicione 5kg quando completar 10 reps com boa forma.",
+       alt:"Stiff com halteres · Mesa flexora · Good Morning"},
+      {id:"p_hipthrust_bb",name:"Hip Thrust com Barra",muscle:"Glúteos · Posteriores",sets:4,reps:"10–12",rest:90,
+       exec:"Ombros no banco, barra no quadril (com proteção). Empurre o quadril até ficar paralelo ao chão. Contraia o glúteo no topo por 2s. Não hiperestenda a lombar.",
+       progress:"Aumente 10kg quando completar 12 reps com contração plena.",
+       alt:"Elevação de quadril no chão · Glúteo 4 apoios com anilha"},
+      {id:"p_leg_curl",name:"⚡ Mesa Flexora",muscle:"Posteriores · Isquiotibiais",sets:3,reps:"10–12",rest:75,
+       exec:"Rolo sobre os calcanhares, não na panturrilha. Flexão até 90° ou mais. Pause 1s no topo. Desça em 3 segundos.",
+       progress:"Aumente 5kg quando completar 12 reps com pausa.",
+       alt:"Stiff unilateral · Nordic Curl · Flexora no cabo"},
+      {id:"p_sumo",name:"⚡ Agachamento Sumô com Halter",muscle:"Glúteos · Adutores · Quadríceps",sets:3,reps:"12–15",rest:60,
+       exec:"Pés bem afastados, dedos apontando 45° para fora. Halter entre as pernas. Desça mantendo o tronco ereto. Joelhos seguem os dedos dos pés.",
+       progress:"Suba 4–5kg no halter quando completar 15 reps.",
+       alt:"Agachamento sumô com barra · Abdução na máquina"},
+      {id:"p_hip_abduct",name:"Abdução de Quadril na Máquina",muscle:"Glúteo Médio · Abdutores",sets:3,reps:"15–20",rest:45,
+       exec:"Ajuste o encosto para que o quadril fique em linha. Abra as pernas até o limite do movimento. Controle o fechamento em 3s.",
+       progress:"Aumente 5kg quando completar 20 reps controladas.",
+       alt:"Abdução com elástico deitado · Glúteo médio 4 apoios"},
+      {id:"p_rdl_single",name:"RDL Unilateral (uma perna)",muscle:"Posterior · Glúteo · Equilíbrio",sets:3,reps:"10 cada lado",rest:60,
+       exec:"Apoio em uma perna, quadril empurra para trás. Braço oposto segura halter. Tronco e perna livre formam uma 'T' no final. Olhar fixo no chão.",
+       progress:"Suba 2kg quando completar 10 reps por lado sem desiquilibrar.",
+       alt:"RDL bilateral com halteres · Cadeira flexora unilateral"}
+    ]
+  }
+};
+
+// ═══════════════════ RENDER ENGINE ═══════════════════
+
+function getLogs() { try { return JSON.parse(localStorage.getItem('nt_logs')||'{}'); } catch(e) { return {}; } }
+function saveLogs(logs) { localStorage.setItem('nt_logs', JSON.stringify(logs)); }
+
+function getLastLog(exId) {
+  const logs = getLogs();
+  if (!logs[exId] || logs[exId].length === 0) return null;
+  return logs[exId][logs[exId].length - 1];
+}
+
+function buildExCard(ex, person, accentColor) {
+  const last = getLastLog(ex.id);
+  const lastHtml = last
+    ? `<div class="last-log" style="display:flex;gap:12px;flex-wrap:wrap;">
+        ${last.sets.map((s,i)=>`<span>Série ${i+1}: <strong>${s.weight}kg × ${s.reps}</strong></span>`).join('')}
+        <span style="color:var(--dim);">RPE ${last.rpe} · ${last.date}</span>
+       </div>`
+    : `<div style="font-size:11px;color:var(--dim);margin-top:4px;">Sem registro anterior — primeiro treino!</div>`;
+
+  const setsRows = [];
+  const n = typeof ex.sets === 'number' ? ex.sets : 3;
+  for (let i = 1; i <= n; i++) {
+    const sv = last && last.sets[i-1] ? last.sets[i-1].weight : '';
+    const rv = last && last.sets[i-1] ? last.sets[i-1].reps : '';
+    setsRows.push(`
+      <div class="sets-row">
+        <div class="sets-label" style="color:${accentColor}">S${i}</div>
+        <input class="log-input" id="w_${ex.id}_${i}" placeholder="kg" value="${sv}" type="number" step="0.5" min="0">
+        <input class="log-input" id="r_${ex.id}_${i}" placeholder="reps" value="${rv}" type="number" min="0">
+        <input class="log-input" id="rpe_${ex.id}_${i}" placeholder="RPE" type="number" min="1" max="10" value="${last&&last.sets[i-1]?last.sets[i-1].rpe||'':""}">
+        <button class="btn-done" id="done_${ex.id}_${i}" onclick="markSet('${ex.id}',${i},'${person}')">✓</button>
+      </div>`);
+  }
+
+  return `
+  <div class="ex-card" id="card_${ex.id}">
+    <div class="ex-header" onclick="toggleEx(this,'body_${ex.id}')">
+      <div class="ex-num" style="background:${accentColor}22;color:${accentColor}">${ex.name.startsWith('⚡')?'⚡':'💪'}</div>
+      <div class="ex-main">
+        <div class="ex-name">${ex.name.replace('⚡ ','')}</div>
+        <div class="ex-meta">
+          <span class="badge b-sets">${ex.sets} séries</span>
+          <span class="badge b-reps">${ex.reps} reps</span>
+          <span class="badge b-rest">⏱ ${ex.rest}s descanso</span>
+          <span class="badge b-muscle">${ex.muscle}</span>
+          ${ex.name.startsWith('⚡')?'<span class="badge b-super">⚡ Superset</span>':''}
+        </div>
+      </div>
+      <span class="ex-toggle">▾</span>
+    </div>
+    <div class="ex-body" id="body_${ex.id}">
+      ${lastHtml}
+      <div class="ex-grid" style="margin-top:14px;">
+        <div class="info-box">
+          <div class="ib-label">🎯 Execução Correta</div>
+          <div class="ib-text">${ex.exec}</div>
+        </div>
+        <div class="info-box">
+          <div class="ib-label">📈 Como Progredir Carga</div>
+          <div class="ib-text">${ex.progress}</div>
+        </div>
+        <div class="info-box" style="grid-column:1/-1;">
+          <div class="ib-label">🔄 Exercícios Substitutos</div>
+          <div class="ib-text">${ex.alt}</div>
+        </div>
+      </div>
+      <div class="log-section">
+        <div class="log-title">
+          <span>📝 Registrar Série</span>
+          <button class="btn-done" onclick="startRest(${ex.rest},'${ex.name.replace('⚡ ','')}')">⏱ Iniciar Descanso ${ex.rest}s</button>
+        </div>
+        <div class="sets-row" style="margin-bottom:4px;">
+          <div></div>
+          <div class="col-hdr">Peso (kg)</div>
+          <div class="col-hdr">Reps</div>
+          <div class="col-hdr">RPE (1-10)</div>
+          <div class="col-hdr">Feito</div>
+        </div>
+        ${setsRows.join('')}
+        <button class="btn-primary" style="width:100%;margin-top:10px;" onclick="saveExercise('${ex.id}','${ex.name.replace('⚡ ','')}',${n},'${person}')">💾 Salvar Exercício</button>
+      </div>
+      <div class="progress-hint">
+        <strong>📊 Regra da Dupla Progressão:</strong> Primeiro aumente as repetições até o limite superior do range. Quando conseguir isso em TODAS as séries, na próxima sessão aumente a carga e volte ao limite inferior de reps.
+      </div>
+    </div>
+  </div>`;
+}
+
+function renderWorkout(exercises, containerId, person, accentColor) {
+  const el = document.getElementById(containerId);
+  if (!el) return;
+  el.innerHTML = exercises.map(ex => buildExCard(ex, person, accentColor)).join('');
+}
+
+// Render all on load
+function renderAll() {
+  // Caroline
+  renderWorkout(cWorkouts.A.exercises, 'cA-exercises', 'c', '#f472b6');
+  renderWorkout(cWorkouts.B.exercises, 'cB-exercises', 'c', '#f472b6');
+  renderWorkout(cWorkouts.C.exercises, 'cC-exercises', 'c', '#f472b6');
+  // Pedro
+  renderWorkout(pWorkouts.UA.exercises, 'pUA-exercises', 'p', '#38bdf8');
+  renderWorkout(pWorkouts.LA.exercises, 'pLA-exercises', 'p', '#38bdf8');
+  renderWorkout(pWorkouts.UB.exercises, 'pUB-exercises', 'p', '#38bdf8');
+  renderWorkout(pWorkouts.LB.exercises, 'pLB-exercises', 'p', '#38bdf8');
+  updateSessionBar('c');
+  updateSessionBar('p');
+  renderHistory();
+}
+
+// ═══════════════════ INTERACTIONS ═══════════════════
+
+function toggleEx(header, bodyId) {
+  const body = document.getElementById(bodyId);
+  const isOpen = body.classList.contains('open');
+  body.classList.toggle('open', !isOpen);
+  header.classList.toggle('open', !isOpen);
+}
+
+function markSet(exId, setNum, person) {
+  const btn = document.getElementById(`done_${exId}_${setNum}`);
+  const w = document.getElementById(`w_${exId}_${setNum}`).value;
+  const r = document.getElementById(`r_${exId}_${setNum}`).value;
+  if (!w || !r) { alert('Preencha o peso e as repetições!'); return; }
+  btn.classList.add('completed');
+  btn.textContent = '✅';
+  updateSessionBar(person);
+}
+
+function saveExercise(exId, exName, sets, person) {
+  const setData = [];
+  for (let i = 1; i <= sets; i++) {
+    const w = parseFloat(document.getElementById(`w_${exId}_${i}`)?.value || 0);
+    const r = parseInt(document.getElementById(`r_${exId}_${i}`)?.value || 0);
+    const rpe = parseInt(document.getElementById(`rpe_${exId}_${i}`)?.value || 7);
+    if (w > 0 && r > 0) setData.push({weight: w, reps: r, rpe: rpe || 7});
+  }
+  if (setData.length === 0) { alert('Preencha pelo menos uma série!'); return; }
+
+  const today = new Date().toLocaleDateString('pt-BR');
+  const payload = {
+    date: today,
+    person,
+    exId,
+    exName,
+    sets: setData,
+    workout: person === 'c' ? document.querySelector('#pg-c .wtab.on')?.textContent || '' : document.querySelector('#pg-p .wtab.on')?.textContent || ''
+  };
+
+  // Salva localmente e envia para Google Sheets
+  gsPost(payload);
+  updateSessionBar(person);
+  renderHistory();
+}
+
+function updateSessionBar(person) {
+  const logs = getLogs();
+  const workouts = person === 'c' ? cWorkouts : pWorkouts;
+  let totalVol = 0, done = 0, total = 0;
+  Object.values(workouts).forEach(w => {
+    if (!w.exercises) return;
+    w.exercises.forEach(ex => {
+      total++;
+      const last = getLastLog(ex.id);
+      if (last) {
+        done++;
+        last.sets.forEach(s => { totalVol += (s.weight * s.reps); });
+      }
+    });
+  });
+  const vol = document.getElementById(`${person}-vol`);
+  const exd = document.getElementById(`${person}-exdone`);
+  const tim = document.getElementById(`${person}-time`);
+  if (vol) vol.textContent = totalVol.toFixed(0);
+  if (exd) exd.textContent = `${done}/${total}`;
+  if (tim) tim.textContent = Math.round(total * 4.5);
+}
+
+function finishSession(person) {
+  const today = new Date().toLocaleDateString('pt-BR');
+  alert(`🎉 Treino de ${today} concluído! Continue assim — consistência é tudo!`);
+}
+
+// ═══════════════════ TIMER ═══════════════════
+
+let timerInterval = null;
+let timerTotal = 60;
+let timerLeft = 60;
+
+function startRest(seconds, exName) {
+  clearInterval(timerInterval);
+  timerTotal = seconds;
+  timerLeft = seconds;
+  const bar = document.getElementById('rest-timer');
+  const display = document.getElementById('timer-display');
+  const fill = document.getElementById('timer-fill');
+  bar.classList.add('active');
+  bar.querySelector('.timer-title').textContent = `⏱ Descanso — ${exName}`;
+
+  function tick() {
+    display.textContent = timerLeft;
+    const pct = (timerLeft / timerTotal) * 100;
+    fill.style.width = pct + '%';
+    display.classList.toggle('urgent', timerLeft <= 10);
+    fill.classList.toggle('urgent', timerLeft <= 10);
+    if (timerLeft <= 0) {
+      clearInterval(timerInterval);
+      bar.classList.remove('active');
+      // Small vibration if available
+      if (navigator.vibrate) navigator.vibrate([200,100,200]);
+    }
+    timerLeft--;
+  }
+  tick();
+  timerInterval = setInterval(tick, 1000);
+}
+
+function addTimer(s) { timerLeft += s; }
+function stopTimer() { clearInterval(timerInterval); document.getElementById('rest-timer').classList.remove('active'); }
+
+// ═══════════════════ HISTORY ═══════════════════
+
+let progressChart = null;
+
+function renderHistory() {
+  const logs = getLogs();
+  const histList = document.getElementById('hist-list');
+  const selectors = document.getElementById('hist-selectors');
+
+  // Build exercise list for selectors
+  const allEx = {};
+  [...Object.values(cWorkouts), ...Object.values(pWorkouts)].forEach(w => {
+    if (!w.exercises) return;
+    w.exercises.forEach(ex => { allEx[ex.id] = ex.name.replace('⚡ ',''); });
+  });
+
+  // Selector buttons
+  const personGroups = {c: [], p: []};
+  Object.values(cWorkouts).forEach(w => { if(w.exercises) w.exercises.forEach(ex => { if(!personGroups.c.find(e=>e.id===ex.id)) personGroups.c.push(ex); }); });
+  Object.values(pWorkouts).forEach(w => { if(w.exercises) w.exercises.forEach(ex => { if(!personGroups.p.find(e=>e.id===ex.id)) personGroups.p.push(ex); }); });
+
+  selectors.innerHTML = `
+    <div>
+      <div style="font-size:11px;color:var(--car);font-weight:700;text-transform:uppercase;letter-spacing:.6px;margin-bottom:8px;">👩 Caroline</div>
+      <div style="display:flex;flex-wrap:wrap;gap:5px;">
+        ${personGroups.c.map(ex => `<button onclick="showExChart('${ex.id}','${ex.name.replace('⚡ ','').replace(/'/g,"\\'")}','#f472b6')" style="padding:5px 10px;border-radius:7px;border:1px solid var(--bd);background:var(--s2);color:var(--dim2);cursor:pointer;font-size:11px;font-family:'DM Sans',sans-serif;">${ex.name.replace('⚡ ','')}</button>`).join('')}
+      </div>
+    </div>
+    <div>
+      <div style="font-size:11px;color:var(--ped);font-weight:700;text-transform:uppercase;letter-spacing:.6px;margin-bottom:8px;">👨 Pedro</div>
+      <div style="display:flex;flex-wrap:wrap;gap:5px;">
+        ${personGroups.p.map(ex => `<button onclick="showExChart('${ex.id}','${ex.name.replace('⚡ ','').replace(/'/g,"\\'")}','#38bdf8')" style="padding:5px 10px;border-radius:7px;border:1px solid var(--bd);background:var(--s2);color:var(--dim2);cursor:pointer;font-size:11px;font-family:'DM Sans',sans-serif;">${ex.name.replace('⚡ ','')}</button>`).join('')}
+      </div>
+    </div>`;
+
+  // History entries
+  const allEntries = [];
+  Object.entries(logs).forEach(([exId, entries]) => {
+    entries.forEach(e => { allEntries.push({...e, exId}); });
+  });
+  allEntries.sort((a,b) => {
+    const da = a.date.split('/').reverse().join('');
+    const db = b.date.split('/').reverse().join('');
+    return db.localeCompare(da);
+  });
+
+  if (allEntries.length === 0) {
+    histList.innerHTML = '<div style="color:var(--dim);font-size:13px;padding:20px;text-align:center;">Nenhum treino registrado ainda. Complete sua primeira sessão!</div>';
+    return;
+  }
+
+  histList.innerHTML = allEntries.slice(0, 30).map(e => `
+    <div class="hist-card">
+      <div class="hist-date">${e.date} · ${e.person === 'c' ? '👩 Caroline' : '👨 Pedro'}</div>
+      <div class="hist-name">${e.name}</div>
+      <div class="hist-sets">
+        ${e.sets.map((s,i) => `<span class="hist-set">S${i+1}: <strong>${s.weight}kg</strong> × ${s.reps} (RPE ${s.rpe||'?'})</span>`).join('')}
+        <span class="hist-set" style="border-color:rgba(167,139,250,.3);color:var(--pur);">Vol: ${e.sets.reduce((t,s)=>t+(s.weight*s.reps),0).toFixed(0)}kg</span>
+      </div>
+    </div>`).join('');
+}
+
+function showExChart(exId, exName, color) {
+  const logs = getLogs();
+  const entries = logs[exId] || [];
+  const card = document.getElementById('chart-card');
+  card.style.display = 'block';
+  document.getElementById('chart-ex-name').textContent = exName;
+  document.getElementById('chart-ex-sub').textContent = entries.length > 0
+    ? `${entries.length} sessões registradas`
+    : 'Nenhum registro ainda';
+
+  const labels = entries.map(e => e.date);
+  const maxWeights = entries.map(e => Math.max(...e.sets.map(s => s.weight)));
+  const avgRpe = entries.map(e => {
+    const rpv = e.sets.map(s=>s.rpe||7);
+    return rpv.reduce((a,b)=>a+b,0)/rpv.length;
+  });
+
+  if (progressChart) progressChart.destroy();
+  const ctx = document.getElementById('progress-chart');
+  progressChart = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [
+        {label:'Carga Máx (kg)',data:maxWeights,borderColor:color,backgroundColor:color+'22',borderWidth:2.5,tension:.4,fill:true,pointRadius:5,pointBackgroundColor:color,yAxisID:'y'},
+        {label:'RPE Médio',data:avgRpe,borderColor:'#fb923c',backgroundColor:'rgba(251,146,60,.1)',borderWidth:1.5,tension:.4,fill:false,pointRadius:3,yAxisID:'y2',borderDash:[4,4]}
+      ]
+    },
+    options:{responsive:true,maintainAspectRatio:false,
+      plugins:{legend:{labels:{color:'#94a3b8'}},tooltip:{backgroundColor:'#111722',borderColor:'#1e2a3a',borderWidth:1}},
+      scales:{
+        x:{grid:{color:'#1e2a3a'},ticks:{color:'#64748b'}},
+        y:{grid:{color:'#1e2a3a'},position:'left',title:{display:true,text:'kg',color:'#64748b'}},
+        y2:{grid:{display:false},position:'right',min:1,max:10,title:{display:true,text:'RPE',color:'#64748b'}}
+      }}
+  });
+}
+
+// ═══════════════════ NAVIGATION ═══════════════════
+
+function showTab(n) {
+  document.querySelectorAll('.pg').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('on'));
+  document.getElementById('pg-'+n).classList.add('on');
+  document.querySelector(`.tab[data-p="${n}"]`).classList.add('on');
+  if (n === 'h') renderHistory();
+}
+
+function cShowW(w) {
+  document.querySelectorAll('#pg-c .wpage').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('#pg-c .wtab').forEach(t=>t.classList.remove('on'));
+  document.getElementById('cw-'+w).classList.add('on');
+  document.getElementById('cwt-'+w).classList.add('on');
+}
+
+function pShowW(w) {
+  document.querySelectorAll('#pg-p .wpage').forEach(p=>p.classList.remove('on'));
+  document.querySelectorAll('#pg-p .wtab').forEach(t=>t.classList.remove('on'));
+  document.getElementById('pw-'+w).classList.add('on');
+  document.getElementById('pwt-'+w).classList.add('on');
+}
+
+function setCDay(w) { cShowW(w); }
+function setPDay(w) { pShowW(w); }
+
+window.addEventListener('load', async () => {
+  renderAll(); // Renderiza com cache local primeiro (instantâneo)
+  const fresh = await gsLoad(); // Busca do Google Sheets
+  if (fresh && Object.keys(fresh).length > 0) {
+    renderAll(); // Re-renderiza com dados atualizados
+  }
+});
+
+async function reloadFromCloud() {
+  setSyncStatus('loading', '⏳ Buscando dados do Google Sheets...');
+  const fresh = await gsLoad();
+  if (fresh) {
+    renderAll();
+    renderHistory();
+  }
+}
+</script>
+</body>
+</html>
