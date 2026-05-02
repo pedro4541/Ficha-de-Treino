@@ -405,7 +405,7 @@ header{
 <div class="wrap">
 
 <header>
-  <div class="logo">Nutro<em>Track</em> · <span style="font-size:14px;font-weight:500;color:var(--dim2)">Fichas de Treino</span> <span style="font-size:10px;font-weight:700;background:rgba(167,139,250,.15);color:var(--pur);border:1px solid rgba(167,139,250,.3);border-radius:999px;padding:2px 8px;vertical-align:middle;">v1.3</span></div>
+  <div class="logo">Nutro<em>Track</em> · <span style="font-size:14px;font-weight:500;color:var(--dim2)">Fichas de Treino</span> <span style="font-size:10px;font-weight:700;background:rgba(167,139,250,.15);color:var(--pur);border:1px solid rgba(167,139,250,.3);border-radius:999px;padding:2px 8px;vertical-align:middle;">v1.4</span></div>
   <div style="display:flex;align-items:center;gap:10px;">
     <div id="sync-status" style="font-size:12px;color:var(--dim);">☁️ Pronto</div>
     <button onclick="reloadFromCloud()" style="padding:5px 12px;border-radius:8px;border:1px solid var(--bd);background:var(--s2);color:var(--dim2);cursor:pointer;font-size:11px;font-family:'DM Sans',sans-serif;">🔄 Sincronizar</button>
@@ -694,25 +694,36 @@ async function gsLoad() {
   try {
     const resp = await fetch(GS_URL + '?t=' + Date.now());
     const rows = await resp.json();
-    // Reagrupa por exId
+
+    if (!Array.isArray(rows) || rows.length === 0) {
+      setSyncStatus('ok', '✅ Nenhum dado ainda');
+      setTimeout(() => setSyncStatus('idle'), 2000);
+      return localCache;
+    }
+
+    // O Apps Script já retorna agrupado por exId+data+pessoa
+    // Cada item tem: { date, person, exId, name, workout, sets:[{weight,reps,rpe}] }
     const fresh = {};
     rows.forEach(r => {
       if (!r.exId) return;
       if (!fresh[r.exId]) fresh[r.exId] = [];
-      // Agrupa sets do mesmo registro (mesma data + exercício)
-      const key = `${r.date}_${r.exId}`;
-      let entry = fresh[r.exId].find(e => e._key === key);
-      if (!entry) {
-        entry = { _key: key, date: String(r.date), person: r.person, exId: r.exId, name: r.exName, sets: [], workout: r.workout };
-        fresh[r.exId].push(entry);
-      }
-      entry.sets.push({ weight: parseFloat(r.weight) || 0, reps: parseInt(r.reps) || 0, rpe: parseInt(r.rpe) || 7 });
+      fresh[r.exId].push({
+        date:    String(r.date),
+        person:  r.person,
+        exId:    r.exId,
+        name:    r.name || r.exName || '',
+        workout: r.workout || '',
+        sets:    Array.isArray(r.sets) ? r.sets.map(s => ({
+          weight: parseFloat(s.weight) || 0,
+          reps:   parseInt(s.reps)     || 0,
+          rpe:    parseInt(s.rpe)      || 7
+        })) : []
+      });
     });
-    // Remove _key helper
-    Object.keys(fresh).forEach(id => fresh[id].forEach(e => delete e._key));
+
     localCache = fresh;
     saveCache();
-    setSyncStatus('ok', `✅ Dados carregados — ${rows.length} registros`);
+    setSyncStatus('ok', `✅ ${rows.length} registro(s) carregado(s)`);
     setTimeout(() => setSyncStatus('idle'), 3000);
     return fresh;
   } catch(err) {
@@ -983,13 +994,16 @@ const pWorkouts = {
 
 // ═══════════════════ RENDER ENGINE ═══════════════════
 
-function getLogs() { try { return JSON.parse(localStorage.getItem('nt_logs')||'{}'); } catch(e) { return {}; } }
-function saveLogs(logs) { localStorage.setItem('nt_logs', JSON.stringify(logs)); }
-
 function getLastLog(exId) {
   const logs = getLogs();
   if (!logs[exId] || logs[exId].length === 0) return null;
-  return logs[exId][logs[exId].length - 1];
+  // Ordena por data e retorna o mais recente
+  const sorted = [...logs[exId]].sort((a, b) => {
+    const da = a.date ? a.date.split('/').reverse().join('') : '';
+    const db = b.date ? b.date.split('/').reverse().join('') : '';
+    return db.localeCompare(da);
+  });
+  return sorted[0];
 }
 
 function buildExCard(ex, person, accentColor) {
