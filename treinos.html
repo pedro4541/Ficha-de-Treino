@@ -2,7 +2,13 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="NutroTrack">
+<meta name="theme-color" content="#0a0e14">
+<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230a0e14'/><text y='.9em' font-size='70' x='50%' text-anchor='middle' dominant-baseline='top'>💪</text></svg>">
+
 <title>NutroTrack · Fichas de Treino</title>
 <link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@500;600;700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
@@ -175,6 +181,12 @@ header{display:flex;align-items:center;justify-content:space-between;margin-bott
   display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;
 }
 .sess-stat{text-align:center;}
+.sess-stats-row{display:flex;gap:16px;flex-wrap:wrap;}
+@media(max-width:768px){
+  .session-bar{flex-direction:column;gap:10px;}
+  .sess-stats-row{display:grid;grid-template-columns:1fr 1fr 1fr;width:100%;gap:8px;}
+  .session-bar .btn-primary{width:100%;}
+}
 .sess-val{font-family:'Clash Display',sans-serif;font-size:20px;font-weight:700;color:var(--grn);}
 .sess-lb{font-size:10px;color:var(--dim);text-transform:uppercase;letter-spacing:.5px;}
 
@@ -201,6 +213,160 @@ header{display:flex;align-items:center;justify-content:space-between;margin-bott
 .section-title{font-family:'Clash Display',sans-serif;font-size:13px;font-weight:700;color:var(--dim);letter-spacing:1px;text-transform:uppercase;margin:18px 0 10px;display:flex;align-items:center;gap:8px;}
 
 footer{text-align:center;padding:28px 0 12px;color:var(--dim);font-size:11px;border-top:1px solid var(--bd);margin-top:32px;}
+
+/* ═══════════════════ MOBILE RESPONSIVO ═══════════════════ */
+
+/* Base mobile adjustments */
+@media(max-width:768px){
+
+  /* Padding menor */
+  .wrap{padding:16px 12px;}
+
+  /* Header compacto */
+  header{flex-direction:column;align-items:flex-start;gap:10px;margin-bottom:20px;padding-bottom:14px;}
+  header > div:last-child{width:100%;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:6px;}
+  .logo{font-size:17px;}
+  #sync-status{font-size:11px;}
+
+  /* Tabs: scroll horizontal */
+  .tabs{width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;border-radius:10px;gap:4px;padding:4px;}
+  .tab{padding:8px 14px;font-size:12px;white-space:nowrap;flex-shrink:0;}
+
+  /* Person header: empilhado */
+  .person-header{flex-direction:column;align-items:flex-start;padding:14px 16px;gap:10px;}
+  .person-info{gap:12px;}
+  .person-avatar{width:42px;height:42px;font-size:20px;}
+  .person-name{font-size:16px;}
+  .person-sub{font-size:11px;}
+  .person-stats{display:grid;grid-template-columns:repeat(4,1fr);width:100%;gap:8px;margin-top:4px;}
+  .pstat{background:var(--s2);border:1px solid var(--bd);border-radius:8px;padding:8px 6px;}
+  .pstat-val{font-size:15px;}
+  .pstat-lb{font-size:9px;}
+
+  /* Tip box */
+  .tip-box{padding:10px 12px;}
+  .tip-box span{font-size:12px;}
+
+  /* Split week: scroll horizontal */
+  .split-grid{grid-template-columns:repeat(7,minmax(44px,1fr));gap:4px;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  .split-day{padding:8px 4px;}
+  .sd-name{font-size:9px;}
+  .sd-label{font-size:10px;}
+  .sd-tag{font-size:8px;}
+
+  /* Workout tabs: scroll */
+  .wtabs{overflow-x:auto;-webkit-overflow-scrolling:touch;flex-wrap:nowrap;padding-bottom:4px;}
+  .wtab{white-space:nowrap;flex-shrink:0;font-size:11px;padding:7px 12px;}
+
+  /* Session bar: grid 2x2 */
+  .session-bar{flex-direction:column;gap:10px;padding:12px 14px;}
+  .session-bar > div{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;width:100%;}
+  .sess-stat{background:var(--s2);border:1px solid var(--bd);border-radius:8px;padding:8px;}
+  .sess-stats-row{display:flex;gap:16px;flex-wrap:wrap;}
+@media(max-width:768px){
+  .session-bar{flex-direction:column;gap:10px;}
+  .sess-stats-row{display:grid;grid-template-columns:1fr 1fr 1fr;width:100%;gap:8px;}
+  .session-bar .btn-primary{width:100%;}
+}
+.sess-val{font-size:18px;}
+  .sess-lb{font-size:9px;}
+  .session-bar .btn-primary{width:100%;padding:11px;font-size:13px;}
+
+  /* Exercise cards */
+  .ex-header{padding:12px 14px;gap:10px;}
+  .ex-num{width:28px;height:28px;font-size:12px;border-radius:6px;}
+  .ex-name{font-size:13px;}
+  .ex-meta{gap:5px;margin-top:3px;}
+  .badge{font-size:9px;padding:2px 6px;}
+  .ex-toggle{font-size:16px;}
+  .ex-body{padding:0 12px 14px;}
+
+  /* Info grid: single column */
+  .ex-grid{grid-template-columns:1fr !important;gap:8px;}
+  .info-box{padding:10px 12px;}
+  .ib-label{font-size:9px;}
+  .ib-text{font-size:12px;}
+
+  /* Log section */
+  .log-section{padding:12px;}
+  .log-title{font-size:11px;flex-direction:column;align-items:flex-start;gap:8px;}
+  .log-title .btn-done{width:100%;text-align:center;padding:8px;}
+
+  /* Sets row: layout mobile */
+  .sets-row{grid-template-columns:24px 1fr 1fr 1fr 44px;gap:4px;}
+  .sets-label{font-size:10px;}
+  .log-input{padding:7px 4px;font-size:12px;}
+  .col-hdr{font-size:8px;}
+  .btn-done{padding:7px 6px;font-size:11px;}
+
+  /* Progress hint */
+  .progress-hint{font-size:11px;padding:8px 10px;}
+
+  /* Section titles */
+  .section-title{font-size:11px;}
+
+  /* HIIT card */
+  .hiit-header{padding:12px 14px;}
+  .hiit-title{font-size:14px;}
+  .hiit-sub{font-size:11px;}
+  .hiit-body{padding:12px 14px;}
+  .hiit-row{flex-direction:column;align-items:flex-start;gap:2px;padding:8px 0;}
+  .hiit-ex{font-size:12px;}
+  .hiit-detail{font-size:11px;}
+
+  /* History */
+  .hist-card{padding:12px;}
+  .hist-name{font-size:13px;}
+  .hist-sets{gap:4px;}
+  .hist-set{font-size:11px;padding:3px 8px;}
+  #hist-selectors{grid-template-columns:1fr !important;}
+
+  /* Charts card */
+  #chart-card{padding:14px;}
+
+  /* Compare section */
+  .cmp{grid-template-columns:1fr 30px 1fr;gap:8px;}
+  .cm .cvl{font-size:14px;}
+  .cm .clb{font-size:8px;}
+
+  /* Timer */
+  .timer-bar{bottom:12px;right:12px;left:12px;min-width:unset;}
+  .timer-count{font-size:36px;}
+
+  /* Accordion */
+  .acc-hd{padding:14px 14px;}
+  .acc-title{font-size:14px;}
+  .acc-pills{gap:4px;}
+  .pill{font-size:9px;padding:2px 7px;}
+  .acc-body{padding:14px;}
+  .acc-arrow{font-size:16px;}
+
+  /* Two column -> single */
+  .two{grid-template-columns:1fr !important;}
+
+  /* Insight items */
+  .ins{padding:7px 0;}
+  .it{font-size:12px;}
+
+  /* Buttons */
+  .btn-primary,.btn-danger{padding:10px 16px;font-size:12px;}
+}
+
+/* Extra small (iPhone SE, etc) */
+@media(max-width:380px){
+  .person-stats{grid-template-columns:repeat(2,1fr);}
+  .sets-row{grid-template-columns:22px 1fr 1fr 40px;gap:3px;}
+  /* Hide RPE on very small screens, show label only */
+  .sets-row input:nth-child(4){display:none;}
+  .col-hdr:nth-child(4){display:none;}
+}
+
+/* PWA — remove Safari UI quando instalado como app */
+@media(display-mode:standalone){
+  body{padding-top:env(safe-area-inset-top);}
+  .wrap{padding-bottom:calc(16px + env(safe-area-inset-bottom));}
+}
+
 </style>
 </head>
 <body>
@@ -267,9 +433,11 @@ footer{text-align:center;padding:28px 0 12px;color:var(--dim);font-size:11px;bor
 
   <!-- SESSION BAR -->
   <div class="session-bar" id="c-sess-bar">
-    <div class="sess-stat"><div class="sess-val" id="c-vol">0</div><div class="sess-lb">Volume Total (kg)</div></div>
-    <div class="sess-stat"><div class="sess-val" id="c-exdone" style="color:var(--pur)">0/0</div><div class="sess-lb">Exercícios Feitos</div></div>
-    <div class="sess-stat"><div class="sess-val" id="c-time" style="color:var(--org)">0</div><div class="sess-lb">Min Estimados</div></div>
+    <div class="sess-stats-row">
+      <div class="sess-stat"><div class="sess-val" id="c-vol">0</div><div class="sess-lb">Volume (kg)</div></div>
+      <div class="sess-stat"><div class="sess-val" id="c-exdone" style="color:var(--pur)">0/0</div><div class="sess-lb">Exercícios</div></div>
+      <div class="sess-stat"><div class="sess-val" id="c-time" style="color:var(--org)">0</div><div class="sess-lb">Minutos</div></div>
+    </div>
     <button class="btn-primary" onclick="finishSession('c')">✅ Finalizar Treino</button>
   </div>
 
@@ -356,9 +524,11 @@ footer{text-align:center;padding:28px 0 12px;color:var(--dim);font-size:11px;bor
   </div>
 
   <div class="session-bar" id="p-sess-bar">
-    <div class="sess-stat"><div class="sess-val" id="p-vol">0</div><div class="sess-lb">Volume Total (kg)</div></div>
-    <div class="sess-stat"><div class="sess-val" id="p-exdone" style="color:var(--pur)">0/0</div><div class="sess-lb">Exercícios Feitos</div></div>
-    <div class="sess-stat"><div class="sess-val" id="p-time" style="color:var(--org)">0</div><div class="sess-lb">Min Estimados</div></div>
+    <div class="sess-stats-row">
+      <div class="sess-stat"><div class="sess-val" id="p-vol">0</div><div class="sess-lb">Volume (kg)</div></div>
+      <div class="sess-stat"><div class="sess-val" id="p-exdone" style="color:var(--pur)">0/0</div><div class="sess-lb">Exercícios</div></div>
+      <div class="sess-stat"><div class="sess-val" id="p-time" style="color:var(--org)">0</div><div class="sess-lb">Minutos</div></div>
+    </div>
     <button class="btn-primary" onclick="finishSession('p')">✅ Finalizar Treino</button>
   </div>
 
