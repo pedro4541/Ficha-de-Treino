@@ -361,10 +361,42 @@ footer{text-align:center;padding:28px 0 12px;color:var(--dim);font-size:11px;bor
   .col-hdr:nth-child(4){display:none;}
 }
 
-/* PWA — remove Safari UI quando instalado como app */
+/* Safe area — Dynamic Island / notch / iPhone 17 */
+.wrap{
+  padding-left:max(18px, env(safe-area-inset-left));
+  padding-right:max(18px, env(safe-area-inset-right));
+}
+header{
+  padding-top:max(0px, env(safe-area-inset-top));
+}
+/* PWA standalone mode */
 @media(display-mode:standalone){
-  body{padding-top:env(safe-area-inset-top);}
-  .wrap{padding-bottom:calc(16px + env(safe-area-inset-bottom));}
+  body{
+    padding-top:env(safe-area-inset-top);
+    padding-bottom:env(safe-area-inset-bottom);
+  }
+  header{
+    padding-top:calc(env(safe-area-inset-top) + 8px);
+  }
+  .timer-bar{
+    bottom:calc(12px + env(safe-area-inset-bottom));
+  }
+}
+/* Sempre aplicar no Safari iOS mesmo fora do modo standalone */
+@supports(padding-top: env(safe-area-inset-top)){
+  body{
+    padding-top:env(safe-area-inset-top);
+  }
+  header{
+    padding-top:calc(env(safe-area-inset-top) + 4px);
+    margin-top:0;
+  }
+  .tabs{
+    margin-top:4px;
+  }
+  .timer-bar{
+    bottom:calc(20px + env(safe-area-inset-bottom));
+  }
 }
 
 </style>
