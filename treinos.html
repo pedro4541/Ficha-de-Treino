@@ -395,7 +395,7 @@ footer{text-align:center;padding:28px 0 12px;color:var(--dim);font-size:11px;bor
       <div class="person-avatar av-c">👩</div>
       <div>
         <div class="person-name" style="color:var(--car)">Caroline Silva</div>
-        <div class="person-sub">31 anos · 161 cm · 79,75 kg · Ozempic · Full Body 3×/semana</div>
+        <div class="person-sub">31 anos · 161 cm · 79,75 kg · Ozempic · Upper/Lower 4×/semana</div>
       </div>
     </div>
     <div class="person-stats">
@@ -408,27 +408,28 @@ footer{text-align:center;padding:28px 0 12px;color:var(--dim);font-size:11px;bor
 
   <div class="tip-box">
     <strong>💡 Estratégia Personal:</strong>
-    <span> Full Body 3×/semana maximiza gasto calórico e frequência muscular — ideal para recomposição com Ozempic. Supersets reduzem tempo de treino e aumentam o gasto calórico sem comprometer a carga. <strong>Proteína mínima: 100g/dia. Não treinar em jejum.</strong></span>
+    <span> Upper/Lower 4×/semana — cada sessão é focada, mais motivante e com mais volume por grupo muscular. Mesma eficiência do Full Body com mais prazer no treino. Supersets marcados com ⚡ economizam tempo sem perder intensidade. <strong>Proteína mínima: 100g/dia. Não treinar em jejum.</strong></span>
   </div>
 
   <!-- SPLIT SEMANA -->
   <div class="section-title">📅 Organização da Semana</div>
   <div class="split-grid" id="c-split">
-    <div class="split-day active-day" onclick="setCDay('A')"><div class="sd-name">Seg</div><div class="sd-label">Full A</div><div class="sd-tag" style="color:var(--car)">💪 Treino</div></div>
-    <div class="split-day rest"><div class="sd-name">Ter</div><div class="sd-label">LISS</div><div class="sd-tag" style="color:var(--ped)">🚶 Cardio</div></div>
-    <div class="split-day active-day" onclick="setCDay('B')"><div class="sd-name">Qua</div><div class="sd-label">Full B</div><div class="sd-tag" style="color:var(--car)">💪 Treino</div></div>
-    <div class="split-day rest"><div class="sd-name">Qui</div><div class="sd-label">LISS</div><div class="sd-tag" style="color:var(--ped)">🚶 Cardio</div></div>
-    <div class="split-day active-day" onclick="setCDay('C')"><div class="sd-name">Sex</div><div class="sd-label">Full C</div><div class="sd-tag" style="color:var(--car)">💪 Treino</div></div>
+    <div class="split-day active-day" onclick="setCDay('UA')"><div class="sd-name">Seg</div><div class="sd-label">Upper A</div><div class="sd-tag" style="color:var(--car)">💪 Empurra</div></div>
+    <div class="split-day active-day" onclick="setCDay('LA')"><div class="sd-name">Ter</div><div class="sd-label">Lower A</div><div class="sd-tag" style="color:var(--car)">🦵 Quad</div></div>
+    <div class="split-day hiit-day" onclick="setCDay('LI')"><div class="sd-name">Qua</div><div class="sd-label">LISS</div><div class="sd-tag" style="color:var(--ped)">🚶 Cardio</div></div>
+    <div class="split-day active-day" onclick="setCDay('UB')"><div class="sd-name">Qui</div><div class="sd-label">Upper B</div><div class="sd-tag" style="color:var(--car)">💪 Puxa</div></div>
+    <div class="split-day active-day" onclick="setCDay('LB')"><div class="sd-name">Sex</div><div class="sd-label">Lower B</div><div class="sd-tag" style="color:var(--car)">🦵 Post.</div></div>
     <div class="split-day rest"><div class="sd-name">Sáb</div><div class="sd-label">Ativo</div><div class="sd-tag" style="color:var(--dim)">🧘 Flex</div></div>
     <div class="split-day rest"><div class="sd-name">Dom</div><div class="sd-label">Descanso</div><div class="sd-tag" style="color:var(--dim)">😴 Rest</div></div>
   </div>
 
   <!-- WORKOUT SELECTOR -->
   <div class="wtabs">
-    <button class="wtab on" id="cwt-A" onclick="cShowW('A')">Full Body A · Seg</button>
-    <button class="wtab" id="cwt-B" onclick="cShowW('B')">Full Body B · Qua</button>
-    <button class="wtab" id="cwt-C" onclick="cShowW('C')">Full Body C · Sex</button>
-    <button class="wtab hiit-tab" id="cwt-L" onclick="cShowW('L')">LISS Cardio · Ter/Qui</button>
+    <button class="wtab on" id="cwt-UA" onclick="cShowW('UA')">Upper A · Seg</button>
+    <button class="wtab" id="cwt-LA" onclick="cShowW('LA')">Lower A · Ter</button>
+    <button class="wtab hiit-tab" id="cwt-LI" onclick="cShowW('LI')">LISS · Qua</button>
+    <button class="wtab" id="cwt-UB" onclick="cShowW('UB')">Upper B · Qui</button>
+    <button class="wtab" id="cwt-LB" onclick="cShowW('LB')">Lower B · Sex</button>
   </div>
 
   <!-- SESSION BAR -->
@@ -441,23 +442,28 @@ footer{text-align:center;padding:28px 0 12px;color:var(--dim);font-size:11px;bor
     <button class="btn-primary" onclick="finishSession('c')">✅ Finalizar Treino</button>
   </div>
 
-  <!-- FULL BODY A -->
-  <div class="wpage on" id="cw-A">
-    <div class="section-title">⚡ Full Body A · Segunda-feira</div>
-    <div id="cA-exercises"></div>
+  <!-- UPPER A -->
+  <div class="wpage on" id="cw-UA">
+    <div class="section-title">💪 Upper A · Segunda · Empurra</div>
+    <div id="cUA-exercises"></div>
   </div>
-  <!-- FULL BODY B -->
-  <div class="wpage" id="cw-B">
-    <div class="section-title">⚡ Full Body B · Quarta-feira</div>
-    <div id="cB-exercises"></div>
+  <!-- LOWER A -->
+  <div class="wpage" id="cw-LA">
+    <div class="section-title">🦵 Lower A · Terça · Quadríceps</div>
+    <div id="cLA-exercises"></div>
   </div>
-  <!-- FULL BODY C -->
-  <div class="wpage" id="cw-C">
-    <div class="section-title">⚡ Full Body C · Sexta-feira</div>
-    <div id="cC-exercises"></div>
+  <!-- UPPER B -->
+  <div class="wpage" id="cw-UB">
+    <div class="section-title">💪 Upper B · Quinta · Puxa</div>
+    <div id="cUB-exercises"></div>
+  </div>
+  <!-- LOWER B -->
+  <div class="wpage" id="cw-LB">
+    <div class="section-title">🦵 Lower B · Sexta · Posterior & Glúteos</div>
+    <div id="cLB-exercises"></div>
   </div>
   <!-- LISS -->
-  <div class="wpage" id="cw-L">
+  <div class="wpage" id="cw-LI">
     <div class="hiit-card">
       <div class="hiit-header">
         <div class="hiit-title">🚶 LISS Cardio · Terça e Quinta</div>
@@ -691,97 +697,134 @@ function saveLogs(logs) { localCache = logs; saveCache(); }
 // ═══════════════════ DADOS DOS TREINOS ═══════════════════
 
 const cWorkouts = {
-  A: {
-    name:"Full Body A · Segunda", color:"#f472b6",
-    tip:"Foco em EMPURRA + PUXADA + PERNAS (extensores). Supersets marcados com ⚡ — sem descanso entre os pares.",
+  UA: {
+    name:"Upper A · Segunda · Empurra", color:"#f472b6",
+    tip:"Foco em PEITO, OMBROS e TRÍCEPS. Supersets marcados com ⚡ — execute os dois exercícios sem descanso entre eles. Descanse apenas após o par completo.",
     exercises:[
-      {id:"c_squat",name:"Agachamento Livre",muscle:"Quadríceps · Glúteos · Core",sets:4,reps:"10–12",rest:90,
-       exec:"Pés na largura dos ombros, dedos levemente abertos. Desça até a coxa ficar paralela ao chão, joelhos na linha dos pés. Mantenha o peito erguido e o core contraído durante todo o movimento.",
-       progress:"Quando conseguir fazer 12 reps com boa forma em TODAS as 4 séries, aumente 2,5kg na próxima sessão.",
-       alt:"Agachamento no Smith · Leg Press 45° · Agachamento Goblet com kettlebell"},
-      {id:"c_rdl",name:"⚡ Romanian Deadlift",muscle:"Posterior · Glúteos · Lombar",sets:4,reps:"10–12",rest:60,
-       exec:"Barra próxima ao corpo. Empurre o quadril para trás e desça a barra pela frente das pernas até sentir esticar os posteriores (aprox. abaixo do joelho). Não arredonde a lombar.",
-       progress:"Aumente 2,5kg quando completar 12 reps em todas as séries. Se a lombar cansar antes das pernas, reduza o peso.",
-       alt:"Stiff com halteres · Cadeira flexora · Hip Hinge com elástico"},
-      {id:"c_bench",name:"Supino com Halteres",muscle:"Peitoral · Ombro · Tríceps",sets:3,reps:"10–12",rest:90,
-       exec:"Halteres no lado do peito, cotovelos a 45° do corpo. Empurre verticalmente e controle a descida em 2–3 segundos. Não deixe os cotovelos abrirem demais.",
-       progress:"Quando fazer 12 reps com boa forma, suba 2kg por halter (4kg total).",
+      {id:"c_bench",name:"Supino com Halteres",muscle:"Peitoral · Ombros · Tríceps",sets:4,reps:"10–12",rest:90,
+       exec:"Deitada no banco, halteres ao lado do peito, cotovelos a 45° do corpo. Empurre verticalmente e controle a descida em 2–3 segundos. Não deixe os cotovelos abrirem demais.",
+       progress:"Quando fazer 12 reps com boa forma em TODAS as séries, suba 2kg por halter na próxima sessão.",
        alt:"Supino na máquina · Crossover no cabo · Flexão de braço"},
-      {id:"c_row",name:"⚡ Remada Curvada com Halteres",muscle:"Dorsal · Romboides · Bíceps",sets:3,reps:"10–12",rest:60,
-       exec:"Pés afastados, tronco inclinado 45°, core firme. Puxe os halteres em direção ao umbigo, cotovelos junto ao corpo. Espreme o dorsal no topo por 1 segundo.",
-       progress:"Aumente 2kg por halter quando conseguir 12 reps perfeitas.",
-       alt:"Remada cavalinho · Remada no cabo · Pull-down no cabo"},
+      {id:"c_inc_press",name:"⚡ Supino Inclinado com Halteres",muscle:"Peitoral Superior · Ombros",sets:3,reps:"10–12",rest:60,
+       exec:"Banco a 30–45°. Halteres ao lado do peito na altura do esterno. Empurre sem deixar os braços perpendiculares ao corpo. Controle a descida em 2s.",
+       progress:"Suba 2kg por halter quando completar 12 reps.",
+       alt:"Supino inclinado na máquina · Crossover inclinado"},
       {id:"c_ohp",name:"Desenvolvimento com Halteres",muscle:"Ombros · Tríceps",sets:3,reps:"10–12",rest:75,
-       exec:"Sentada, costas apoiadas, halteres na altura dos ombros. Empurre para cima sem arquear a lombar. Controle a descida.",
+       exec:"Sentada, costas apoiadas, halteres na altura dos ombros. Empurre para cima sem arquear a lombar. Controle a descida em 2s.",
        progress:"Suba 2kg no total quando completar 12 reps em todas as séries.",
        alt:"Desenvolvimento na máquina · Arnold Press · Elevação lateral"},
-      {id:"c_plank",name:"Prancha Abdominal",muscle:"Core · Transverso",sets:3,reps:"30–45s",rest:45,
+      {id:"c_lateral",name:"⚡ Elevação Lateral",muscle:"Ombro Médio",sets:3,reps:"15",rest:45,
+       exec:"Halteres leves. Eleve lateralmente até a altura dos ombros, cotovelo levemente dobrado. Não balance. Desça em 3 segundos.",
+       progress:"Aumente 1kg por halter quando completar 15 reps sem impulso.",
+       alt:"Elevação lateral no cabo · Face pull"},
+      {id:"c_tricep",name:"Tríceps Pulley",muscle:"Tríceps",sets:3,reps:"12–15",rest:60,
+       exec:"Cotovelos fixos ao lado do corpo. Estenda o braço completamente, gire o punho para fora no final. Controle a subida em 2 segundos.",
+       progress:"Suba 2–5kg quando completar 15 reps perfeitas.",
+       alt:"Tríceps no cabo · Mergulho no banco"},
+      {id:"c_tricep_french",name:"⚡ Tríceps Francês com Halter",muscle:"Tríceps · Cabeça Longa",sets:3,reps:"12",rest:45,
+       exec:"Sentada ou deitada, halter atrás da cabeça com as duas mãos. Cotovelos apontam para cima. Estenda completamente sem mover os cotovelos.",
+       progress:"Suba 2kg quando completar 12 reps sem balançar os cotovelos.",
+       alt:"Tríceps testa · Tríceps no cabo com corda"}
+    ]
+  },
+  LA: {
+    name:"Lower A · Terça · Quadríceps", color:"#f472b6",
+    tip:"Foco em QUADRÍCEPS e CORE. Começa com o exercício mais pesado quando você está mais descansada. Supersets marcados com ⚡.",
+    exercises:[
+      {id:"c_squat",name:"Agachamento Goblet",muscle:"Quadríceps · Glúteos · Core",sets:4,reps:"10–12",rest:90,
+       exec:"Segure um halter verticalmente na frente do peito. Pés um pouco mais que largura dos ombros. Agache profundo, cotovelos empurram os joelhos para fora. Peito erguido.",
+       progress:"Quando 12 reps ficarem fáceis, adicione 2kg ao halter ou faça com pausa de 2s no fundo.",
+       alt:"Agachamento livre com barra · Agachamento no Smith · Agachamento sumô"},
+      {id:"c_lgpress",name:"Leg Press 45°",muscle:"Quadríceps · Glúteos",sets:4,reps:"12–15",rest:75,
+       exec:"Pés no meio da plataforma, largura do quadril. Desça até 90° de joelho, sem o quadril sair da cadeira. Não deixe os joelhos fecharem.",
+       progress:"Aumente 5–10kg quando completar 15 reps em todas as séries.",
+       alt:"Agachamento Goblet pesado · Afundo com halteres"},
+      {id:"c_leg_ext",name:"⚡ Cadeira Extensora",muscle:"Quadríceps · Isolamento",sets:3,reps:"12–15",rest:60,
+       exec:"Rolo sobre os tornozelos. Extensão completa no topo, pause 1s. Desça controlado em 3 segundos. Não use impulso.",
+       progress:"Aumente 5kg quando completar 15 reps com pausa.",
+       alt:"Agachamento isométrico na parede · Terminal Knee Extension"},
+      {id:"c_lunge",name:"⚡ Afundo com Halteres",muscle:"Quadríceps · Glúteos · Equilíbrio",sets:3,reps:"10 cada lado",rest:60,
+       exec:"Passo largo à frente, joelho traseiro desce até próximo ao chão. Joelho da frente não ultrapassa muito a ponta do pé. Empurre pelo calcanhar para voltar.",
+       progress:"Suba 2kg por halter quando completar 10 reps por lado sem desequilíbrio.",
+       alt:"Afundo estático · Step-up no banco · Afundo reverso"},
+      {id:"c_calf",name:"Elevação de Panturrilha em Pé",muscle:"Gastrocnêmio · Sóleo",sets:4,reps:"15–20",rest:45,
+       exec:"Pé na borda do step, calcanhar abaixo do nível. Suba na ponta do pé o máximo possível. Segure 2s no topo. Desça lentamente.",
+       progress:"Aumente 5kg quando completar 20 reps com pausa no topo.",
+       alt:"Elevação sentada na máquina · Leg press com panturrilha"},
+      {id:"c_plank",name:"Prancha Abdominal",muscle:"Core · Transverso",sets:3,reps:"40s",rest:45,
        exec:"Antebraços no chão, corpo reto como uma tábua. Não deixe o quadril subir ou descer. Respire normalmente. Ative o core como se fosse apanhar um soco.",
-       progress:"Quando segurar 45s com facilidade, progrida para 60s ou prancha com elevação de perna alternada.",
+       progress:"Quando segurar 40s com facilidade, progrida para 60s ou prancha com elevação de perna alternada.",
        alt:"Dead Bug · Hollow Hold · Prancha lateral"}
     ]
   },
-  B: {
-    name:"Full Body B · Quarta", color:"#f472b6",
-    tip:"Foco em PUXADA + EMPURRA INCLINADO + PERNAS (glúteos). Descanse mais entre as séries compostas.",
+  UB: {
+    name:"Upper B · Quinta · Puxa", color:"#f472b6",
+    tip:"Foco em DORSAL, BÍCEPS e POSTERIOR DE OMBRO. Complementa o Upper A. Supersets marcados com ⚡.",
     exercises:[
-      {id:"c_lgpress",name:"Leg Press 45°",muscle:"Quadríceps · Glúteos",sets:4,reps:"12–15",rest:75,
-       exec:"Pés no meio da plataforma, largura do quadril. Desça até 90° de joelho, não deixe o quadril levantar da cadeira. Empurre pela plataforma toda, não pela ponta dos pés.",
-       progress:"Aumente 5–10kg quando completar 15 reps em todas as séries.",
-       alt:"Agachamento Goblet · Afundo com halteres · Agachamento no Smith"},
-      {id:"c_hipthrust",name:"⚡ Hip Thrust com Barra/Halteres",muscle:"Glúteos · Posteriores",sets:4,reps:"12–15",rest:60,
-       exec:"Ombros apoiados no banco, barra no dobramento do quadril. Empurre o quadril para cima até o corpo ficar paralelo ao chão. Contraia o glúteo no topo por 1–2 segundos.",
-       progress:"Suba 5kg quando completar 15 reps com contração plena.",
-       alt:"Elevação de quadril no chão · Glúteo 4 apoios · Mesa extensora de glúteo"},
-      {id:"c_pulldown",name:"Puxada no Pulley (Lat Pulldown)",muscle:"Dorsal · Bíceps",sets:4,reps:"10–12",rest:75,
+      {id:"c_pulldown",name:"Puxada no Pulley (Lat Pulldown)",muscle:"Dorsal · Bíceps",sets:4,reps:"10–12",rest:90,
        exec:"Pegada pronada, um pouco mais larga que os ombros. Puxe a barra até o queixo, cotovelos apontando para o chão. Não balance o tronco. Controle a subida.",
        progress:"Aumente 2,5–5kg quando completar 12 reps sem balanço.",
        alt:"Remada no cabo · Pullover · Assisted Pull-up"},
-      {id:"c_inc_press",name:"⚡ Supino Inclinado com Halteres",muscle:"Peitoral Superior · Ombros",sets:3,reps:"10–12",rest:60,
-       exec:"Banco a 30–45°. Halteres ao lado do peito, cotovelos a 45°. Empurre sem deixar os braços ficarem perpendiculares ao corpo. Controle a descida em 2s.",
-       progress:"Suba 2kg por halter quando completar 12 reps.",
-       alt:"Supino inclinado na máquina · Crossover inclinado · Flexão de braço inclinada"},
+      {id:"c_row",name:"⚡ Remada Curvada com Halteres",muscle:"Dorsal · Romboides · Bíceps",sets:4,reps:"10–12",rest:60,
+       exec:"Pés afastados, tronco inclinado 45°, core firme. Puxe os halteres em direção ao umbigo, cotovelos junto ao corpo. Espreme o dorsal no topo por 1 segundo.",
+       progress:"Aumente 2kg por halter quando conseguir 12 reps perfeitas.",
+       alt:"Remada cavalinho · Remada no cabo · Pull-down no cabo"},
+      {id:"c_seated_row",name:"Remada Sentada no Cabo",muscle:"Dorsal Médio · Trapézio",sets:3,reps:"12",rest:75,
+       exec:"Puxe a pega até o umbigo. Cotovelos junto ao corpo. Sem arredondar as costas na extensão. Espreme o dorsal no final.",
+       progress:"Aumente 5kg quando completar 12 reps com contração plena.",
+       alt:"Remada cavalinho · Remada unilateral com halter"},
+      {id:"c_facepull",name:"⚡ Face Pull no Cabo",muscle:"Posterior de Ombro · Manguito",sets:3,reps:"15",rest:45,
+       exec:"Cabo na altura dos olhos, corda. Puxe em direção ao rosto, cotovelos acima dos ombros. Rotação externa no final. Essencial para saúde dos ombros.",
+       progress:"Aumente 5kg quando completar 15 reps com rotação externa completa.",
+       alt:"Elevação posterior com halteres · Crucifixo inverso"},
       {id:"c_curl",name:"Rosca Direta com Halteres",muscle:"Bíceps",sets:3,reps:"12–15",rest:60,
        exec:"Cotovelos fixos ao lado do corpo. Suba os halteres girando o punho (supinação). Controle a descida em 2 segundos. Não balance o tronco.",
        progress:"Suba 1–2kg quando completar 15 reps.",
        alt:"Rosca no cabo · Rosca concentrada · Rosca martelo"},
-      {id:"c_tricep",name:"⚡ Tríceps Pulley",muscle:"Tríceps",sets:3,reps:"12–15",rest:45,
-       exec:"Cotovelos fixos ao lado do corpo. Estenda o braço completamente, gire o punho para fora no final. Controle a subida em 2 segundos.",
-       progress:"Suba 2–5kg quando completar 15 reps perfeitas.",
-       alt:"Tríceps no cabo · Tríceps francês com halter · Mergulho no banco"}
+      {id:"c_hammer",name:"⚡ Rosca Martelo",muscle:"Bíceps · Braquial · Antebraço",sets:3,reps:"12",rest:45,
+       exec:"Pegada neutra (halteres paralelos). Suba alternando os braços. Sem rotação do punho. Cotovelos fixos ao lado do corpo.",
+       progress:"Suba 2kg por halter quando completar 12 reps.",
+       alt:"Rosca no cabo com corda · Rosca de concentração"}
     ]
   },
-  C: {
-    name:"Full Body C · Sexta", color:"#f472b6",
-    tip:"Treino mais denso — circuito de alta intensidade. Menores cargas, mais reps, menos descanso. Gasto calórico máximo. Ideal para finalizar a semana.",
+  LB: {
+    name:"Lower B · Sexta · Posterior & Glúteos", color:"#f472b6",
+    tip:"Foco em POSTERIORES e GLÚTEOS. O Hip Thrust é o exercício mais importante desta sessão — é o melhor exercício para glúteos comprovado pela ciência. Supersets marcados com ⚡.",
     exercises:[
-      {id:"c_goblet",name:"Agachamento Goblet",muscle:"Quadríceps · Glúteos · Core",sets:4,reps:"15",rest:60,
-       exec:"Segure um halter verticalmente na frente do peito com as duas mãos. Pés um pouco mais que largura dos ombros. Agache profundo, cotovelos empurram os joelhos para fora. Postura ereta.",
-       progress:"Quando 15 reps ficarem fáceis, adicione 2kg ao halter ou faça com pausa de 2s no fundo.",
-       alt:"Agachamento livre com barra · Leg press · Agachamento sumô"},
-      {id:"c_chest_cable",name:"⚡ Crossover no Cabo",muscle:"Peitoral · Ombro Anterior",sets:3,reps:"12–15",rest:45,
-       exec:"Cabos na altura dos ombros ou acima. Pés afastados, um levemente à frente. Cruze os braços à frente do peito com leve curvatura no cotovelo. Controle a abertura em 3s.",
-       progress:"Aumente 2–5kg quando completar 15 reps controladas.",
-       alt:"Supino com halteres · Flexão de braço com pés elevados"},
-      {id:"c_seated_row",name:"Remada Sentada no Cabo",muscle:"Dorsal Médio · Bíceps",sets:3,reps:"12–15",rest:60,
-       exec:"Puxe o cabo até o umbigo, cotovelos junto ao corpo. Espreme o dorsal no final por 1s. Controle a extensão dos braços sem deixar as costas arredondarem.",
-       progress:"Aumente 5kg quando completar 15 reps com contração plena.",
-       alt:"Remada curvada · Remada cavalinho · Puxada"},
-      {id:"c_lunge",name:"⚡ Afundo com Halteres",muscle:"Quadríceps · Glúteos · Equilíbrio",sets:3,reps:"10 cada lado",rest:60,
-       exec:"Passo largo à frente, joelho traseiro desce até próximo ao chão. Joelho da frente não ultrapassa muito a ponta do pé. Empurre pelo calcanhar para voltar.",
-       progress:"Suba 2kg por halter quando completar 10 reps por lado sem desequilíbrio.",
-       alt:"Afundo estático (estacionário) · Step-up no banco · Afundo reverso"},
-      {id:"c_lateral",name:"Elevação Lateral",muscle:"Ombro Médio",sets:3,reps:"15",rest:45,
-       exec:"Halteres leves. Eleve lateralmente até ombro, cotovelo levemente dobrado. Não balance. Desça em 3 segundos. Se precisar balançar, está pesado demais.",
-       progress:"Aumente 1kg por halter quando completar 15 reps sem impulso.",
-       alt:"Elevação lateral no cabo · Elevação com elástico · Face pull"},
-      {id:"c_ab_crunch",name:"⚡ Crunch no Cabo",muscle:"Reto Abdominal",sets:3,reps:"15–20",rest:45,
+      {id:"c_rdl",name:"Romanian Deadlift com Halteres",muscle:"Posteriores · Glúteos · Lombar",sets:4,reps:"10–12",rest:90,
+       exec:"Halteres próximos ao corpo. Empurre o quadril para trás e desça pela frente das pernas até sentir estirar os posteriores. Não arredonde a lombar. Core firme.",
+       progress:"Aumente 2kg por halter quando completar 12 reps com boa forma.",
+       alt:"Stiff com halteres · Mesa flexora · Good Morning"},
+      {id:"c_hipthrust",name:"⚡ Hip Thrust com Halteres",muscle:"Glúteos · Posteriores",sets:4,reps:"12–15",rest:60,
+       exec:"Ombros apoiados no banco, halter no dobramento do quadril. Empurre o quadril até o corpo ficar paralelo ao chão. Contraia o glúteo no topo por 2 segundos.",
+       progress:"Suba 4kg no halter quando completar 15 reps com contração plena.",
+       alt:"Elevação de quadril no chão · Glúteo 4 apoios com anilha"},
+      {id:"c_leg_curl",name:"Mesa Flexora",muscle:"Posteriores · Isquiotibiais",sets:3,reps:"12",rest:75,
+       exec:"Rolo sobre os calcanhares, não na panturrilha. Flexão até 90° ou mais. Pause 1s no topo. Desça em 3 segundos.",
+       progress:"Aumente 5kg quando completar 12 reps com pausa.",
+       alt:"Stiff unilateral · Flexora no cabo · Nordic Curl"},
+      {id:"c_sumo",name:"⚡ Agachamento Sumô com Halter",muscle:"Glúteos · Adutores · Quadríceps",sets:3,reps:"12–15",rest:60,
+       exec:"Pés bem afastados, dedos apontando 45° para fora. Halter entre as pernas. Desça mantendo o tronco ereto. Joelhos seguem os dedos dos pés.",
+       progress:"Suba 4kg no halter quando completar 15 reps.",
+       alt:"Agachamento sumô com barra · Abdução na máquina"},
+      {id:"c_hip_abduct",name:"Abdução de Quadril na Máquina",muscle:"Glúteo Médio · Abdutores",sets:3,reps:"15–20",rest:45,
+       exec:"Ajuste o encosto para que o quadril fique em linha. Abra as pernas até o limite do movimento. Controle o fechamento em 3s.",
+       progress:"Aumente 5kg quando completar 20 reps controladas.",
+       alt:"Abdução com elástico deitado · Glúteo médio 4 apoios"},
+      {id:"c_ab_crunch",name:"Crunch no Cabo",muscle:"Reto Abdominal",sets:3,reps:"15–20",rest:45,
        exec:"Ajoelhada de frente para o pulley com corda na nuca. Contraia o abdômen puxando o tronco em direção às coxas. Pause 1s embaixo. Não use os braços para puxar.",
        progress:"Aumente 5kg quando completar 20 reps com contração plena.",
        alt:"Crunch no chão · Bicicleta abdominal · Ab roller"}
     ]
+  },
+  LI: {
+    name:"LISS · Quarta", color:"#f472b6",
+    tip:"Recuperação ativa. Zona 2 — você consegue manter uma conversa sem ficar sem fôlego.",
+    exercises:[]
   }
 };
+
+
 
 const pWorkouts = {
   UA: {
@@ -1004,9 +1047,10 @@ function renderWorkout(exercises, containerId, person, accentColor) {
 // Render all on load
 function renderAll() {
   // Caroline
-  renderWorkout(cWorkouts.A.exercises, 'cA-exercises', 'c', '#f472b6');
-  renderWorkout(cWorkouts.B.exercises, 'cB-exercises', 'c', '#f472b6');
-  renderWorkout(cWorkouts.C.exercises, 'cC-exercises', 'c', '#f472b6');
+  renderWorkout(cWorkouts.UA.exercises, 'cUA-exercises', 'c', '#f472b6');
+  renderWorkout(cWorkouts.LA.exercises, 'cLA-exercises', 'c', '#f472b6');
+  renderWorkout(cWorkouts.UB.exercises, 'cUB-exercises', 'c', '#f472b6');
+  renderWorkout(cWorkouts.LB.exercises, 'cLB-exercises', 'c', '#f472b6');
   // Pedro
   renderWorkout(pWorkouts.UA.exercises, 'pUA-exercises', 'p', '#38bdf8');
   renderWorkout(pWorkouts.LA.exercises, 'pLA-exercises', 'p', '#38bdf8');
