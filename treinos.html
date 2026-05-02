@@ -7,7 +7,7 @@
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="NutroTrack">
 <meta name="theme-color" content="#0a0e14">
-<link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%230a0e14'/><text y='.9em' font-size='70' x='50%' text-anchor='middle' dominant-baseline='top'>💪</text></svg>">
+<link rel="apple-touch-icon" id="ati" href="">
 
 <title>NutroTrack · Fichas de Treino</title>
 <link href="https://fonts.googleapis.com/css2?family=Clash+Display:wght@500;600;700&family=DM+Sans:wght@400;500&display=swap" rel="stylesheet">
@@ -1271,5 +1271,48 @@ async function reloadFromCloud() {
   }
 }
 </script>
+
+<script>
+// Gera ícone PWA via canvas (funciona no iOS)
+(function(){
+  try {
+    var c = document.createElement('canvas');
+    c.width = 180; c.height = 180;
+    var ctx = c.getContext('2d');
+    // Fundo
+    ctx.fillStyle = '#0a0e14';
+    ctx.beginPath();
+    ctx.roundRect(0,0,180,180,36);
+    ctx.fill();
+    // Borda gradiente
+    var g = ctx.createLinearGradient(0,0,180,180);
+    g.addColorStop(0,'#34d399');
+    g.addColorStop(1,'#38bdf8');
+    ctx.strokeStyle = g;
+    ctx.lineWidth = 10;
+    ctx.beginPath();
+    ctx.roundRect(5,5,170,170,32);
+    ctx.stroke();
+    // NT texto
+    ctx.fillStyle = '#34d399';
+    ctx.font = 'bold 72px system-ui, -apple-system, sans-serif';
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    ctx.fillText('NT', 90, 85);
+    // Linha inferior
+    ctx.fillStyle = '#38bdf8';
+    ctx.font = 'bold 22px system-ui, -apple-system, sans-serif';
+    ctx.fillText('TREINO', 90, 138);
+    // Aplica
+    var png = c.toDataURL('image/png');
+    var ati = document.getElementById('ati');
+    if(ati) ati.href = png;
+    var fav = document.createElement('link');
+    fav.rel = 'icon'; fav.type = 'image/png'; fav.href = png;
+    document.head.appendChild(fav);
+  } catch(e){ console.log('Icon error:', e); }
+})();
+</script>
+
 </body>
 </html>
