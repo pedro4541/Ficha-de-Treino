@@ -399,13 +399,62 @@ header{
   }
 }
 
+
+/* Series counter badge */
+.series-counter{
+  font-size:11px;font-weight:700;padding:2px 9px;border-radius:999px;
+  background:rgba(255,255,255,.07);color:var(--dim2);margin-left:6px;
+  transition:all .3s;white-space:nowrap;flex-shrink:0;
+}
+.series-counter.done{background:rgba(52,211,153,.2);color:var(--grn);}
+.series-counter.all-done{background:rgba(52,211,153,.35);color:var(--grn);}
+
+/* Completed card glow */
+.ex-card.all-done{border-color:rgba(52,211,153,.4);}
+.ex-card.all-done .ex-header{background:rgba(52,211,153,.05);}
+
+/* History redesign */
+.hist-filters{display:flex;flex-direction:column;gap:12px;margin-bottom:20px;}
+.hist-filter-row{display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.filter-label{font-size:11px;color:var(--dim);text-transform:uppercase;letter-spacing:.6px;font-weight:700;min-width:70px;}
+.filter-select{
+  background:var(--s2);border:1px solid var(--bd);border-radius:9px;
+  color:var(--txt);padding:8px 14px;font-size:13px;font-family:'DM Sans',sans-serif;
+  cursor:pointer;outline:none;flex:1;min-width:160px;max-width:320px;
+  -webkit-appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2364748b' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;background-position:right 12px center;padding-right:32px;
+}
+.filter-select:focus{border-color:var(--grn);}
+
+.chart-section{background:var(--s);border:1px solid var(--bd);border-radius:14px;padding:18px;margin-bottom:16px;display:none;}
+.chart-section.visible{display:block;}
+.chart-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:14px;flex-wrap:wrap;gap:8px;}
+.chart-title{font-family:'Clash Display',sans-serif;font-size:16px;font-weight:700;color:var(--txt);}
+.chart-subtitle{font-size:11px;color:var(--dim);margin-top:2px;}
+.chart-stats{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:14px;}
+.cstat{background:var(--s2);border:1px solid var(--bd);border-radius:8px;padding:8px 12px;text-align:center;}
+.cstat-val{font-family:'Clash Display',sans-serif;font-size:18px;font-weight:700;}
+.cstat-lb{font-size:9px;color:var(--dim);text-transform:uppercase;letter-spacing:.5px;margin-top:2px;}
+
+.hist-group{margin-bottom:16px;}
+.hist-group-title{font-size:11px;font-weight:700;color:var(--dim);text-transform:uppercase;letter-spacing:.6px;margin-bottom:8px;padding:6px 0;border-bottom:1px solid var(--bd);}
+.hist-card{background:var(--s);border:1px solid var(--bd);border-radius:12px;padding:14px;margin-bottom:8px;}
+.hist-row{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px;flex-wrap:wrap;gap:4px;}
+.hist-name{font-family:'Clash Display',sans-serif;font-size:14px;font-weight:600;color:var(--txt);}
+.hist-date{font-size:11px;color:var(--dim);}
+.hist-sets{display:flex;gap:5px;flex-wrap:wrap;margin-top:6px;}
+.hist-set{background:var(--s2);border:1px solid var(--bd);border-radius:6px;padding:4px 9px;font-size:11px;color:var(--dim2);}
+.hist-set strong{color:var(--grn);}
+.hist-vol{font-size:11px;color:var(--pur);font-weight:600;}
+.empty-state{color:var(--dim);font-size:13px;padding:32px;text-align:center;border:1px dashed var(--bd);border-radius:12px;}
+
 </style>
 </head>
 <body>
 <div class="wrap">
 
 <header>
-  <div class="logo">Nutro<em>Track</em> · <span style="font-size:14px;font-weight:500;color:var(--dim2)">Fichas de Treino</span> <span style="font-size:10px;font-weight:700;background:rgba(167,139,250,.15);color:var(--pur);border:1px solid rgba(167,139,250,.3);border-radius:999px;padding:2px 8px;vertical-align:middle;">v1.4</span></div>
+  <div class="logo">Nutro<em>Track</em> · <span style="font-size:14px;font-weight:500;color:var(--dim2)">Fichas de Treino</span> <span style="font-size:10px;font-weight:700;background:rgba(167,139,250,.15);color:var(--pur);border:1px solid rgba(167,139,250,.3);border-radius:999px;padding:2px 8px;vertical-align:middle;">v1.5</span></div>
   <div style="display:flex;align-items:center;gap:10px;">
     <div id="sync-status" style="font-size:12px;color:var(--dim);">☁️ Pronto</div>
     <button onclick="reloadFromCloud()" style="padding:5px 12px;border-radius:8px;border:1px solid var(--bd);background:var(--s2);color:var(--dim2);cursor:pointer;font-size:11px;font-family:'DM Sans',sans-serif;">🔄 Sincronizar</button>
@@ -604,16 +653,46 @@ header{
 <!-- ════════════════════ HISTÓRICO ════════════════════ -->
 <div class="pg" id="pg-h">
   <div class="section-title">📊 Evolução de Carga por Exercício</div>
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px;" id="hist-selectors"></div>
-  <div class="hist-card" id="chart-card" style="display:none;">
-    <div class="ct" id="chart-ex-name" style="font-family:'Clash Display',sans-serif;font-size:16px;font-weight:700;color:var(--txt);margin-bottom:4px;"></div>
-    <div style="font-size:12px;color:var(--dim);margin-bottom:14px;" id="chart-ex-sub"></div>
+  <!-- Filtros -->
+  <div class="hist-filters">
+    <div class="hist-filter-row">
+      <span class="filter-label">Pessoa</span>
+      <select class="filter-select" id="filt-person" onchange="renderHistory()">
+        <option value="all">Todos</option>
+        <option value="c">👩 Caroline</option>
+        <option value="p">👨 Pedro</option>
+      </select>
+    </div>
+    <div class="hist-filter-row">
+      <span class="filter-label">Grupo</span>
+      <select class="filter-select" id="filt-group" onchange="filterByGroup()">
+        <option value="all">Todos os grupos</option>
+      </select>
+    </div>
+    <div class="hist-filter-row">
+      <span class="filter-label">Exercício</span>
+      <select class="filter-select" id="filt-ex" onchange="renderHistory()">
+        <option value="all">Todos os exercícios</option>
+      </select>
+    </div>
+  </div>
+
+  <!-- Gráfico de evolução -->
+  <div class="chart-section" id="chart-card">
+    <div class="chart-header">
+      <div>
+        <div class="chart-title" id="chart-ex-name"></div>
+        <div class="chart-subtitle" id="chart-ex-sub"></div>
+      </div>
+    </div>
+    <div class="chart-stats" id="chart-stats"></div>
     <div style="position:relative;height:200px;"><canvas id="progress-chart"></canvas></div>
   </div>
-  <div class="section-title" style="margin-top:20px;">🗒 Registros Salvos</div>
-  <div id="hist-list"><div style="color:var(--dim);font-size:13px;padding:20px;text-align:center;">Nenhum treino registrado ainda. Complete sua primeira sessão!</div></div>
+
+  <!-- Lista de registros -->
+  <div id="hist-list"></div>
   <div style="display:flex;gap:8px;margin-top:16px;">
-    <button class="btn-danger" onclick="if(confirm('Apagar todos os registros?')){localStorage.removeItem('nt_logs');renderHistory();}">🗑 Limpar Histórico</button>
+    <button class="btn-danger" onclick="if(confirm('Apagar todos os registros?')){localCache={};saveCache();renderHistory();}">🗑 Limpar Histórico</button>
   </div>
 </div>
 
@@ -1044,6 +1123,7 @@ function buildExCard(ex, person, accentColor) {
           ${ex.name.startsWith('⚡')?'<span class="badge b-super">⚡ Superset</span>':''}
         </div>
       </div>
+      <span class="series-counter" id="sc_${ex.id}">0/${n}</span>
       <span class="ex-toggle">▾</span>
     </div>
     <div class="ex-body" id="body_${ex.id}">
@@ -1116,13 +1196,35 @@ function toggleEx(header, bodyId) {
   header.classList.toggle('open', !isOpen);
 }
 
-function markSet(exId, setNum, person) {
+function markSet(exId, setNum, person, total) {
   const btn = document.getElementById(`done_${exId}_${setNum}`);
   const w = document.getElementById(`w_${exId}_${setNum}`).value;
   const r = document.getElementById(`r_${exId}_${setNum}`).value;
   if (!w || !r) { alert('Preencha o peso e as repetições!'); return; }
   btn.classList.add('completed');
   btn.textContent = '✅';
+  // Highlight the row
+  const row = document.getElementById(`row_${exId}_${setNum}`);
+  if(row) row.style.opacity = '0.6';
+  // Update counter
+  const n = total || 3;
+  let done = 0;
+  for(let i=1;i<=n;i++){
+    const b = document.getElementById(`done_${exId}_${i}`);
+    if(b && b.classList.contains('completed')) done++;
+  }
+  const counter = document.getElementById(`sc_${exId}`);
+  if(counter){
+    counter.textContent = `${done}/${n}`;
+    if(done === n){
+      counter.classList.add('all-done');
+      counter.textContent = `✅ ${n}/${n}`;
+      document.getElementById(`card_${exId}`)?.classList.add('all-done');
+    } else if(done > 0){
+      counter.classList.add('done');
+      counter.classList.remove('all-done');
+    }
+  }
   updateSessionBar(person);
 }
 
@@ -1221,73 +1323,183 @@ function stopTimer() { clearInterval(timerInterval); document.getElementById('re
 
 let progressChart = null;
 
+// Mapeia grupos musculares por exercício
+const muscleGroups = {
+  c: {
+    'Peito & Ombros': ['c_bench','c_inc_press','c_ohp','c_lateral','c_chest_cable','c_cable_fly','c_facepull'],
+    'Costas & Bíceps': ['c_pulldown','c_row','c_seated_row','c_curl','c_hammer'],
+    'Tríceps': ['c_tricep','c_tricep_french','c_tricep_skull'],
+    'Pernas & Glúteos': ['c_squat','c_lgpress','c_rdl','c_hipthrust','c_lunge','c_leg_ext','c_leg_curl','c_sumo','c_calf','c_hip_abduct','c_lunge_walk'],
+    'Core & Abdômen': ['c_plank','c_ab_crunch'],
+  },
+  p: {
+    'Peito & Ombros': ['p_bench','p_ohp','p_inc_db','p_cable_fly','p_lat_raise','p_facepull'],
+    'Costas & Bíceps': ['p_pullup','p_row_bb','p_seated_row','p_curl_bb','p_hammer'],
+    'Tríceps': ['p_tricep_skull'],
+    'Pernas & Glúteos': ['p_squat','p_legpress','p_leg_ext','p_lunge_walk','p_rdl','p_hipthrust_bb','p_leg_curl','p_sumo','p_hip_abduct','p_rdl_single','p_calf'],
+    'Core & Abdômen': ['p_plank'],
+  }
+};
+
+// Build exercise lookup
+function buildExLookup() {
+  const map = {};
+  [...Object.values(cWorkouts), ...Object.values(pWorkouts)].forEach(w => {
+    if (!w.exercises) return;
+    w.exercises.forEach(ex => { map[ex.id] = {...ex, person: w.color === '#f472b6' ? 'c' : 'p'}; });
+  });
+  return map;
+}
+
+function populateFilters() {
+  const personSel = document.getElementById('filt-person');
+  const groupSel = document.getElementById('filt-group');
+  const exSel = document.getElementById('filt-ex');
+  if (!groupSel || !exSel) return;
+
+  const person = personSel?.value || 'all';
+  const groups = person === 'all'
+    ? {...muscleGroups.c, ...muscleGroups.p}
+    : muscleGroups[person] || {};
+
+  // Populate groups
+  const curGroup = groupSel.value;
+  groupSel.innerHTML = '<option value="all">Todos os grupos</option>' +
+    Object.keys(groups).map(g => `<option value="${g}">${g}</option>`).join('');
+  if([...groupSel.options].find(o=>o.value===curGroup)) groupSel.value = curGroup;
+
+  // Populate exercises
+  filterByGroup(true);
+}
+
+function filterByGroup(silent) {
+  const person = document.getElementById('filt-person')?.value || 'all';
+  const group = document.getElementById('filt-group')?.value || 'all';
+  const exSel = document.getElementById('filt-ex');
+  if (!exSel) return;
+
+  const groups = person === 'all'
+    ? {...muscleGroups.c, ...muscleGroups.p}
+    : muscleGroups[person] || {};
+
+  const exMap = buildExLookup();
+  let exIds = [];
+  if (group === 'all') {
+    exIds = Object.values(groups).flat();
+  } else {
+    exIds = groups[group] || [];
+  }
+
+  const curEx = exSel.value;
+  exSel.innerHTML = '<option value="all">Todos os exercícios</option>' +
+    exIds.map(id => {
+      const ex = exMap[id];
+      if (!ex) return '';
+      return `<option value="${id}">${ex.name.replace('⚡ ','')}</option>`;
+    }).filter(Boolean).join('');
+  if([...exSel.options].find(o=>o.value===curEx)) exSel.value = curEx;
+
+  if(!silent) renderHistory();
+}
+
 function renderHistory() {
   const logs = getLogs();
   const histList = document.getElementById('hist-list');
-  const selectors = document.getElementById('hist-selectors');
+  if (!histList) return;
 
-  // Build exercise list for selectors
-  const allEx = {};
-  [...Object.values(cWorkouts), ...Object.values(pWorkouts)].forEach(w => {
-    if (!w.exercises) return;
-    w.exercises.forEach(ex => { allEx[ex.id] = ex.name.replace('⚡ ',''); });
-  });
+  populateFilters();
 
-  // Selector buttons
-  const personGroups = {c: [], p: []};
-  Object.values(cWorkouts).forEach(w => { if(w.exercises) w.exercises.forEach(ex => { if(!personGroups.c.find(e=>e.id===ex.id)) personGroups.c.push(ex); }); });
-  Object.values(pWorkouts).forEach(w => { if(w.exercises) w.exercises.forEach(ex => { if(!personGroups.p.find(e=>e.id===ex.id)) personGroups.p.push(ex); }); });
+  const person = document.getElementById('filt-person')?.value || 'all';
+  const selEx = document.getElementById('filt-ex')?.value || 'all';
+  const exMap = buildExLookup();
 
-  selectors.innerHTML = `
-    <div>
-      <div style="font-size:11px;color:var(--car);font-weight:700;text-transform:uppercase;letter-spacing:.6px;margin-bottom:8px;">👩 Caroline</div>
-      <div style="display:flex;flex-wrap:wrap;gap:5px;">
-        ${personGroups.c.map(ex => `<button onclick="showExChart('${ex.id}','${ex.name.replace('⚡ ','').replace(/'/g,"\\'")}','#f472b6')" style="padding:5px 10px;border-radius:7px;border:1px solid var(--bd);background:var(--s2);color:var(--dim2);cursor:pointer;font-size:11px;font-family:'DM Sans',sans-serif;">${ex.name.replace('⚡ ','')}</button>`).join('')}
-      </div>
-    </div>
-    <div>
-      <div style="font-size:11px;color:var(--ped);font-weight:700;text-transform:uppercase;letter-spacing:.6px;margin-bottom:8px;">👨 Pedro</div>
-      <div style="display:flex;flex-wrap:wrap;gap:5px;">
-        ${personGroups.p.map(ex => `<button onclick="showExChart('${ex.id}','${ex.name.replace('⚡ ','').replace(/'/g,"\\'")}','#38bdf8')" style="padding:5px 10px;border-radius:7px;border:1px solid var(--bd);background:var(--s2);color:var(--dim2);cursor:pointer;font-size:11px;font-family:'DM Sans',sans-serif;">${ex.name.replace('⚡ ','')}</button>`).join('')}
-      </div>
-    </div>`;
-
-  // History entries
-  const allEntries = [];
+  // Collect and filter entries
+  let allEntries = [];
   Object.entries(logs).forEach(([exId, entries]) => {
-    entries.forEach(e => { allEntries.push({...e, exId}); });
+    entries.forEach(e => allEntries.push({...e, exId}));
   });
+
+  // Filter by person
+  if (person !== 'all') allEntries = allEntries.filter(e => e.person === person);
+  // Filter by exercise
+  if (selEx !== 'all') allEntries = allEntries.filter(e => e.exId === selEx);
+
+  // Sort by date desc
   allEntries.sort((a,b) => {
-    const da = a.date.split('/').reverse().join('');
-    const db = b.date.split('/').reverse().join('');
+    const da = (a.date||'').split('/').reverse().join('');
+    const db = (b.date||'').split('/').reverse().join('');
     return db.localeCompare(da);
   });
 
+  // Show chart if specific exercise selected
+  const chartCard = document.getElementById('chart-card');
+  if (selEx !== 'all' && allEntries.length > 0) {
+    const ex = exMap[selEx];
+    const color = person === 'p' ? '#38bdf8' : '#f472b6';
+    showExChart(selEx, ex ? ex.name.replace('⚡ ','') : selEx, color, allEntries);
+    chartCard?.classList.add('visible');
+  } else {
+    chartCard?.classList.remove('visible');
+  }
+
   if (allEntries.length === 0) {
-    histList.innerHTML = '<div style="color:var(--dim);font-size:13px;padding:20px;text-align:center;">Nenhum treino registrado ainda. Complete sua primeira sessão!</div>';
+    histList.innerHTML = '<div class="empty-state">Nenhum registro encontrado.<br>Complete um treino para ver o histórico aqui!</div>';
     return;
   }
 
-  histList.innerHTML = allEntries.slice(0, 30).map(e => `
-    <div class="hist-card">
-      <div class="hist-date">${e.date} · ${e.person === 'c' ? '👩 Caroline' : '👨 Pedro'}</div>
-      <div class="hist-name">${e.name}</div>
-      <div class="hist-sets">
-        ${e.sets.map((s,i) => `<span class="hist-set">S${i+1}: <strong>${s.weight}kg</strong> × ${s.reps} (RPE ${s.rpe||'?'})</span>`).join('')}
-        <span class="hist-set" style="border-color:rgba(167,139,250,.3);color:var(--pur);">Vol: ${e.sets.reduce((t,s)=>t+(s.weight*s.reps),0).toFixed(0)}kg</span>
-      </div>
+  // Group by date
+  const byDate = {};
+  allEntries.forEach(e => {
+    const d = e.date || 'Sem data';
+    if (!byDate[d]) byDate[d] = [];
+    byDate[d].push(e);
+  });
+
+  histList.innerHTML = Object.entries(byDate).slice(0,20).map(([date, entries]) => `
+    <div class="hist-group">
+      <div class="hist-group-title">📅 ${date}</div>
+      ${entries.map(e => {
+        const vol = e.sets.reduce((t,s)=>t+(s.weight*s.reps),0).toFixed(0);
+        const maxW = Math.max(...e.sets.map(s=>s.weight));
+        const personColor = e.person === 'c' ? 'var(--car)' : 'var(--ped)';
+        return `
+        <div class="hist-card">
+          <div class="hist-row">
+            <div class="hist-name">${e.name || e.exId}</div>
+            <div style="display:flex;gap:8px;align-items:center;">
+              <span class="hist-vol">Vol: ${vol}kg</span>
+              <span style="font-size:10px;color:${personColor};font-weight:700;">${e.person==='c'?'👩':'👨'}</span>
+            </div>
+          </div>
+          <div class="hist-sets">
+            ${e.sets.map((s,i)=>`<span class="hist-set">S${i+1}: <strong>${s.weight}kg</strong>×${s.reps} <span style="color:var(--dim)">RPE${s.rpe||7}</span></span>`).join('')}
+            <span class="hist-set" style="border-color:rgba(56,189,248,.2);color:var(--ped);">🏆 Max: ${maxW}kg</span>
+          </div>
+        </div>`;
+      }).join('')}
     </div>`).join('');
 }
 
-function showExChart(exId, exName, color) {
+function showExChart(exId, exName, color, entriesOverride) {
   const logs = getLogs();
-  const entries = logs[exId] || [];
-  const card = document.getElementById('chart-card');
-  card.style.display = 'block';
+  const entries = entriesOverride || logs[exId] || [];
   document.getElementById('chart-ex-name').textContent = exName;
   document.getElementById('chart-ex-sub').textContent = entries.length > 0
-    ? `${entries.length} sessões registradas`
+    ? `${entries.length} sessão(ões) registrada(s)`
     : 'Nenhum registro ainda';
+
+  // Stats
+  const allWeights = entries.flatMap(e=>e.sets.map(s=>s.weight));
+  const maxEver = allWeights.length ? Math.max(...allWeights) : 0;
+  const firstW = entries.length ? Math.max(...entries[0].sets.map(s=>s.weight)) : 0;
+  const lastW = entries.length ? Math.max(...entries[entries.length-1].sets.map(s=>s.weight)) : 0;
+  const diff = lastW - firstW;
+  const statsEl = document.getElementById('chart-stats');
+  if(statsEl) statsEl.innerHTML = `
+    <div class="cstat"><div class="cstat-val" style="color:var(--grn)">${maxEver}kg</div><div class="cstat-lb">Carga Máx</div></div>
+    <div class="cstat"><div class="cstat-val" style="color:var(--pur)">${entries.length}</div><div class="cstat-lb">Sessões</div></div>
+    <div class="cstat"><div class="cstat-val" style="color:${diff>=0?'var(--grn)':'var(--red)'}">${diff>=0?'+':''}${diff.toFixed(1)}kg</div><div class="cstat-lb">Evolução</div></div>
+  `;
 
   const labels = entries.map(e => e.date);
   const maxWeights = entries.map(e => Math.max(...e.sets.map(s => s.weight)));
