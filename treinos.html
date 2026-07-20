@@ -454,7 +454,7 @@ header{
 <div class="wrap">
 
 <header>
-  <div class="logo">Nutro<em>Track</em> · <span style="font-size:14px;font-weight:500;color:var(--dim2)">Fichas de Treino</span> <span style="font-size:10px;font-weight:700;background:rgba(167,139,250,.15);color:var(--pur);border:1px solid rgba(167,139,250,.3);border-radius:999px;padding:2px 8px;vertical-align:middle;">v1.8</span></div>
+  <div class="logo">Nutro<em>Track</em> · <span style="font-size:14px;font-weight:500;color:var(--dim2)">Fichas de Treino</span> <span style="font-size:10px;font-weight:700;background:rgba(167,139,250,.15);color:var(--pur);border:1px solid rgba(167,139,250,.3);border-radius:999px;padding:2px 8px;vertical-align:middle;">v1.9</span></div>
   <div style="display:flex;align-items:center;gap:10px;">
     <div id="sync-status" style="font-size:12px;color:var(--dim);">☁️ Pronto</div>
     <button onclick="reloadFromCloud()" style="padding:5px 12px;border-radius:8px;border:1px solid var(--bd);background:var(--s2);color:var(--dim2);cursor:pointer;font-size:11px;font-family:'DM Sans',sans-serif;">🔄 Sincronizar</button>
@@ -907,7 +907,7 @@ const cWorkouts = {
   },
   LB: {
     name:"Lower B · Sexta · Posterior & Glúteos", color:"#f472b6",
-    tip:"Posterior de coxa e glúteos — foco em máquinas. Esta sessão equilibra a anterior. O Hip Thrust é o rei dos glúteos. Aperte bem no topo de cada movimento.",
+    tip:"Posterior de coxa e glúteos — foco em máquinas. Esta sessão equilibra a anterior. A Elevação Pélvica é o rei dos glúteos. Aperte bem no topo de cada movimento.",
     exercises:[
       {id:"c_leg_curl_lying",name:"Mesa Flexora (deitada)",muscle:"Posteriores · Isquiotibiais",sets:4,reps:"12",rest:75,
        exec:"Deitada, rolo sobre os calcanhares (não na panturrilha). Flexione trazendo o calcanhar ao glúteo. Aperte 1s no topo. Desça em 3s controlando.",
@@ -917,14 +917,14 @@ const cWorkouts = {
        exec:"Sentada, pernas estendidas sobre o rolo. Flexione os joelhos empurrando o rolo para baixo. Aperte no final. A versão sentada alonga mais o posterior.",
        progress:"Suba 1 placa quando completar 12 reps.",
        alt:"Mesa flexora deitada · Flexora em pé unilateral"},
-      {id:"c_hipthrust",name:"Hip Thrust no Smith/Máquina",muscle:"Glúteos · Posteriores",sets:4,reps:"12–15",rest:75,
+      {id:"c_hipthrust",name:"Elevação Pélvica no Smith/Máquina",muscle:"Glúteos · Posteriores",sets:4,reps:"12–15",rest:75,
        exec:"Ombros apoiados no banco, barra do Smith sobre o quadril (com proteção). Empurre o quadril até o corpo ficar paralelo ao chão. Aperte o glúteo 2s no topo.",
        progress:"Adicione 5kg quando completar 15 reps com contração plena.",
-       alt:"Hip Thrust com halter · Elevação pélvica na máquina"},
-      {id:"c_glute_machine",name:"Glúteo na Máquina (Kickback)",muscle:"Glúteo Máximo",sets:3,reps:"15 cada",rest:45,
-       exec:"Empurre a plataforma para trás com o calcanhar, uma perna de cada vez. Aperte o glúteo no final 1s. Não arqueie a lombar — o movimento vem do glúteo.",
-       progress:"Suba 1 placa quando completar 15 reps por perna.",
-       alt:"Coice no cabo · Glúteo 4 apoios com caneleira"},
+       alt:"Elevação pélvica com halter · Ponte de glúteo no solo"},
+      {id:"c_stiff",name:"Stiff com Halteres",muscle:"Glúteos · Posteriores · Lombar",sets:3,reps:"12",rest:60,
+       exec:"Em pé, halteres à frente das coxas, pés na largura do quadril. Joelhos levemente flexionados e fixos. Empurre o quadril para trás descendo os halteres rente às pernas até sentir o alongamento nos posteriores/glúteos. Suba contraindo o glúteo. Mantenha as costas retas o tempo todo — nunca arredonde a lombar.",
+       progress:"Suba 1–2kg por halter quando completar 12 reps com boa forma e sem forçar a lombar.",
+       alt:"Stiff na barra · Levantamento terra romeno · Good Morning na máquina"},
       {id:"c_abductor",name:"Cadeira Abdutora",muscle:"Glúteo Médio · Abdutores",sets:3,reps:"15–20",rest:45,
        exec:"Sentada, joelhos contra as almofadas externas. Abra as pernas ao máximo, aperte o glúteo lateral 1s. Feche controlando em 3s. Incline o tronco à frente para pegar mais glúteo.",
        progress:"Suba 1 placa quando completar 20 reps controladas.",
@@ -1050,14 +1050,14 @@ const pWorkouts = {
        exec:"Sentado, pernas estendidas sobre o rolo. Flexione os joelhos empurrando o rolo para baixo. Aperte no final. A versão sentada alonga mais o posterior.",
        progress:"Suba 1 placa quando completar 12 reps.",
        alt:"Mesa flexora deitada · Flexora em pé unilateral"},
-      {id:"p_hipthrust",name:"Hip Thrust no Smith/Máquina",muscle:"Glúteos · Posteriores",sets:4,reps:"10–12",rest:90,
+      {id:"p_hipthrust",name:"Elevação Pélvica no Smith/Máquina",muscle:"Glúteos · Posteriores",sets:4,reps:"10–12",rest:90,
        exec:"Ombros apoiados no banco, barra do Smith sobre o quadril (com proteção). Empurre o quadril até o corpo ficar paralelo ao chão. Aperte o glúteo 2s no topo.",
        progress:"Adicione 5–10kg quando completar 12 reps com contração plena.",
-       alt:"Hip Thrust com halter · Elevação pélvica na máquina"},
-      {id:"p_glute_machine",name:"Glúteo na Máquina (Kickback)",muscle:"Glúteo Máximo",sets:3,reps:"12–15 cada",rest:45,
-       exec:"Empurre a plataforma para trás com o calcanhar, uma perna de cada vez. Aperte o glúteo 1s no final. Não arqueie a lombar — o movimento vem do glúteo.",
-       progress:"Suba 1 placa quando completar 15 reps por perna.",
-       alt:"Coice no cabo · Glúteo 4 apoios com caneleira"},
+       alt:"Elevação pélvica com halter · Ponte de glúteo no solo"},
+      {id:"p_stiff",name:"Stiff com Halteres",muscle:"Glúteos · Posteriores · Lombar",sets:3,reps:"10–12",rest:75,
+       exec:"Em pé, halteres à frente das coxas, pés na largura do quadril. Joelhos levemente flexionados e fixos. Empurre o quadril para trás descendo os halteres rente às pernas até sentir o alongamento nos posteriores/glúteos. Suba contraindo o glúteo. Costas sempre retas — nunca arredonde a lombar.",
+       progress:"Suba 2kg por halter quando completar 12 reps com boa forma e sem forçar a lombar.",
+       alt:"Stiff na barra · Levantamento terra romeno · Good Morning na máquina"},
       {id:"p_abductor",name:"Cadeira Abdutora",muscle:"Glúteo Médio · Abdutores",sets:3,reps:"15–20",rest:45,
        exec:"Sentado, joelhos contra as almofadas externas. Abra as pernas ao máximo, aperte o glúteo lateral 1s. Feche em 3s. Incline o tronco à frente para pegar mais glúteo.",
        progress:"Suba 1 placa quando completar 20 reps controladas.",
@@ -1331,7 +1331,7 @@ const muscleGroups = {
     'Costas & Ombro Post.': ['c_pulldown','c_seated_row','c_low_row_cable','c_reverse_fly'],
     'Braços': ['c_tricep','c_curl','c_hammer'],
     'Quadríceps': ['c_legpress','c_leg_ext','c_smith_squat','c_adductor'],
-    'Posterior & Glúteos': ['c_leg_curl_lying','c_leg_curl_seated','c_hipthrust','c_glute_machine','c_abductor'],
+    'Posterior & Glúteos': ['c_leg_curl_lying','c_leg_curl_seated','c_hipthrust','c_stiff','c_abductor'],
     'Panturrilha & Core': ['c_calf','c_ab_machine'],
   },
   p: {
@@ -1339,7 +1339,7 @@ const muscleGroups = {
     'Costas & Ombro Post.': ['p_pulldown','p_seated_row','p_tbar','p_straight_pulldown','p_reverse_fly'],
     'Braços': ['p_tricep','p_tricep_french','p_curl_db','p_hammer'],
     'Quadríceps': ['p_legpress','p_hack','p_leg_ext','p_adductor'],
-    'Posterior & Glúteos': ['p_leg_curl_lying','p_leg_curl_seated','p_hipthrust','p_glute_machine','p_abductor'],
+    'Posterior & Glúteos': ['p_leg_curl_lying','p_leg_curl_seated','p_hipthrust','p_stiff','p_abductor'],
     'Panturrilha': ['p_calf','p_calf_seated'],
   }
 };
