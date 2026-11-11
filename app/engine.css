@@ -182,3 +182,8 @@ footer{text-align:center;color:var(--dim);opacity:.6;font-size:11px;margin:30px 
 .boot{min-height:60vh;display:flex;align-items:center;justify-content:center;color:var(--dim);text-align:center;padding:20px;}
 .gt .cd{color:var(--txt);}
 .set input::placeholder{color:var(--dim);opacity:.45;}
+/* título longo: uma linha só; em telas estreitas o status vira só a bolinha */
+.logo{min-width:0;flex:1;}
+#ttl{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;}
+.logo .mark,.ver{flex-shrink:0;}
+@media(max-width:420px){.sync span{display:none;}.logo{font-size:15px;letter-spacing:.2px;}}
