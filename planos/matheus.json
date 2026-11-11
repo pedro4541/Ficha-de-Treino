@@ -1,0 +1,728 @@
+{
+ "versao": "1.0",
+ "pessoas": [
+  {
+   "id": "m",
+   "nome": "Matheus",
+   "cor": "#67D5C3",
+   "modo": "rotacao",
+   "frequencia": "3 a 4x por semana (A → B → C → D, em sequência)",
+   "duracao_min": "60-80",
+   "semana": [],
+   "regras": [
+    "Ordem fixa A → B → C → D. Treinou 3x na semana? Sem problema: na próxima continue de onde parou. O app sempre mostra o próximo treino.",
+    "Progressão dupla: use um peso em que você consiga o número MÍNIMO da faixa de repetições. Quando fizer o MÁXIMO da faixa em todas as séries com boa técnica, aumente o peso e volte ao mínimo.",
+    "Quanto aumentar: barra +2,5 kg (exercícios grandes de perna podem subir +5 kg); halteres +1 a 2 kg por lado; máquinas e polia +1 placa. O app sugere a carga de hoje com base no último treino.",
+    "Reserva: termine cada série sabendo que ainda dariam mais 1–2 repetições (Fase 1: 2–3). Falha total só na última série dos isolados, se quiser.",
+    "Aquecimento: 5 min de cardio leve + 2 séries de aproximação no 1º exercício (uma com ~50% e outra com ~75% da carga do dia).",
+    "Descanso no cronômetro: 2–2,5 min nos exercícios pesados, 60–90s nos demais. Respeitar o descanso é o que deixa a carga subir.",
+    "Travou no mesmo peso por 2 treinos seguidos? Mantenha a carga e tente +1 repetição por série, ou baixe 10% e suba de novo em 2–3 semanas.",
+    "A cada 6–8 semanas faça uma semana leve: mesmos exercícios, metade das séries e ~10% menos peso. Depois volte e continue subindo.",
+    "Perder gordura e ganhar massa ao mesmo tempo: as cargas precisam continuar subindo. Durma bem, coma proteína em todas as refeições e deixe o cardio para o final do treino."
+   ],
+   "treinos": [
+    {
+     "id": "m_A",
+     "nome": "Treino A · Superiores (Força)",
+     "foco": "Peito, costas, ombros e braços com cargas mais altas",
+     "duracao_est_min": 70,
+     "aquecimento": "5 min de bike ou elíptico leve + manguito/rotação de ombros com elástico",
+     "exercicios": [
+      {
+       "id": "m_supino",
+       "name": "Supino Reto com Barra",
+       "muscle": "Peitoral · Tríceps",
+       "sets": 4,
+       "reps": "6–8",
+       "rest": 120,
+       "exec": "Escápulas juntas e para baixo, pés firmes no chão. Desça a barra controlando até tocar a parte de baixo do peito, cotovelos a ~45° do tronco. Empurre forte sem tirar o quadril do banco.",
+       "progress": "Fez 8 reps nas 4 séries? Suba 2,5 kg. Ficou abaixo de 6? Mantenha a carga até completar.",
+       "incremento": "2,5 kg",
+       "alt": [
+        {
+         "name": "Supino Reto com Halteres",
+         "exec": "Mesmo movimento com halteres, descendo até a linha do peito. Suba 2 kg por halter ao fechar a faixa."
+        },
+        {
+         "name": "Supino na Máquina",
+         "exec": "Pegada na linha do meio do peito, empurre sem travar os cotovelos e volte em 2s."
+        }
+       ],
+       "fase2": {
+        "sets": 5
+       }
+      },
+      {
+       "id": "m_remada",
+       "name": "Remada Curvada com Barra",
+       "muscle": "Costas · Dorsal",
+       "sets": 4,
+       "reps": "6–8",
+       "rest": 120,
+       "exec": "Tronco inclinado a ~45°, coluna neutra e joelhos levemente flexionados. Puxe a barra até o umbigo levando os cotovelos para trás e juntando as escápulas. Desça controlando.",
+       "progress": "Fez 8 reps nas 4 séries sem balançar o tronco? Suba 2,5 kg.",
+       "incremento": "2,5 kg",
+       "alt": [
+        {
+         "name": "Remada Cavalinho (T-Bar)",
+         "exec": "Peito apoiado ou tronco firme, puxe até o abdômen juntando as escápulas."
+        },
+        {
+         "name": "Remada Baixa na Polia",
+         "exec": "Coluna reta, puxe o triângulo até o umbigo e segure 1s."
+        }
+       ],
+       "fase2": {
+        "sets": 5
+       }
+      },
+      {
+       "id": "m_desenv",
+       "name": "Desenvolvimento com Halteres",
+       "muscle": "Ombros",
+       "sets": 3,
+       "reps": "8–10",
+       "rest": 90,
+       "exec": "Sentado com encosto, halteres na altura das orelhas. Empurre para cima sem bater um no outro e desça até a linha do queixo controlando.",
+       "progress": "Fechou 3x10? Suba 2 kg por halter.",
+       "incremento": "2 kg por halter",
+       "alt": [
+        {
+         "name": "Desenvolvimento na Máquina",
+         "exec": "Empurre para cima sem travar os cotovelos e desça devagar."
+        },
+        {
+         "name": "Desenvolvimento com Barra no Smith",
+         "exec": "Barra desce até o queixo, empurre para cima sem arquear a lombar."
+        }
+       ]
+      },
+      {
+       "id": "m_puxada",
+       "name": "Puxada Frontal",
+       "muscle": "Costas · Dorsal",
+       "sets": 3,
+       "reps": "8–10",
+       "rest": 90,
+       "exec": "Pegada um pouco mais aberta que os ombros. Peito para cima, puxe a barra até o alto do peito levando os cotovelos para baixo e para trás. Suba controlando até alongar.",
+       "progress": "Fechou 3x10? Suba 1 placa.",
+       "incremento": "1 placa",
+       "alt": [
+        {
+         "name": "Barra Fixa (ou Graviton)",
+         "exec": "Pegada pronada, suba até o queixo passar a barra. No graviton, reduza a ajuda conforme evoluir."
+        },
+        {
+         "name": "Puxada com Triângulo",
+         "exec": "Mesmo aparelho, puxe até o peito com cotovelos junto ao corpo."
+        }
+       ]
+      },
+      {
+       "id": "m_cross",
+       "name": "Crucifixo na Polia (Crossover)",
+       "muscle": "Peitoral",
+       "sets": 2,
+       "reps": "12–15",
+       "rest": 60,
+       "exec": "Polias na altura dos ombros, um passo à frente. Cotovelos levemente flexionados e fixos, feche os braços à frente do peito e segure 1s. Volte abrindo até alongar.",
+       "progress": "Fechou 2x15 com a pausa? Suba 1 placa.",
+       "incremento": "1 placa",
+       "alt": [
+        {
+         "name": "Peck Deck (Voador)",
+         "exec": "Costas no encosto, feche os braços à frente do peito e volte devagar."
+        },
+        {
+         "name": "Crucifixo com Halteres",
+         "exec": "Deitado no banco, abra os braços em arco até alongar o peito e feche por cima."
+        }
+       ]
+      },
+      {
+       "id": "m_rosca",
+       "name": "Rosca Direta com Barra",
+       "muscle": "Bíceps",
+       "sets": 3,
+       "reps": "10–12",
+       "rest": 60,
+       "exec": "Cotovelos colados ao corpo e parados. Suba a barra sem balançar o tronco e desça em 2–3s até esticar o braço.",
+       "progress": "Fechou 3x12 sem roubar? Suba 2 kg (ou 1 kg de cada lado).",
+       "incremento": "2 kg",
+       "alt": [
+        {
+         "name": "Rosca na Polia Baixa",
+         "exec": "Mesmo movimento com a barra da polia, tensão constante."
+        },
+        {
+         "name": "Rosca Alternada com Halteres",
+         "exec": "Um braço de cada vez, girando a palma para cima ao subir."
+        }
+       ]
+      },
+      {
+       "id": "m_triceps",
+       "name": "Tríceps na Polia com Corda",
+       "muscle": "Tríceps",
+       "sets": 3,
+       "reps": "10–12",
+       "rest": 60,
+       "exec": "Cotovelos colados ao corpo. Estique os braços abrindo a corda no final e volte até ~90° sem deixar o cotovelo subir.",
+       "progress": "Fechou 3x12? Suba 1 placa.",
+       "incremento": "1 placa",
+       "alt": [
+        {
+         "name": "Tríceps Testa com Barra W",
+         "exec": "Deitado, desça a barra até a testa movendo só o antebraço e estique."
+        },
+        {
+         "name": "Mergulho no Banco",
+         "exec": "Mãos no banco atrás do corpo, desça até ~90° de cotovelo e suba."
+        }
+       ]
+      },
+      {
+       "id": "m_cardioA",
+       "name": "Cardio Final · Bike Moderada",
+       "muscle": "Cardio",
+       "sets": 1,
+       "reps": "10 min",
+       "rest": 0,
+       "exec": "10 min pedalando em ritmo moderado: respiração acelerada, mas dá para falar frases curtas.",
+       "progress": "Fase 2: 12 min ou um pouco mais de carga na bike.",
+       "alt": [
+        {
+         "name": "Elíptico",
+         "exec": "10 min em ritmo moderado."
+        },
+        {
+         "name": "Esteira Inclinada",
+         "exec": "10 min a 5,5–6 km/h com 8–10% de inclinação, sem segurar no corrimão."
+        }
+       ],
+       "registro": "min",
+       "fase2": {
+        "reps": "12 min"
+       }
+      }
+     ]
+    },
+    {
+     "id": "m_B",
+     "nome": "Treino B · Inferiores (Força)",
+     "foco": "Quadríceps, posterior, glúteo e panturrilha com cargas mais altas",
+     "duracao_est_min": 65,
+     "aquecimento": "5 min de bike leve + 10 agachamentos sem peso + mobilidade de quadril",
+     "exercicios": [
+      {
+       "id": "m_agach",
+       "name": "Agachamento Livre com Barra",
+       "muscle": "Quadríceps · Glúteo",
+       "sets": 4,
+       "reps": "6–8",
+       "rest": 150,
+       "exec": "Barra apoiada no trapézio, pés na largura dos ombros e levemente para fora. Desça como se fosse sentar entre os calcanhares, joelhos acompanhando a ponta dos pés, até pelo menos a coxa paralela ao chão. Suba empurrando o chão, coluna neutra.",
+       "progress": "Fez 8 reps nas 4 séries com a profundidade certa? Suba 2,5–5 kg.",
+       "incremento": "2,5–5 kg",
+       "alt": [
+        {
+         "name": "Agachamento no Smith",
+         "exec": "Pés um pouco à frente da barra, desça até a coxa paralela e suba empurrando pelo meio do pé."
+        },
+        {
+         "name": "Agachamento Hack",
+         "exec": "Costas no apoio, desça controlando até ~90° e suba sem travar os joelhos."
+        }
+       ],
+       "fase2": {
+        "sets": 5
+       }
+      },
+      {
+       "id": "m_rdl",
+       "name": "Levantamento Terra Romeno",
+       "muscle": "Posterior · Glúteo",
+       "sets": 3,
+       "reps": "8–10",
+       "rest": 120,
+       "exec": "Barra na frente das coxas, joelhos levemente flexionados e fixos. Leve o quadril para trás descendo a barra rente às pernas até sentir alongar o posterior (logo abaixo dos joelhos). Suba empurrando o quadril para frente.",
+       "progress": "Fechou 3x10 com as costas retas? Suba 2,5–5 kg.",
+       "incremento": "2,5–5 kg",
+       "alt": [
+        {
+         "name": "Stiff com Halteres",
+         "exec": "Mesmo movimento com halteres rente às pernas."
+        },
+        {
+         "name": "Mesa Flexora",
+         "exec": "Deitado, dobre os joelhos trazendo o rolo perto do glúteo e desça em 3s."
+        }
+       ],
+       "fase2": {
+        "sets": 4
+       }
+      },
+      {
+       "id": "m_legpress",
+       "name": "Leg Press 45°",
+       "muscle": "Quadríceps · Glúteo",
+       "sets": 3,
+       "reps": "10–12",
+       "rest": 90,
+       "exec": "Pés na largura do quadril no meio da plataforma. Desça até ~90° de joelho sem tirar o quadril do banco e empurre sem travar os joelhos.",
+       "progress": "Fechou 3x12? Suba 10 kg.",
+       "incremento": "10 kg",
+       "alt": [
+        {
+         "name": "Leg Horizontal",
+         "exec": "Mesmo movimento no aparelho sentado."
+        },
+        {
+         "name": "Agachamento Goblet",
+         "exec": "Halter junto ao peito, desça até a coxa paralela e suba."
+        }
+       ]
+      },
+      {
+       "id": "m_flexora",
+       "name": "Cadeira Flexora",
+       "muscle": "Posterior de Coxa",
+       "sets": 3,
+       "reps": "10–12",
+       "rest": 60,
+       "exec": "Joelho alinhado ao eixo da máquina, rolo acima do calcanhar. Dobre os joelhos até o fim, segure 1s e volte em 3s.",
+       "progress": "Fechou 3x12? Suba 1 placa.",
+       "incremento": "1 placa",
+       "alt": [
+        {
+         "name": "Mesa Flexora",
+         "exec": "Deitado de bruços, mesmo movimento."
+        },
+        {
+         "name": "Flexora em Pé na Polia",
+         "exec": "Tornozeleira na polia baixa, dobre o joelho trazendo o pé ao glúteo."
+        }
+       ]
+      },
+      {
+       "id": "m_panturrilha",
+       "name": "Panturrilha em Pé",
+       "muscle": "Panturrilha",
+       "sets": 4,
+       "reps": "10–12",
+       "rest": 60,
+       "exec": "Suba o máximo na ponta dos pés, segure 1s no topo e desça alongando bem por 2s.",
+       "progress": "Fechou 4x12 com pausa? Suba 1 placa.",
+       "incremento": "1 placa",
+       "alt": [
+        {
+         "name": "Panturrilha no Leg Press",
+         "exec": "Ponta dos pés na borda da plataforma, empurre e volte alongando."
+        },
+        {
+         "name": "Panturrilha Sentado",
+         "exec": "Apoio sobre os joelhos, suba os calcanhares e desça devagar."
+        }
+       ]
+      },
+      {
+       "id": "m_prancha",
+       "name": "Prancha",
+       "muscle": "Core",
+       "sets": 3,
+       "reps": "40–60s",
+       "rest": 45,
+       "exec": "Antebraços no chão, corpo em linha reta da cabeça ao calcanhar. Contraia abdômen e glúteo sem deixar o quadril cair.",
+       "progress": "Passou de 60s nas 3 séries? Faça com uma anilha nas costas ou prancha com toque no ombro.",
+       "alt": [
+        {
+         "name": "Prancha Lateral",
+         "exec": "30–45s de cada lado, quadril alto."
+        },
+        {
+         "name": "Roda Abdominal (de joelhos)",
+         "exec": "Role à frente até onde mantiver a lombar neutra e volte."
+        }
+       ],
+       "registro": "seg"
+      },
+      {
+       "id": "m_hiit",
+       "name": "HIIT na Bike",
+       "muscle": "Cardio",
+       "sets": 8,
+       "reps": "20s forte / 40s leve",
+       "rest": 0,
+       "exec": "8 minutos: 20s pedalando forte (quase sem conseguir falar) + 40s bem leve. Repita 8x.",
+       "progress": "Fase 2: 10 rounds.",
+       "alt": [
+        {
+         "name": "HIIT no Remo Ergômetro",
+         "exec": "Mesmo esquema: 20s forte e 40s leve."
+        },
+        {
+         "name": "Bike Moderada",
+         "exec": "10 min em ritmo constante, se as pernas estiverem muito cansadas."
+        }
+       ],
+       "registro": "tiros",
+       "intervalos": {
+        "forte_s": 20,
+        "leve_s": 40
+       },
+       "fase2": {
+        "sets": 10,
+        "exec": "10 minutos: 20s pedalando forte (quase sem conseguir falar) + 40s bem leve. Repita 10x."
+       }
+      }
+     ]
+    },
+    {
+     "id": "m_C",
+     "nome": "Treino C · Superiores (Volume)",
+     "foco": "Mais séries e repetições para hipertrofia: costas, peito, ombros e braços",
+     "duracao_est_min": 72,
+     "aquecimento": "5 min de remo ergômetro ou elíptico leve + rotação de ombros com elástico",
+     "exercicios": [
+      {
+       "id": "m_supinoinc",
+       "name": "Supino Inclinado com Halteres",
+       "muscle": "Peitoral Superior",
+       "sets": 4,
+       "reps": "8–10",
+       "rest": 90,
+       "exec": "Banco a ~30°. Halteres descem até a linha do peito com cotovelos a ~45°, e sobem aproximando sem bater.",
+       "progress": "Fechou 4x10? Suba 2 kg por halter.",
+       "incremento": "2 kg por halter",
+       "alt": [
+        {
+         "name": "Supino Inclinado na Máquina",
+         "exec": "Mesmo movimento guiado, desça em 2s."
+        },
+        {
+         "name": "Supino Inclinado com Barra",
+         "exec": "Barra desce até a parte alta do peito."
+        }
+       ]
+      },
+      {
+       "id": "m_puxneutra",
+       "name": "Puxada com Pegada Neutra",
+       "muscle": "Costas · Dorsal",
+       "sets": 3,
+       "reps": "10–12",
+       "rest": 90,
+       "exec": "Pegador de pegada neutra (palmas uma para a outra). Puxe até o peito levando os cotovelos para baixo, segure 1s e suba alongando.",
+       "progress": "Fechou 3x12? Suba 1 placa.",
+       "incremento": "1 placa",
+       "alt": [
+        {
+         "name": "Puxada Frontal Aberta",
+         "exec": "Pegada aberta, puxe até o alto do peito."
+        },
+        {
+         "name": "Pulldown com Braços Estendidos",
+         "exec": "Braços quase retos, puxe a barra da altura da cabeça até as coxas."
+        }
+       ]
+      },
+      {
+       "id": "m_serrote",
+       "name": "Remada Unilateral com Halter (Serrote)",
+       "muscle": "Costas · Dorsal",
+       "sets": 3,
+       "reps": "10–12/lado",
+       "rest": 75,
+       "exec": "Joelho e mão apoiados no banco, coluna reta. Puxe o halter até a cintura com o cotovelo junto ao corpo e desça alongando.",
+       "progress": "Fechou 3x12 de cada lado? Suba 2 kg.",
+       "incremento": "2 kg",
+       "alt": [
+        {
+         "name": "Remada Baixa na Polia",
+         "exec": "Coluna reta, puxe até o umbigo juntando as escápulas."
+        },
+        {
+         "name": "Remada na Máquina",
+         "exec": "Peito apoiado, puxe as alças e volte devagar."
+        }
+       ]
+      },
+      {
+       "id": "m_lateral",
+       "name": "Elevação Lateral com Halteres",
+       "muscle": "Ombros (Lateral)",
+       "sets": 4,
+       "reps": "12–15",
+       "rest": 45,
+       "exec": "Em pé, tronco levemente à frente. Eleve os braços para os lados até a altura dos ombros, cotovelos levemente dobrados, e desça em 2s. Sem impulso.",
+       "progress": "Fechou 4x15? Suba 1 kg por halter (ou use a polia para progredir aos poucos).",
+       "incremento": "1 kg por halter",
+       "alt": [
+        {
+         "name": "Elevação Lateral na Polia",
+         "exec": "Um braço de cada vez, cabo passando na frente do corpo."
+        },
+        {
+         "name": "Elevação Lateral na Máquina",
+         "exec": "Cotovelos nas almofadas, eleve até a linha dos ombros."
+        }
+       ],
+       "fase2": {
+        "sets": 5
+       }
+      },
+      {
+       "id": "m_inverso",
+       "name": "Crucifixo Inverso (Peck Deck Invertido)",
+       "muscle": "Ombros (Posterior) · Postura",
+       "sets": 3,
+       "reps": "12–15",
+       "rest": 45,
+       "exec": "De frente para o encosto, braços na altura dos ombros. Abra para trás juntando as escápulas, segure 1s e volte devagar.",
+       "progress": "Fechou 3x15? Suba 1 placa.",
+       "incremento": "1 placa",
+       "alt": [
+        {
+         "name": "Face Pull na Polia",
+         "exec": "Corda na altura do rosto, puxe abrindo as mãos ao lado das orelhas."
+        },
+        {
+         "name": "Crucifixo Inverso com Halteres",
+         "exec": "Tronco inclinado à frente, abra os braços para os lados."
+        }
+       ]
+      },
+      {
+       "id": "m_martelo",
+       "name": "Rosca Martelo",
+       "muscle": "Bíceps · Antebraço",
+       "sets": 3,
+       "reps": "10–12",
+       "rest": 60,
+       "exec": "Palmas viradas uma para a outra, cotovelos colados. Suba sem balançar e desça em 2s.",
+       "progress": "Fechou 3x12? Suba 2 kg por halter.",
+       "incremento": "2 kg por halter",
+       "alt": [
+        {
+         "name": "Rosca Martelo na Polia com Corda",
+         "exec": "Mesmo movimento com a corda na polia baixa."
+        },
+        {
+         "name": "Rosca Scott",
+         "exec": "Braço apoiado no banco Scott, desça até quase esticar."
+        }
+       ]
+      },
+      {
+       "id": "m_frances",
+       "name": "Tríceps Francês com Halter",
+       "muscle": "Tríceps (Cabeça Longa)",
+       "sets": 3,
+       "reps": "10–12",
+       "rest": 60,
+       "exec": "Sentado com encosto, halter seguro com as duas mãos atrás da cabeça. Estique os braços para cima mantendo os cotovelos apontados para frente e desça alongando.",
+       "progress": "Fechou 3x12? Suba 2 kg.",
+       "incremento": "2 kg",
+       "alt": [
+        {
+         "name": "Tríceps Francês na Polia",
+         "exec": "De costas para a polia, corda atrás da cabeça, estique à frente."
+        },
+        {
+         "name": "Tríceps Testa",
+         "exec": "Deitado com barra W, desça até a testa e estique."
+        }
+       ]
+      },
+      {
+       "id": "m_cardioC",
+       "name": "Cardio Final · Esteira Inclinada",
+       "muscle": "Cardio",
+       "sets": 1,
+       "reps": "12 min",
+       "rest": 0,
+       "exec": "12 min a 5,5–6 km/h com 8–10% de inclinação, sem segurar no corrimão. Ritmo de frases curtas.",
+       "progress": "Fase 2: 15 min ou +1–2% de inclinação.",
+       "alt": [
+        {
+         "name": "Escada (Simulador)",
+         "exec": "10–12 min em ritmo moderado."
+        },
+        {
+         "name": "Bike Moderada",
+         "exec": "12 min em ritmo constante."
+        }
+       ],
+       "registro": "min",
+       "fase2": {
+        "reps": "15 min"
+       }
+      }
+     ]
+    },
+    {
+     "id": "m_D",
+     "nome": "Treino D · Inferiores (Volume) e Core",
+     "foco": "Posterior, glúteo, quadríceps e abdômen com mais volume",
+     "duracao_est_min": 65,
+     "aquecimento": "5 min de bike leve + 10 elevações pélvicas sem peso + mobilidade de quadril",
+     "exercicios": [
+      {
+       "id": "m_terra",
+       "name": "Levantamento Terra",
+       "muscle": "Posterior · Glúteo · Costas",
+       "sets": 3,
+       "reps": "5–6",
+       "rest": 150,
+       "exec": "Barra sobre o meio do pé, pegada logo fora das pernas. Quadril para trás, peito aberto e coluna neutra. Empurre o chão com as pernas e estenda o quadril até ficar em pé. Desça controlando, sem arredondar as costas. Fase 1: priorize a técnica com carga moderada.",
+       "progress": "Fez 6 reps nas 3 séries com as costas neutras? Suba 5 kg.",
+       "incremento": "5 kg",
+       "alt": [
+        {
+         "name": "Terra com Barra Hexagonal (Trap Bar)",
+         "exec": "Mesmo movimento por dentro da barra, mais fácil de manter a coluna neutra."
+        },
+        {
+         "name": "Terra Romeno com Halteres",
+         "exec": "Joelhos levemente flexionados, quadril para trás com os halteres rente às pernas."
+        }
+       ],
+       "fase2": {
+        "sets": 4
+       }
+      },
+      {
+       "id": "m_bulgaro",
+       "name": "Agachamento Búlgaro",
+       "muscle": "Quadríceps · Glúteo",
+       "sets": 3,
+       "reps": "8–10/perna",
+       "rest": 90,
+       "exec": "Pé de trás apoiado no banco, pé da frente um passo grande à frente. Desça reto até o joelho de trás quase tocar o chão e suba empurrando pelo calcanhar da frente.",
+       "progress": "Fechou 3x10 em cada perna? Suba 2 kg por halter.",
+       "incremento": "2 kg por halter",
+       "alt": [
+        {
+         "name": "Afundo no Smith",
+         "exec": "Passo à frente, desça até ~90° nos dois joelhos e suba."
+        },
+        {
+         "name": "Passada Caminhando",
+         "exec": "Passos longos com halteres, joelho de trás quase no chão."
+        }
+       ]
+      },
+      {
+       "id": "m_extensora",
+       "name": "Cadeira Extensora",
+       "muscle": "Quadríceps",
+       "sets": 3,
+       "reps": "12–15",
+       "rest": 60,
+       "exec": "Joelho alinhado ao eixo da máquina. Estique até o fim, segure 1s e desça em 3s.",
+       "progress": "Fechou 3x15? Suba 1 placa. Fase 2: última série com drop set (tire ~30% e vá até a falha).",
+       "incremento": "1 placa",
+       "alt": [
+        {
+         "name": "Sissy Squat Assistido",
+         "exec": "Segurando em um apoio, joelhos à frente e tronco para trás, desça e suba."
+        },
+        {
+         "name": "Leg Press com Pés Baixos",
+         "exec": "Pés na parte baixa da plataforma para focar no quadríceps."
+        }
+       ]
+      },
+      {
+       "id": "m_mesa",
+       "name": "Mesa Flexora",
+       "muscle": "Posterior de Coxa",
+       "sets": 3,
+       "reps": "10–12",
+       "rest": 60,
+       "exec": "Quadril colado no banco. Dobre os joelhos até o rolo chegar perto do glúteo e desça em 3s.",
+       "progress": "Fechou 3x12? Suba 1 placa.",
+       "incremento": "1 placa",
+       "alt": [
+        {
+         "name": "Cadeira Flexora",
+         "exec": "Sentado, mesmo movimento."
+        },
+        {
+         "name": "Flexão Nórdica Assistida",
+         "exec": "Joelhos no colchonete, desça o tronco à frente devagar com os pés presos."
+        }
+       ]
+      },
+      {
+       "id": "m_hipthrust",
+       "name": "Elevação Pélvica (Hip Thrust)",
+       "muscle": "Glúteo",
+       "sets": 3,
+       "reps": "10–12",
+       "rest": 75,
+       "exec": "Escápulas no banco, barra com proteção sobre o quadril, canelas verticais no topo. Suba contraindo o glúteo, segure 1s e desça controlando, sem arquear a lombar.",
+       "progress": "Fechou 3x12 com a pausa? Suba 5–10 kg.",
+       "incremento": "5–10 kg",
+       "alt": [
+        {
+         "name": "Elevação Pélvica na Máquina",
+         "exec": "Cinto no quadril, suba e segure 1s."
+        },
+        {
+         "name": "Ponte de Glúteo com Barra",
+         "exec": "Deitado no chão, mesmo movimento com menor amplitude."
+        }
+       ]
+      },
+      {
+       "id": "m_crunch",
+       "name": "Abdominal na Polia (Crunch)",
+       "muscle": "Abdômen",
+       "sets": 3,
+       "reps": "12–15",
+       "rest": 45,
+       "exec": "Ajoelhado de frente para a polia alta, corda atrás da cabeça. Enrole o tronco levando os cotovelos em direção às coxas, sem mover o quadril. Volte devagar.",
+       "progress": "Fechou 3x15? Suba 1 placa.",
+       "incremento": "1 placa",
+       "alt": [
+        {
+         "name": "Elevação de Pernas na Barra",
+         "exec": "Pendurado, suba os joelhos até o peito sem balançar."
+        },
+        {
+         "name": "Abdominal Infra no Banco",
+         "exec": "Deitado, suba o quadril do banco trazendo os joelhos ao peito."
+        }
+       ]
+      },
+      {
+       "id": "m_cardioD",
+       "name": "Cardio Final · Esteira Inclinada",
+       "muscle": "Cardio",
+       "sets": 1,
+       "reps": "10 min",
+       "rest": 0,
+       "exec": "10 min a 5,5–6 km/h com 8–10% de inclinação, sem segurar no corrimão.",
+       "progress": "Fase 2: 12–15 min.",
+       "alt": [
+        {
+         "name": "Elíptico",
+         "exec": "10 min em ritmo moderado."
+        },
+        {
+         "name": "Bike Moderada",
+         "exec": "10 min em ritmo constante."
+        }
+       ],
+       "registro": "min",
+       "fase2": {
+        "reps": "12–15 min"
+       }
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

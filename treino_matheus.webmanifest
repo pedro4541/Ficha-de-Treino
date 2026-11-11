@@ -1,0 +1,33 @@
+{
+  "id": "./treino_matheus.html",
+  "name": "Treino Matheus",
+  "short_name": "Treino M",
+  "description": "Ficha de treino",
+  "lang": "pt-BR",
+  "start_url": "./treino_matheus.html",
+  "scope": "./treino_matheus.html",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0E1013",
+  "theme_color": "#0E1013",
+  "icons": [
+    {
+      "src": "icons/mt-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/mt-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/mt-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

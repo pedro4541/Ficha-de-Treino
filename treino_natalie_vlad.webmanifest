@@ -1,8 +1,8 @@
 {
   "id": "./treino_natalie_vlad.html",
-  "name": "Treino Natalie & Vlad",
+  "name": "Treino Nat & Vlad",
   "short_name": "Treino N&V",
-  "description": "Treinos da Natalie e do Vlad",
+  "description": "Ficha de treino",
   "lang": "pt-BR",
   "start_url": "./treino_natalie_vlad.html",
   "scope": "./treino_natalie_vlad.html",
@@ -11,8 +11,23 @@
   "background_color": "#000000",
   "theme_color": "#000000",
   "icons": [
-    { "src": "icons/nv-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
-    { "src": "icons/nv-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
-    { "src": "icons/nv-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+    {
+      "src": "icons/nv-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/nv-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icons/nv-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
   ]
 }

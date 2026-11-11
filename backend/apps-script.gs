@@ -1,7 +1,9 @@
 /**
- * Treino Natalie & Vlad — backend (Google Apps Script)
+ * Backend dos apps de treino (Google Apps Script) — o MESMO código serve para todos os apps
+ * (Nat & Vlad, Matheus, ...). Cada app tem seu próprio projeto no script.google.com e sua
+ * própria planilha: só troque NOME_PLANILHA abaixo antes de rodar setup().
  *
- * Planilha: "Treino Natalie & Vlad", aba "logs".
+ * Planilha: NOME_PLANILHA, aba "logs".
  * Colunas: id | data | pessoa | treinoId | treinoNome | fase | detalhes | rpe | obs | criadoEm
  *
  * GET  ?action=list                       -> {"ok":true,"logs":[...]}
@@ -17,7 +19,7 @@
  * (nunca "Nova implantação", que muda a URL).
  */
 
-var NOME_PLANILHA = 'Treino Natalie & Vlad';
+var NOME_PLANILHA = 'Treino Natalie & Vlad'; // ← troque para cada app (ex.: 'Treino Matheus')
 var NOME_ABA = 'logs';
 var CABECALHOS = ['id', 'data', 'pessoa', 'treinoId', 'treinoNome', 'fase', 'detalhes', 'rpe', 'obs', 'criadoEm'];
 var COL = {}; CABECALHOS.forEach(function (h, i) { COL[h] = i; });

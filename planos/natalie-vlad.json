@@ -1,0 +1,1079 @@
+{
+ "versao": "1.2",
+ "pessoas": [
+  {
+   "id": "n",
+   "nome": "Nat",
+   "cor": "#F7A8C9",
+   "modo": "semana",
+   "frequencia": "4x fixos + 1 opcional",
+   "duracao_min": "30-40",
+   "semana": [
+    {
+     "dia": "Seg",
+     "treino": "n_A"
+    },
+    {
+     "dia": "Ter",
+     "treino": "n_B"
+    },
+    {
+     "dia": "Qua",
+     "treino": "descanso",
+     "obs": "Caminhada leve livre (opcional)"
+    },
+    {
+     "dia": "Qui",
+     "treino": "n_C"
+    },
+    {
+     "dia": "Sex",
+     "treino": "n_D"
+    },
+    {
+     "dia": "Sáb",
+     "treino": "n_E",
+     "opcional": true
+    },
+    {
+     "dia": "Dom",
+     "treino": "descanso"
+    }
+   ],
+   "regras": [
+    "Peso certo: as 2 últimas repetições de cada série devem ser difíceis (esforço 8 de 10). Se sobrar fôlego para 3 ou mais, aumente o peso.",
+    "Descanso marcado no cronômetro do app — é o que mantém o treino em 30–40 min e o gasto calórico alto.",
+    "Antes de cada treino: 4 min de bike ou elíptico + 1 série leve do 1º exercício.",
+    "Fase 2: +1 série no 1º exercício dos treinos de Glúteo, Anterior e Posterior e 15s a menos de descanso nos exercícios isolados (o app já ajusta sozinho).",
+    "Incômodo leve (até 3 de 10) que passa em 24h é aceitável. Mais que isso: troque pela alternativa e diminua o movimento."
+   ],
+   "treinos": [
+    {
+     "id": "n_A",
+     "nome": "Treino A · Glúteo",
+     "foco": "Glúteo máximo e médio",
+     "duracao_est_min": 37,
+     "aquecimento": "4 min bike/elíptico leve",
+     "exercicios": [
+      {
+       "id": "n_hipthrust",
+       "name": "Elevação Pélvica (Hip Thrust)",
+       "muscle": "Glúteo Máximo",
+       "sets": 4,
+       "reps": "10–12",
+       "rest": 75,
+       "exec": "Escápulas apoiadas no banco, pés na largura do quadril, canelas verticais no topo. Suba contraindo o glúteo e segure 1s em cima. Queixo levemente para baixo, sem arquear a lombar.",
+       "progress": "Suba 5kg quando fizer 4x12 com pausa de 1s no topo.",
+       "alt": [
+        {
+         "name": "Elevação pélvica na máquina",
+         "exec": "Sente na máquina, costas no encosto, cinto no quadril. Suba o quadril apertando o glúteo e segure 1s em cima."
+        },
+        {
+         "name": "Ponte de glúteo no chão",
+         "exec": "Deitada de barriga para cima, joelhos dobrados, peso sobre o quadril. Suba o quadril apertando o glúteo, segure 1s e desça devagar."
+        }
+       ],
+       "incremento": "5 kg",
+       "fase2": {
+        "sets": 5
+       }
+      },
+      {
+       "id": "n_pullthrough",
+       "name": "Pull-Through na Polia",
+       "muscle": "Glúteo · Posterior",
+       "sets": 3,
+       "reps": "12–15",
+       "rest": 60,
+       "exec": "Fique de costas para a polia baixa, segurando a corda entre as pernas. Joelhos levemente dobrados e parados. Leve o bumbum para trás (como se fosse fechar uma porta com ele) e depois empurre o quadril para frente apertando forte o glúteo. Quem trabalha é o quadril, não o joelho.",
+       "progress": "Suba 1 placa quando fizer 3x15 com contração forte no final.",
+       "alt": [
+        {
+         "name": "Glúteo na máquina (coice)",
+         "exec": "Apoie o peito e os braços na máquina, um pé na plataforma. Empurre a perna para trás e para cima apertando o glúteo, volte devagar."
+        },
+        {
+         "name": "Extensão de quadril no banco inclinado",
+         "exec": "Quadril apoiado na borda do banco inclinado, calcanhares presos. Desça com as costas retas e suba apertando o glúteo até o corpo ficar reto."
+        }
+       ],
+       "incremento": "1 placa"
+      },
+      {
+       "id": "n_stiff",
+       "name": "Stiff com Halteres",
+       "muscle": "Posterior de Coxa · Glúteo",
+       "sets": 3,
+       "reps": "10–12",
+       "rest": 60,
+       "exec": "Joelhos levemente flexionados e fixos. Empurre o quadril para trás deslizando os halteres rente às coxas até sentir alongar o posterior. Coluna neutra o tempo todo. Suba contraindo o glúteo.",
+       "progress": "Suba 2kg por halter quando completar 3x12 sem arredondar as costas.",
+       "alt": [
+        {
+         "name": "Stiff com barra",
+         "exec": "Mesmo movimento, segurando uma barra: joelhos levemente dobrados, leve o quadril para trás com a barra rente às pernas e suba apertando o glúteo."
+        },
+        {
+         "name": "Mesa flexora",
+         "exec": "Deitada de bruços na máquina, dobre os joelhos trazendo o rolo perto do bumbum. Desça em 3s."
+        }
+       ],
+       "incremento": "2 kg por halter"
+      },
+      {
+       "id": "n_abducao",
+       "name": "Cadeira Abdutora",
+       "muscle": "Glúteo Médio",
+       "sets": 3,
+       "reps": "15–20",
+       "rest": 45,
+       "exec": "Tronco levemente inclinado à frente (ativa mais o glúteo). Abra controlando, segure 1s aberto, volte em 2s sem bater o peso.",
+       "progress": "Suba a carga quando fizer 20 reps limpas. Fase 2: na última série, ao terminar, tire 30% do peso e continue até não conseguir mais.",
+       "alt": [
+        {
+         "name": "Abrir a perna na polia",
+         "exec": "Em pé, de lado para a polia, tornozeleira na perna de fora. Leve a perna para o lado sem inclinar o corpo. Volte devagar."
+        },
+        {
+         "name": "Abrir as pernas com elástico",
+         "exec": "Sentada, elástico acima dos joelhos. Abra os joelhos contra o elástico, segure 1s e volte devagar."
+        }
+       ],
+       "incremento": "1 placa",
+       "fase2": {
+        "rest": 30
+       }
+      },
+      {
+       "id": "n_coice",
+       "name": "Coice na Polia",
+       "muscle": "Glúteo Máximo",
+       "sets": 2,
+       "reps": "12–15/perna",
+       "rest": 30,
+       "exec": "Tornozeleira no cabo baixo, mãos apoiadas. Leve a perna para trás e levemente para cima sem arquear a lombar. Aperte o glúteo no final.",
+       "progress": "Suba 1 placa quando fizer 15 reps controladas.",
+       "alt": [
+        {
+         "name": "Coice na máquina",
+         "exec": "Peito apoiado, pé na plataforma. Empurre a perna para trás apertando o glúteo e volte devagar."
+        },
+        {
+         "name": "Coice de 4 apoios",
+         "exec": "No chão com mãos e joelhos apoiados, caneleira no tornozelo. Leve uma perna para trás e para cima, joelho dobrado, sem arquear as costas."
+        }
+       ],
+       "incremento": "1 placa",
+       "fase2": {
+        "rest": 15
+       }
+      }
+     ]
+    },
+    {
+     "id": "n_B",
+     "nome": "Treino B · Superiores e Abdômen",
+     "foco": "Costas, peito, ombros e barriga",
+     "duracao_est_min": 34,
+     "aquecimento": "4 min elíptico/remo ergômetro leve",
+     "exercicios": [
+      {
+       "id": "n_puxada",
+       "name": "Puxada Frontal",
+       "muscle": "Costas",
+       "sets": 3,
+       "reps": "10–12",
+       "rest": 60,
+       "exec": "Pegada um pouco mais aberta que os ombros. Peito para cima, puxe a barra até o alto do peito levando os cotovelos para baixo. Suba controlando.",
+       "progress": "Suba 1 placa quando fizer 3x12.",
+       "alt": [
+        {
+         "name": "Puxada com pegador em V",
+         "exec": "Mesmo aparelho com o pegador em V. Puxe até o peito levando os cotovelos para baixo."
+        },
+        {
+         "name": "Puxada na máquina",
+         "exec": "Sente, segure as alças e puxe para baixo levando os cotovelos ao lado do corpo. Suba devagar."
+        }
+       ],
+       "incremento": "1 placa"
+      },
+      {
+       "id": "n_supino",
+       "name": "Supino na Máquina",
+       "muscle": "Peito · Tríceps",
+       "sets": 3,
+       "reps": "10–12",
+       "rest": 60,
+       "exec": "Pegada na linha do meio do peito, escápulas encaixadas no banco. Empurre sem travar os cotovelos e volte em 2s.",
+       "progress": "Suba 1 placa quando fizer 3x12.",
+       "alt": [
+        {
+         "name": "Supino com halteres",
+         "exec": "Deitada no banco, halteres na altura do peito. Empurre para cima e desça devagar em 2s."
+        },
+        {
+         "name": "Flexão com joelho no chão",
+         "exec": "Mãos um pouco mais abertas que os ombros, joelhos apoiados. Desça o peito até perto do chão e empurre de volta, corpo reto."
+        }
+       ],
+       "incremento": "1 placa"
+      },
+      {
+       "id": "n_remada",
+       "name": "Remada Baixa",
+       "muscle": "Costas · Postura",
+       "sets": 3,
+       "reps": "12",
+       "rest": 60,
+       "exec": "Coluna reta, puxe o triângulo até o umbigo juntando as escápulas. Segure 1s. Não balance o tronco.",
+       "progress": "Suba 1 placa quando fizer 3x12 com a pausa.",
+       "alt": [
+        {
+         "name": "Remada com halter",
+         "exec": "Um joelho e uma mão apoiados no banco. Puxe o halter até a cintura com o cotovelo junto ao corpo, desça devagar."
+        },
+        {
+         "name": "Remada na máquina",
+         "exec": "Peito apoiado, segure as alças e puxe juntando as escápulas. Volte devagar."
+        }
+       ],
+       "incremento": "1 placa"
+      },
+      {
+       "id": "n_desenv",
+       "name": "Desenvolvimento com Halteres",
+       "muscle": "Ombros",
+       "sets": 2,
+       "reps": "12",
+       "rest": 45,
+       "exec": "Sentada com encosto. Halteres na altura das orelhas, empurre para cima sem bater um no outro. Desça em 2s.",
+       "progress": "Suba 1kg por halter quando fizer 2x12.",
+       "alt": [
+        {
+         "name": "Ombro na máquina",
+         "exec": "Sentada, alças na altura dos ombros. Empurre para cima sem travar os cotovelos, desça devagar."
+        },
+        {
+         "name": "Abrir os braços com halteres",
+         "exec": "Em pé, halteres ao lado do corpo. Levante os braços para os lados até a altura dos ombros, cotovelos levemente dobrados, desça em 2s."
+        }
+       ],
+       "incremento": "1 kg por halter"
+      },
+      {
+       "id": "n_prancha",
+       "name": "Prancha",
+       "muscle": "Barriga",
+       "sets": 3,
+       "reps": "30–45s",
+       "rest": 30,
+       "exec": "Antebraços no chão, corpo em linha reta da cabeça ao calcanhar. Contraia abdômen e glúteo. Não deixe o quadril cair.",
+       "progress": "+10s por semana até 60s; depois prancha com toque no ombro.",
+       "alt": [
+        {
+         "name": "Prancha com joelhos no chão",
+         "exec": "Antebraços e joelhos no chão, corpo reto do joelho à cabeça. Contraia a barriga e segure."
+        },
+        {
+         "name": "Prancha na parede",
+         "exec": "Em pé, antebraços apoiados na parede, corpo inclinado e reto. Contraia a barriga e segure."
+        }
+       ],
+       "registro": "seg"
+      },
+      {
+       "id": "n_dead_bug",
+       "name": "Dead Bug",
+       "muscle": "Barriga",
+       "sets": 2,
+       "reps": "10/lado",
+       "rest": 30,
+       "exec": "Deitada de barriga para cima, braços esticados para o teto e joelhos dobrados no ar. Estique devagar um braço para trás e a perna do lado oposto para frente, mantendo a lombar colada no chão. Volte e troque o lado.",
+       "progress": "Fase 2: segure um halter leve nas mãos.",
+       "alt": [
+        {
+         "name": "Abdominal tirando os pés do chão",
+         "exec": "Deitada, joelhos dobrados. Tire os pés do chão até os joelhos ficarem sobre o quadril e volte devagar, sem tirar a lombar do chão."
+        },
+        {
+         "name": "Abdominal curto",
+         "exec": "Deitada, joelhos dobrados. Suba só os ombros do chão contraindo a barriga, sem puxar o pescoço."
+        }
+       ],
+       "registro": "reps"
+      }
+     ]
+    },
+    {
+     "id": "n_C",
+     "nome": "Treino C · Anterior",
+     "foco": "Quadríceps, glúteo e finalização metabólica",
+     "duracao_est_min": 38,
+     "aquecimento": "4 min bike leve",
+     "exercicios": [
+      {
+       "id": "n_legpress",
+       "name": "Leg Press 45° (Pés Altos)",
+       "muscle": "Quadríceps · Glúteo",
+       "sets": 4,
+       "reps": "10–12",
+       "rest": 75,
+       "exec": "Pés na parte de cima da plataforma, um pouco mais afastados que o quadril (isso joga o trabalho para glúteo e poupa o joelho). Desça só até onde não tiver dor, no máximo 90° de joelho. Empurre pelo calcanhar sem travar o joelho.",
+       "progress": "Suba 10kg quando fizer 4x12.",
+       "alt": [
+        {
+         "name": "Agachamento com halter no peito",
+         "exec": "Halter junto ao peito, pés um pouco mais abertos que o quadril. Desça como se fosse sentar, só até onde não doer o joelho, e suba empurrando pelo calcanhar."
+        },
+        {
+         "name": "Leg horizontal",
+         "exec": "Mesmo movimento do leg press no aparelho sentado, pés no alto da plataforma, sem descer além de 90°."
+        }
+       ],
+       "incremento": "10 kg",
+       "fase2": {
+        "sets": 5
+       }
+      },
+      {
+       "id": "n_extensora",
+       "name": "Cadeira Extensora",
+       "muscle": "Quadríceps",
+       "sets": 3,
+       "reps": "12–15",
+       "rest": 45,
+       "exec": "Carga moderada e amplitude confortável: se doer no final da extensão ou com o joelho muito dobrado, faça só o trecho sem dor. Desça em 3s.",
+       "progress": "Suba 1 placa quando fizer 3x15.",
+       "alt": [
+        {
+         "name": "Leg press curto",
+         "exec": "No leg press, faça só a metade de cima do movimento, com carga leve, sem dor."
+        },
+        {
+         "name": "Esticar a perna com caneleira",
+         "exec": "Sentada no banco, caneleira no tornozelo. Estique a perna devagar, segure 1s e desça em 3s."
+        }
+       ],
+       "incremento": "1 placa",
+       "fase2": {
+        "rest": 30
+       }
+      },
+      {
+       "id": "n_legpress_uni",
+       "name": "Leg Press Unilateral",
+       "muscle": "Glúteo · Quadríceps",
+       "sets": 3,
+       "reps": "10–12/perna",
+       "rest": 45,
+       "exec": "Um pé no centro-alto da plataforma, carga menor que no bilateral. Desça controlando até onde não houver dor e empurre pelo calcanhar. Corrige diferença de força entre as pernas.",
+       "progress": "Suba 5kg quando fizer 3x12 por perna.",
+       "alt": [
+        {
+         "name": "Glúteo na máquina (coice)",
+         "exec": "Peito apoiado, pé na plataforma. Empurre a perna para trás apertando o glúteo e volte devagar."
+        },
+        {
+         "name": "Cadeira abdutora",
+         "exec": "Sentada, abra as pernas contra o apoio, segure 1s e volte devagar."
+        }
+       ],
+       "incremento": "5 kg"
+      },
+      {
+       "id": "n_flexora",
+       "name": "Mesa Flexora",
+       "muscle": "Posterior de Coxa",
+       "sets": 3,
+       "reps": "12",
+       "rest": 45,
+       "exec": "Quadril colado no banco. Flexione até o rolo encostar perto do glúteo, desça em 3s.",
+       "progress": "Suba 1 placa quando fizer 3x12.",
+       "alt": [
+        {
+         "name": "Cadeira flexora",
+         "exec": "Sentada na máquina, rolo atrás do tornozelo. Puxe o rolo para baixo dobrando os joelhos e volte devagar."
+        },
+        {
+         "name": "Dobrar a perna em pé na polia",
+         "exec": "Em pé, tornozeleira na polia baixa. Dobre o joelho trazendo o pé em direção ao bumbum e volte devagar."
+        }
+       ],
+       "incremento": "1 placa",
+       "fase2": {
+        "rest": 30
+       }
+      },
+      {
+       "id": "n_hiit_bike",
+       "name": "HIIT na Bike",
+       "muscle": "Cardio",
+       "sets": 6,
+       "reps": "20s forte / 40s leve",
+       "rest": 0,
+       "exec": "6 minutos totais. 20s pedalando forte (esforço 8–9 de 10, quase sem conseguir falar) + 40s bem leve. Repita 6x.",
+       "progress": "Fase 2: 8 rounds.",
+       "alt": [
+        {
+         "name": "Tiros no elíptico",
+         "exec": "Mesmo esquema: 20s forte e 40s leve, 6 vezes. Sem impacto no joelho."
+        },
+        {
+         "name": "Bike em ritmo constante",
+         "exec": "Se o joelho incomodar nos tiros: 8 min pedalando em ritmo moderado."
+        }
+       ],
+       "registro": "tiros",
+       "intervalos": {
+        "forte_s": 20,
+        "leve_s": 40
+       },
+       "fase2": {
+        "sets": 8,
+        "exec": "8 minutos totais. 20s pedalando forte (esforço 8–9 de 10, quase sem conseguir falar) + 40s bem leve. Repita 8x."
+       }
+      }
+     ]
+    },
+    {
+     "id": "n_D",
+     "nome": "Treino D · Posterior",
+     "foco": "Glúteo, posterior de coxa e panturrilha",
+     "duracao_est_min": 36,
+     "aquecimento": "4 min elíptico leve",
+     "exercicios": [
+      {
+       "id": "n_rdl",
+       "name": "Levantamento Terra Romeno",
+       "muscle": "Posterior · Glúteo",
+       "sets": 4,
+       "reps": "8–10",
+       "rest": 75,
+       "exec": "Em pé, segurando a barra na frente das coxas, joelhos levemente dobrados. Leve o bumbum para trás descendo a barra rente às pernas até um pouco abaixo dos joelhos, com as costas retas. Suba empurrando o quadril para frente e apertando o glúteo.",
+       "progress": "Suba 2–4kg quando fizer 4x10 com técnica perfeita.",
+       "alt": [
+        {
+         "name": "Inclinação com halteres",
+         "exec": "Mesmo movimento segurando halteres: quadril para trás, costas retas, halteres rente às pernas, sobe apertando o glúteo."
+        },
+        {
+         "name": "Inclinação no Smith",
+         "exec": "Barra guiada do Smith: joelhos levemente dobrados, quadril para trás até a barra passar dos joelhos, sobe apertando o glúteo."
+        }
+       ],
+       "incremento": "2–4 kg",
+       "fase2": {
+        "sets": 5
+       }
+      },
+      {
+       "id": "n_hiperext",
+       "name": "Hiperextensão no Banco 45°",
+       "muscle": "Glúteo · Lombar",
+       "sets": 3,
+       "reps": "12–15",
+       "rest": 45,
+       "exec": "Quadril apoiado na borda do banco, pés levemente virados para fora. Desça com a coluna neutra e suba contraindo o glúteo até o corpo ficar alinhado, sem arquear demais a lombar.",
+       "progress": "Segure uma anilha de 5kg no peito quando fizer 3x15 fácil.",
+       "alt": [
+        {
+         "name": "Puxada de glúteo na polia",
+         "exec": "De costas para a polia baixa, corda entre as pernas. Leve o quadril para trás e empurre para frente apertando o glúteo."
+        },
+        {
+         "name": "Ponte de glúteo no chão",
+         "exec": "Deitada, joelhos dobrados. Suba o quadril apertando o glúteo, segure 1s e desça devagar."
+        }
+       ],
+       "incremento": "anilha de 5 kg"
+      },
+      {
+       "id": "n_hipthrust_uni",
+       "name": "Elevação Pélvica Unilateral",
+       "muscle": "Glúteo Máximo",
+       "sets": 3,
+       "reps": "12/perna",
+       "rest": 45,
+       "exec": "Escápulas no banco, uma perna apoiada e a outra estendida/elevada. Suba contraindo o glúteo da perna de apoio, segure 1s.",
+       "progress": "Adicione um halter no quadril quando fizer 3x12 fácil.",
+       "alt": [
+        {
+         "name": "Ponte com uma perna no chão",
+         "exec": "Deitada, um pé no chão e a outra perna esticada. Suba o quadril apertando o glúteo, segure 1s e desça."
+        },
+        {
+         "name": "Ponte de glúteo com as duas pernas",
+         "exec": "Mesmo movimento com as duas pernas e mais carga."
+        }
+       ],
+       "incremento": "1 halter"
+      },
+      {
+       "id": "n_abducao_cabo",
+       "name": "Abdução na Polia",
+       "muscle": "Glúteo Médio",
+       "sets": 3,
+       "reps": "15/perna",
+       "rest": 30,
+       "exec": "Tornozeleira no cabo baixo, de lado para a máquina. Leve a perna para o lado sem inclinar o tronco. Volte em 2s.",
+       "progress": "Suba 1 placa quando fizer 15 reps estáveis.",
+       "alt": [
+        {
+         "name": "Cadeira abdutora",
+         "exec": "Sentada, abra as pernas contra o apoio, segure 1s e volte devagar."
+        },
+        {
+         "name": "Andar de lado com elástico",
+         "exec": "Elástico acima dos joelhos, semi-agachada. Dê passos laterais curtos sem deixar os joelhos fecharem."
+        }
+       ],
+       "incremento": "1 placa",
+       "fase2": {
+        "rest": 15
+       }
+      },
+      {
+       "id": "n_panturrilha",
+       "name": "Panturrilha em Pé",
+       "muscle": "Panturrilha",
+       "sets": 3,
+       "reps": "15",
+       "rest": 30,
+       "exec": "Suba o máximo na ponta dos pés, segure 1s, desça alongando bem.",
+       "progress": "Suba carga quando fizer 3x15 com pausa.",
+       "alt": [
+        {
+         "name": "Panturrilha no leg press",
+         "exec": "Ponta dos pés na borda da plataforma, empurre esticando o tornozelo e volte alongando."
+        },
+        {
+         "name": "Panturrilha sentada",
+         "exec": "Sentada na máquina, apoio sobre os joelhos. Suba os calcanhares o máximo e desça devagar."
+        }
+       ],
+       "incremento": "1 placa",
+       "fase2": {
+        "rest": 15
+       }
+      }
+     ]
+    },
+    {
+     "id": "n_E",
+     "nome": "Caminhada Inclinada (Opcional)",
+     "foco": "Gasto calórico extra com baixo impacto",
+     "duracao_est_min": 35,
+     "tipo": "cardio",
+     "blocos": [
+      {
+       "fase": "Aquecimento",
+       "min": 5,
+       "vel_kmh": 4.5,
+       "incl_pct": 2,
+       "rpe": "3"
+      },
+      {
+       "fase": "Caminhada inclinada",
+       "min": 25,
+       "vel_kmh": 5,
+       "incl_pct": 10,
+       "rpe": "5–6",
+       "obs": "Ritmo em que dá para falar frases curtas. Sem segurar no corrimão."
+      },
+      {
+       "fase": "Desaquecimento",
+       "min": 5,
+       "vel_kmh": 4,
+       "incl_pct": 0,
+       "rpe": "2"
+      }
+     ],
+     "progress": "Fase 2: inclinação 12% ou 30 min no bloco principal.",
+     "alt": [
+      {
+       "name": "Elíptico",
+       "exec": "35 min em ritmo moderado, conseguindo falar frases curtas. Sem impacto."
+      },
+      {
+       "name": "Bike",
+       "exec": "35 min em ritmo moderado, com carga que dê para manter sem perder o fôlego."
+      }
+     ],
+     "fase2_blocos": [
+      {
+       "fase": "Aquecimento",
+       "min": 5,
+       "vel_kmh": 4.5,
+       "incl_pct": 2,
+       "rpe": "3"
+      },
+      {
+       "fase": "Caminhada inclinada",
+       "min": 25,
+       "vel_kmh": 5,
+       "incl_pct": 12,
+       "rpe": "5–6",
+       "obs": "Ritmo em que dá para falar frases curtas. Sem segurar no corrimão."
+      },
+      {
+       "fase": "Desaquecimento",
+       "min": 5,
+       "vel_kmh": 4,
+       "incl_pct": 0,
+       "rpe": "2"
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "v",
+   "nome": "Vlad",
+   "cor": "#8EC9FF",
+   "modo": "semana",
+   "frequencia": "4x fixos + 1 opcional",
+   "duracao_min": "30-40",
+   "semana": [
+    {
+     "dia": "Seg",
+     "treino": "v_1"
+    },
+    {
+     "dia": "Ter",
+     "treino": "v_2"
+    },
+    {
+     "dia": "Qua",
+     "treino": "descanso"
+    },
+    {
+     "dia": "Qui",
+     "treino": "v_3"
+    },
+    {
+     "dia": "Sex",
+     "treino": "v_4"
+    },
+    {
+     "dia": "Sáb",
+     "treino": "v_5",
+     "opcional": true
+    },
+    {
+     "dia": "Dom",
+     "treino": "descanso"
+    }
+   ],
+   "regras": [
+    "Nunca segure no corrimão com a esteira inclinada.",
+    "Esforço de 0 a 10 e teste da fala: o máximo do plano é 7 (ainda dá para falar frases curtas). Nunca vá até ficar sem conseguir falar.",
+    "Sempre pelo menos 5 min de aquecimento e de desaquecimento. Não pare a esteira de repente.",
+    "Pare na hora se sentir dor ou aperto no peito, tontura, falta de ar fora do normal ou batimento irregular.",
+    "Se usar relógio ou cinta que mede os batimentos, respeite o limite configurado no app."
+   ],
+   "treinos": [
+    {
+     "id": "v_1",
+     "nome": "V1 · Caminhada na Subida",
+     "foco": "Queima de gordura com baixo impacto",
+     "duracao_est_min": 38,
+     "tipo": "cardio",
+     "blocos": [
+      {
+       "fase": "Aquecimento",
+       "min": 5,
+       "vel_kmh": 5,
+       "incl_pct": 1,
+       "rpe": "3"
+      },
+      {
+       "fase": "Bloco principal",
+       "min": 28,
+       "vel_kmh": 5.5,
+       "incl_pct": 10,
+       "rpe": "5–6",
+       "obs": "Ajuste entre 8–12% para ficar no 'consigo falar mas cansa'."
+      },
+      {
+       "fase": "Desaquecimento",
+       "min": 5,
+       "vel_kmh": 4.5,
+       "incl_pct": 0,
+       "rpe": "2"
+      }
+     ],
+     "progress": "Quando ficar fácil: +1% de inclinação OU +0,2 km/h (nunca os dois juntos). Teto: 12% / 6,0 km/h.",
+     "alt": [
+      {
+       "name": "Mais plano e mais rápido",
+       "exec": "Inclinação 6% a 6,0 km/h, mesmo tempo."
+      },
+      {
+       "name": "Mais leve",
+       "exec": "Inclinação 5% a 5,5 km/h, se estiver cansado no dia."
+      }
+     ]
+    },
+    {
+     "id": "v_2",
+     "nome": "V2 · Trote e Caminhada",
+     "foco": "Condicionamento com picos controlados",
+     "duracao_est_min": 36,
+     "tipo": "cardio",
+     "blocos": [
+      {
+       "fase": "Aquecimento",
+       "min": 6,
+       "vel_kmh": 5,
+       "incl_pct": 1,
+       "rpe": "3"
+      },
+      {
+       "fase": "Intervalos",
+       "min": 24,
+       "repeticoes": 6,
+       "trabalho": {
+        "seg": 120,
+        "vel_kmh": 7.5,
+        "incl_pct": 1,
+        "rpe": "6–7"
+       },
+       "recuperacao": {
+        "seg": 120,
+        "vel_kmh": 5.5,
+        "incl_pct": 1,
+        "rpe": "3"
+       },
+       "obs": "6x (2 min trote leve + 2 min caminhada). Trote em ritmo de frases curtas, nunca no máximo."
+      },
+      {
+       "fase": "Desaquecimento",
+       "min": 6,
+       "vel_kmh": 4.5,
+       "incl_pct": 0,
+       "rpe": "2"
+      }
+     ],
+     "progress": "Fase 2: 3 min trote / 2 min caminhada (5x). Não aumentar a velocidade acima de 8 km/h.",
+     "alt": [
+      {
+       "name": "Só caminhada",
+       "exec": "2 min a 6,0 km/h com 8% de inclinação + 2 min a 5,0 km/h com 2%. Repita 6x."
+      },
+      {
+       "name": "Mais leve",
+       "exec": "2 min trote a 7,0 km/h + 3 min caminhada. Repita 5x."
+      }
+     ],
+     "fase2_blocos": [
+      {
+       "fase": "Aquecimento",
+       "min": 6,
+       "vel_kmh": 5,
+       "incl_pct": 1,
+       "rpe": "3"
+      },
+      {
+       "fase": "Intervalos",
+       "min": 25,
+       "repeticoes": 5,
+       "trabalho": {
+        "seg": 180,
+        "vel_kmh": 7.5,
+        "incl_pct": 1,
+        "rpe": "6–7"
+       },
+       "recuperacao": {
+        "seg": 120,
+        "vel_kmh": 5.5,
+        "incl_pct": 1,
+        "rpe": "3"
+       },
+       "obs": "5x (3 min trote leve + 2 min caminhada). Trote em ritmo de frases curtas, nunca no máximo."
+      },
+      {
+       "fase": "Desaquecimento",
+       "min": 6,
+       "vel_kmh": 4.5,
+       "incl_pct": 0,
+       "rpe": "2"
+      }
+     ]
+    },
+    {
+     "id": "v_3",
+     "nome": "V3 · Sobe e Desce a Inclinação",
+     "foco": "Resistência e força de pernas sem impacto",
+     "duracao_est_min": 37,
+     "tipo": "cardio",
+     "blocos": [
+      {
+       "fase": "Aquecimento",
+       "min": 5,
+       "vel_kmh": 5,
+       "incl_pct": 2,
+       "rpe": "3"
+      },
+      {
+       "fase": "Subida",
+       "min": 3,
+       "vel_kmh": 5.5,
+       "incl_pct": 4,
+       "rpe": "4"
+      },
+      {
+       "fase": "Subida",
+       "min": 3,
+       "vel_kmh": 5.5,
+       "incl_pct": 6,
+       "rpe": "5"
+      },
+      {
+       "fase": "Subida",
+       "min": 3,
+       "vel_kmh": 5.5,
+       "incl_pct": 8,
+       "rpe": "6"
+      },
+      {
+       "fase": "Subida",
+       "min": 3,
+       "vel_kmh": 5.5,
+       "incl_pct": 9,
+       "rpe": "7"
+      },
+      {
+       "fase": "Topo",
+       "min": 3,
+       "vel_kmh": 5.5,
+       "incl_pct": 10,
+       "rpe": "6–7"
+      },
+      {
+       "fase": "Descida",
+       "min": 3,
+       "vel_kmh": 5.5,
+       "incl_pct": 9,
+       "rpe": "7"
+      },
+      {
+       "fase": "Descida",
+       "min": 3,
+       "vel_kmh": 5.5,
+       "incl_pct": 8,
+       "rpe": "6"
+      },
+      {
+       "fase": "Descida",
+       "min": 3,
+       "vel_kmh": 5.5,
+       "incl_pct": 6,
+       "rpe": "5"
+      },
+      {
+       "fase": "Descida",
+       "min": 3,
+       "vel_kmh": 5.5,
+       "incl_pct": 4,
+       "rpe": "4"
+      },
+      {
+       "fase": "Desaquecimento",
+       "min": 5,
+       "vel_kmh": 4.5,
+       "incl_pct": 0,
+       "rpe": "2"
+      }
+     ],
+     "progress": "Fase 2: velocidade 5,8 km/h na pirâmide inteira; topo a 12%, se continuar com esforço até 7.",
+     "alt": [
+      {
+       "name": "Mais leve",
+       "exec": "Mesma ideia, subindo de 2% em 2% até 8% e voltando."
+      },
+      {
+       "name": "Inclinação fixa",
+       "exec": "30 min a 5,5 km/h com 7% de inclinação."
+      }
+     ],
+     "fase2_blocos": [
+      {
+       "fase": "Aquecimento",
+       "min": 5,
+       "vel_kmh": 5,
+       "incl_pct": 2,
+       "rpe": "3"
+      },
+      {
+       "fase": "Subida",
+       "min": 3,
+       "vel_kmh": 5.8,
+       "incl_pct": 4,
+       "rpe": "4"
+      },
+      {
+       "fase": "Subida",
+       "min": 3,
+       "vel_kmh": 5.8,
+       "incl_pct": 6,
+       "rpe": "5"
+      },
+      {
+       "fase": "Subida",
+       "min": 3,
+       "vel_kmh": 5.8,
+       "incl_pct": 8,
+       "rpe": "6"
+      },
+      {
+       "fase": "Subida",
+       "min": 3,
+       "vel_kmh": 5.8,
+       "incl_pct": 9,
+       "rpe": "7"
+      },
+      {
+       "fase": "Topo",
+       "min": 3,
+       "vel_kmh": 5.8,
+       "incl_pct": 12,
+       "rpe": "6–7"
+      },
+      {
+       "fase": "Descida",
+       "min": 3,
+       "vel_kmh": 5.8,
+       "incl_pct": 9,
+       "rpe": "7"
+      },
+      {
+       "fase": "Descida",
+       "min": 3,
+       "vel_kmh": 5.8,
+       "incl_pct": 8,
+       "rpe": "6"
+      },
+      {
+       "fase": "Descida",
+       "min": 3,
+       "vel_kmh": 5.8,
+       "incl_pct": 6,
+       "rpe": "5"
+      },
+      {
+       "fase": "Descida",
+       "min": 3,
+       "vel_kmh": 5.8,
+       "incl_pct": 4,
+       "rpe": "4"
+      },
+      {
+       "fase": "Desaquecimento",
+       "min": 5,
+       "vel_kmh": 4.5,
+       "incl_pct": 0,
+       "rpe": "2"
+      }
+     ]
+    },
+    {
+     "id": "v_4",
+     "nome": "V4 · Trote Leve",
+     "foco": "Base aeróbica e evolução para correr contínuo",
+     "duracao_est_min": 35,
+     "tipo": "cardio",
+     "blocos": [
+      {
+       "fase": "Aquecimento",
+       "min": 5,
+       "vel_kmh": 5.5,
+       "incl_pct": 1,
+       "rpe": "3"
+      },
+      {
+       "fase": "Blocos trote/caminhada",
+       "min": 25,
+       "repeticoes": 5,
+       "trabalho": {
+        "seg": 240,
+        "vel_kmh": 7.5,
+        "incl_pct": 1,
+        "rpe": "6"
+       },
+       "recuperacao": {
+        "seg": 60,
+        "vel_kmh": 5.5,
+        "incl_pct": 1,
+        "rpe": "3"
+       },
+       "obs": "5x (4 min trote leve + 1 min caminhada). Trote em ritmo de conversa (esforço 5–6 de 10)."
+      },
+      {
+       "fase": "Desaquecimento",
+       "min": 5,
+       "vel_kmh": 5,
+       "incl_pct": 0,
+       "rpe": "2"
+      }
+     ],
+     "progress": "Avance quando completar sem esforço: 6 min trote/1 min caminhada → 10/1 → 20–25 min de trote contínuo leve (7,5–8 km/h). Sem aumentar velocidade.",
+     "alt": [
+      {
+       "name": "Só caminhada",
+       "exec": "Trocar pelo V1 (caminhada na subida)."
+      },
+      {
+       "name": "Trote mais curto",
+       "exec": "3 min trote + 2 min caminhada, 6x."
+      }
+     ]
+    },
+    {
+     "id": "v_5",
+     "nome": "V5 · Caminhada Longa (Opcional)",
+     "foco": "Volume extra de gasto calórico, recuperação ativa",
+     "duracao_est_min": 40,
+     "tipo": "cardio",
+     "blocos": [
+      {
+       "fase": "Aquecimento",
+       "min": 5,
+       "vel_kmh": 5,
+       "incl_pct": 1,
+       "rpe": "3"
+      },
+      {
+       "fase": "Bloco principal",
+       "min": 32,
+       "vel_kmh": 5.8,
+       "incl_pct": 6,
+       "rpe": "4–5",
+       "obs": "Ritmo confortável — dá para conversar normalmente."
+      },
+      {
+       "fase": "Desaquecimento",
+       "min": 3,
+       "vel_kmh": 4.5,
+       "incl_pct": 0,
+       "rpe": "2"
+      }
+     ],
+     "progress": "Pode subir para 45–50 min se tiver tempo, mantendo ritmo de conversa.",
+     "alt": [
+      {
+       "name": "Caminhada na rua",
+       "exec": "45 min em ritmo confortável, de preferência com subidas."
+      },
+      {
+       "name": "Mais curta",
+       "exec": "30 min a 6,0 km/h com 5% de inclinação."
+      }
+     ]
+    }
+   ],
+   "fc_opcional": true
+  }
+ ]
+}
