@@ -291,7 +291,8 @@ function viewHoje() {
   if (p.modo === 'rotacao') {
     const hoje = getLogs(p.id).find(l => l.data === today());
     const t = hoje ? treinoById(hoje.treinoId) : proximoTreino(p);
-    return h + `<div class="card note">▶ Próximo da sequência: <b>${esc(t.nome)}</b>. Quer outro? Escolha na aba Semana.</div>` + viewTreino(t, false);
+    const extra = p.treinos.find(x => x.opcional);
+    return h + `<div class="card note">▶ ${hoje ? 'Treino de hoje' : 'Próximo da sequência'}: <b>${esc(t.nome)}</b>. Quer outro${extra ? ' ou o ' + esc(extra.nome.split('·')[0].trim()) + ' (opcional)' : ''}? Escolha na aba Semana.</div>` + viewTreino(t, false);
   }
   const dia = DIAS[dayIdx(new Date())], item = p.semana.find(s => s.dia === dia);
   if (!item || item.treino === 'descanso') {
@@ -384,7 +385,7 @@ function viewSemana() {
     let h = phaseBar() + `<h2>Treinos de ${esc(p.nome)}</h2><div class="sub">${esc(p.frequencia)} · ${esc(p.duracao_min)} min · ${feitos.size} feito(s) esta semana</div>`;
     p.treinos.forEach(t => {
       const last = all.find(l => l.treinoId === t.id);
-      h += `<button class="day ${t.id === nx.id ? 'today' : ''}" data-pick="${t.id}"><span class="sp"><b>${esc(t.nome)}</b> ${t.id === nx.id ? '<span class="nx">PRÓXIMO</span>' : ''}<br>
+      h += `<button class="day ${t.id === nx.id ? 'today' : ''}" data-pick="${t.id}"><span class="sp"><b>${esc(t.nome)}</b> ${t.id === nx.id ? '<span class="nx">PRÓXIMO</span>' : ''}${t.opcional ? '<span class="pill">opcional · fora da sequência</span>' : ''}<br>
         <span class="sub">${esc(t.foco)} · ~${t.duracao_est_min} min${last ? ' · último: ' + dm(last.data) : ''}</span></span>
         <span class="tick ${feitos.has(t.id) ? 'ok' : ''}">${feitos.has(t.id) ? '✓' : ''}</span></button>`;
     });
