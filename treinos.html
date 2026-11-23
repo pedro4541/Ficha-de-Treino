@@ -1106,7 +1106,7 @@ function buildExCard(ex, person, accentColor) {
         <input class="log-input" id="w_${ex.id}_${i}" placeholder="kg" value="${sv}" type="number" step="0.5" min="0">
         <input class="log-input" id="r_${ex.id}_${i}" placeholder="reps" value="${rv}" type="number" min="0">
         <input class="log-input" id="rpe_${ex.id}_${i}" placeholder="RPE" type="number" min="1" max="10" value="${last&&last.sets[i-1]?last.sets[i-1].rpe||'':""}">
-        <button class="btn-done" id="done_${ex.id}_${i}" onclick="markSet('${ex.id}',${i},'${person}')">✓</button>
+        <button class="btn-done" id="done_${ex.id}_${i}" onclick="markSet('${ex.id}',${i},'${person}',${n})">✓</button>
       </div>`);
   }
 
